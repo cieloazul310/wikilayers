@@ -1,5 +1,11 @@
 import { combineReducers } from 'redux';
-import { RELOAD } from '../actions';
+import {
+  RELOAD
+ } from '../actions';
+import latestArticle from './latestArticle';
+import currentView from './currentView';
+import baseLayers from './baseLayers';
+import features from './features';
 
 function lastLoad(state = new Date(), action) {
   switch (action.type) {
@@ -10,8 +16,13 @@ function lastLoad(state = new Date(), action) {
   }
 }
 
+
 const rootReducer = combineReducers({
-  lastLoad
+  lastLoad,
+  latestArticle,
+  currentView,
+  baseLayers,
+  features
 });
 
 export default rootReducer;

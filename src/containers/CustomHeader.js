@@ -4,8 +4,10 @@ import {
   reload
 } from '../actions';
 
-const mapStateToProps = (state, ownProps) => {
-  return {};
+const mapStateToProps = ({ currentView }) => {
+  return {
+    currentView
+  };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

@@ -1,3 +1,7 @@
+export * from './fetchArticle';
+export * from './changeView';
+export * from './toggleLayer';
+export * from './handleFeature';
 
 export const RELOAD = 'RELOAD';
 
