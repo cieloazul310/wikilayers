@@ -1,7 +1,9 @@
 import Searcher from '../components/Searcher';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import {
-  fetchArticle
+  fetchArticle,
+  addFeature
 } from '../actions';
 
 const mapStateToProps = ({ latestArticle, currentView }) => {
@@ -15,6 +17,12 @@ const mapDispatchToProps = dispatch => {
   return {
     onButtonClick: (title) => {
       dispatch(fetchArticle(title));
+    },
+    onAddFeatureClick: (feature) => {
+      dispatch(addFeature(feature))
+    },
+    onVisitClick: () => {
+      dispatch(push('/map'));
     }
   };
 };

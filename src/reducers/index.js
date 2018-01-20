@@ -1,28 +1,18 @@
 import { combineReducers } from 'redux';
-import {
-  RELOAD
- } from '../actions';
 import latestArticle from './latestArticle';
 import currentView from './currentView';
 import baseLayers from './baseLayers';
 import features from './features';
-
-function lastLoad(state = new Date(), action) {
-  switch (action.type) {
-    case RELOAD:
-      return action.date;
-    default:
-      return state;
-  }
-}
-
+import mapView from './mapView';
+import { routerReducer } from 'react-router-redux'
 
 const rootReducer = combineReducers({
-  lastLoad,
+  router: routerReducer,
   latestArticle,
   currentView,
   baseLayers,
-  features
+  features,
+  mapView,
 });
 
 export default rootReducer;

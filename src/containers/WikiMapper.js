@@ -1,15 +1,27 @@
 import { connect } from 'react-redux';
+import { updateMapView } from '../actions';
 import Mapper from '../components/Mapper';
 
-const mapStateToProps = ({ currentView, baseLayers }) => {
+const mapStateToProps = ({ currentView, baseLayers, features, mapView }) => {
   return {
     currentView,
-    baseLayers
+    baseLayers,
+    features,
+    mapView
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    updateMapView: (view) => {
+      dispatch(updateMapView(view));
+    }
+  }
+}
+
 const WikiMapper = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Mapper);
 
 export default WikiMapper;

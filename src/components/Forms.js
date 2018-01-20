@@ -13,7 +13,6 @@ class Forms extends Component {
   }
 
   handleChange(e) {
-    console.log(this);
     this.setState({
       title: e.target.value
     });
@@ -23,13 +22,14 @@ class Forms extends Component {
     return (
       <div>
         <TextField
-          hintText="https://ja.wikipedia.org/wiki/水戸市 or 水戸市"
+          hintText="https://ja.wikipedia.org/wiki/偕楽園 or 偕楽園"
+          fullWidth={true}
           value={this.state.title}
           onChange={this.handleChange}
         />
         <br />
         <RaisedButton
-          label="Search"
+          label="検索"
           primary={true}
           onClick={() => {
             this.props.onButtonClick(this.state.title);

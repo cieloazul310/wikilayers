@@ -1,8 +1,12 @@
 import {  TOGGLE_LAYER} from '../actions';
-import { cjstd, seamless, relief, slope } from '../layers/gsi';
+import { cjstd, seamless, relief, slope, specialRelief } from '../layers/gsi';
 import { osm } from '../layers/osm';
+import setLayerBlend from '../map/setLayerBlend';
 
-const initialLayers = [cjstd, osm, seamless, relief, slope];
+const initialLayers = [cjstd, osm, seamless, relief, slope, specialRelief];
+
+setLayerBlend(specialRelief.getLayers().getArray()[1]);
+
 initialLayers.forEach((layer, index) => {
   layer.setVisible(index === 0);
 });

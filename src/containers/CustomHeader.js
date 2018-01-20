@@ -1,19 +1,17 @@
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux'
 import Header from '../components/Header';
-import {
-  reload
-} from '../actions';
 
-const mapStateToProps = ({ currentView }) => {
+const mapStateToProps = ({ router }) => {
   return {
-    currentView
+    router
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onClick: () => {
-      dispatch(reload(new Date()));
+    onMenuClick: pathname => {
+      dispatch(push(pathname));
     }
   }
 };

@@ -1,12 +1,15 @@
 import React from 'react';
+import FeatureList from './FeatureList';
 import LayerList from './LayerList';
 
-const Setter = ({ currentView, baseLayers, onLayerClick }) => (
-  <div
-    hidden={currentView !== 'Settings'}
-  >
-    <h4>Setting</h4>
-    <p>Setting for features, map layers and personal config.</p>
+const Setter = ({ currentView, baseLayers, features, onLayerClick, handleVisibility, onVisitClick }) => (
+  <div>
+    <h4>設定</h4>
+    <FeatureList
+      features={features}
+      handleVisibility={(index) => handleVisibility(index)}
+      onVisitClick={() => onVisitClick()}
+    />
     <LayerList
       baseLayers={baseLayers}
       onLayerClick={(index) => onLayerClick(index)}

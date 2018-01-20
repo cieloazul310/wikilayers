@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
-import { toggleLayer } from '../actions';
+import { toggleLayer, toggleFeature } from '../actions';
+import { push } from 'react-router-redux';
 import Setter from '../components/Setter';
 
-const mapStateToProps = ({ currentView, baseLayers }) => {
+const mapStateToProps = ({ currentView, baseLayers, features }) => {
   return {
     currentView,
-    baseLayers
+    baseLayers,
+    features
   };
 };
 
@@ -13,7 +15,13 @@ const mapDispatchToProps = dispatch => {
   return {
     onLayerClick: (index) => {
       dispatch(toggleLayer(index));
-    }
+    },
+    handleVisibility: (index) => {
+      dispatch(toggleFeature(index));
+    },
+    onVisitClick: () => {
+      dispatch(push('/map'));
+    },
   };
 };
 

@@ -14,9 +14,10 @@ function features(state = [], action) {
       });
     case TOGGLE_FEATURE:
       return state.map((feature, index) => {
-        (feature.index === action.index)
-          ? {...feature, visibility: !feature.visibility}
-          : feature
+        if (index === action.index) {
+          feature.setProperties({visibility: !feature.get('visibility')})
+        }
+        return feature;
       });
     default:
       return state;
