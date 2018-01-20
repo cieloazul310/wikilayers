@@ -18,6 +18,7 @@ function vectorStyle(feature, resolution) {
       new Style({
         text: new TextStyle({
           text: feature.get('name'),
+          offsetY: 4,
           fill: new Fill({
             color: 'white'
           }),

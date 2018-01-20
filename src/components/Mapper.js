@@ -32,7 +32,7 @@ class Mapper extends Component {
         source: new VectorSource({
           features: this.props.features
         }),
-        style: vectorStyle
+        style: vectorStyle,
       });
 
       this.map = new Map({
