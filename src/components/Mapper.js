@@ -6,7 +6,7 @@ import VectorSource from 'ol/source/vector';
 import Group from 'ol/layer/group';
 import Overlay from 'ol/overlay';
 import 'ol/ol.css';
-
+import MapInfo from '../components/MapInfo';
 import commonStyles from '../commonStyles';
 import vectorStyle from '../map/vectorStyle';
 import customControl from '../map/customControl';
@@ -47,21 +47,15 @@ class Mapper extends Component {
         target: 'map'
       });
 
-      var element = document.getElementById('chip');
-
-      var popup = new Overlay({
-        element: element,
-        positioning: 'bottom-center',
-        stopEvent: false,
-        offset: [0, -50]
-      });
-      this.map.addOverlay(popup);
-
       this.map.on('moveend', () => {
         this.props.updateMapView(this.map.getView());
       });
 
-      createVectorEvent(this.map, popup);
+      createVectorEvent(this.map, {
+        selectFeature: this.props.selectFeature,
+        clearSelectedFeature: this.props.clearSelectedFeature
+      });
+
   }
 
   render() {
@@ -76,13 +70,11 @@ class Mapper extends Component {
             id="map"
             style={commonStyles.map}
           >
-            <div
-              id="chip"
-            >
-              aaa
-            </div>
           </div>
       </div>
+      <MapInfo
+        title={this.props.selectedFeatureTitle}
+      />
     </div>
   );
   }

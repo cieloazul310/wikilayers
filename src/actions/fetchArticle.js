@@ -48,6 +48,13 @@ function titleParser(input) {
   }
 }
 
+const requestURL = 'https://ja.wikipedia.org/w/api.php?origin=*'
+ + '&action=query' + '&prop=extracts|pageimages|coordinates'
+ + '&exintro&explaintext'
+ + '&pithumbsize=200'
+ + '&coprimary=all' + '&coprop=type|name|dim|country|region'
+ + '&format=json' + '&formatversion=2'
+
 export function fetchArticle(input) {
   return dispatch => {
     if (title === '') return;
@@ -56,8 +63,7 @@ export function fetchArticle(input) {
 
     dispatch(requestTitle(title));
 
-    return fetch(
-      `https://ja.wikipedia.org/w/api.php?origin=*&action=query&prop=coordinates&format=json&formatversion=2&coprimary=all&coprop=type|name|dim|country|region&titles=${encodeURI(title)}`,
+    return fetch(requestURL + `&titles=${encodeURI(title)}`,
       {
         method: 'GET',
         mode: 'cors'

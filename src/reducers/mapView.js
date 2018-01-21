@@ -1,4 +1,4 @@
-import { UPDATE_MAPVIEW } from '../actions';
+import { UPDATE_MAPVIEW, SET_FEATURE_VIEW } from '../actions';
 import View from 'ol/view';
 import Proj from 'ol/proj';
 
@@ -9,9 +9,16 @@ const initialView = new View({
 
 function mapView(state = initialView, action) {
   switch (action.type) {
-    case UPDATE_MAPVIEW: 
+    case UPDATE_MAPVIEW:
       return action.view;
-    default: 
+    case SET_FEATURE_VIEW:
+      const zoom = state.getZoom();
+      const coords = action.feature.getGeometry().getCoordinates();
+      return new View({
+        center: coords,
+        zoom: zoom
+      });
+    default:
       return state;
   }
 }

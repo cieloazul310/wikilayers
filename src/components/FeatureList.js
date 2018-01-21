@@ -44,12 +44,12 @@ const FeatureList = ({ features, handleVisibility, onVisitClick }) => (
                   {feature.get('visibility') ? '表示中' : '非表示'}
                 </MenuItem>
                 <MenuItem
-                  onClick={() => onVisitClick()}
+                  onClick={() => onVisitClick(feature)}
                 >
                   地図で見る
                 </MenuItem>
                 <MenuItem>
-                  記事を見る
+                  記事を読む
                 </MenuItem>
                 <MenuItem>
                   削除

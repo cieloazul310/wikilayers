@@ -1,35 +1,11 @@
-function createVectorEvent(map, popup) {
-  map.on('click', function(evt) {
+function createVectorEvent(map, obj) {
+  map.on('singleclick', function(evt) {
     const feature = map.forEachFeatureAtPixel(evt.pixel, feature => feature);
     if (feature) {
-      const coordinates = feature.getGeometry().getCoordinates();
-      popup.setPosition(coordinates);
-      popup.getElement().innerHTML = feature.get('name');
-/*
-      $(element).popover({
-        'placement': 'top',
-        'html': true,
-        'content': feature.get('name')
-      });
-      $(element).popover('show');
-      */
+      obj.selectFeature(feature);
     } else {
-      /*
-      $(element).popover('destroy');
-      */
+      obj.clearSelectedFeature();
     }
-  });
-
-  // change mouse cursor when over marker
-  map.on('pointermove', e => {
-    if (e.dragging) {
-      /*
-      $(element).popover('destroy');*/
-      return;
-    }
-    const pixel = map.getEventPixel(e.originalEvent);
-    const hit = map.hasFeatureAtPixel(pixel);/*
-    map.getTarget().style.cursor = hit ? 'pointer' : '';*/
   });
 }
 

@@ -1,7 +1,9 @@
 import {
   ADD_FEATURE,
   REMOVE_FEATURE,
-  TOGGLE_FEATURE
+  TOGGLE_FEATURE,
+  SELECT_FEATURE,
+  CLEAR_SELECTED_FEATURE,
 } from '../actions';
 
 function features(state = [], action) {
@@ -15,8 +17,17 @@ function features(state = [], action) {
     case TOGGLE_FEATURE:
       return state.map((feature, index) => {
         if (index === action.index) {
-          feature.setProperties({visibility: !feature.get('visibility')})
+          feature.setProperties({
+            visibility: !feature.get('visibility')
+          });
         }
+        return feature;
+      });
+    case CLEAR_SELECTED_FEATURE:
+      return state.map(feature => {
+        feature.setProperties({
+          selected: false
+        });
         return feature;
       });
     default:

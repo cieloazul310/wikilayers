@@ -1,14 +1,15 @@
 import React from 'react';
 import FeatureList from './FeatureList';
 import LayerList from './LayerList';
+import commonStyles from '../commonStyles';
 
 const Setter = ({ currentView, baseLayers, features, onLayerClick, handleVisibility, onVisitClick }) => (
-  <div>
+  <div style={commonStyles.container}>
     <h4>設定</h4>
     <FeatureList
       features={features}
       handleVisibility={(index) => handleVisibility(index)}
-      onVisitClick={() => onVisitClick()}
+      onVisitClick={(feature) => onVisitClick(feature)}
     />
     <LayerList
       baseLayers={baseLayers}

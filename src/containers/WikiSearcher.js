@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import {
   fetchArticle,
-  addFeature
+  addFeature,
+  setFeatureView,
 } from '../actions';
 
 const mapStateToProps = ({ latestArticle, currentView }) => {
@@ -21,7 +22,8 @@ const mapDispatchToProps = dispatch => {
     onAddFeatureClick: (feature) => {
       dispatch(addFeature(feature))
     },
-    onVisitClick: () => {
+    onVisitClick: (feature) => {
+      dispatch(setFeatureView(feature));
       dispatch(push('/map'));
     }
   };

@@ -1,13 +1,17 @@
 import { connect } from 'react-redux';
-import { updateMapView } from '../actions';
+import {
+  updateMapView,
+  selectFeature,
+  clearSelectedFeature
+} from '../actions';
 import Mapper from '../components/Mapper';
 
-const mapStateToProps = ({ currentView, baseLayers, features, mapView }) => {
+const mapStateToProps = ({ baseLayers, features, mapView, selectedFeature }) => {
   return {
-    currentView,
     baseLayers,
     features,
-    mapView
+    mapView,
+    selectedFeatureTitle: Object.keys(selectedFeature).length !== 0 ? selectedFeature.get('name') : '選択なし'
   };
 };
 
@@ -15,6 +19,12 @@ const mapDispatchToProps = dispatch => {
   return {
     updateMapView: (view) => {
       dispatch(updateMapView(view));
+    },
+    selectFeature: (feature) => {
+      dispatch(selectFeature(feature));
+    },
+    clearSelectedFeature: () => {
+      dispatch(clearSelectedFeature());
     }
   }
 }

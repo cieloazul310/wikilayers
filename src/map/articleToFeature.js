@@ -7,8 +7,9 @@ function articleToFeature(article) {
   const feature = new olFeature({
     geometry: new geomPoint(Proj.fromLonLat([coord.lon, coord.lat])),
     name: article.title,
-    id: article.pageid,
+    pageid: article.pageid,
     visibility: true,
+    selected: false
   });
 
   return feature;

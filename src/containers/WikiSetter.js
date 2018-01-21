@@ -1,5 +1,9 @@
 import { connect } from 'react-redux';
-import { toggleLayer, toggleFeature } from '../actions';
+import {
+  toggleLayer,
+  toggleFeature,
+  setFeatureView
+} from '../actions';
 import { push } from 'react-router-redux';
 import Setter from '../components/Setter';
 
@@ -19,7 +23,8 @@ const mapDispatchToProps = dispatch => {
     handleVisibility: (index) => {
       dispatch(toggleFeature(index));
     },
-    onVisitClick: () => {
+    onVisitClick: (feature) => {
+      dispatch(setFeatureView(feature));
       dispatch(push('/map'));
     },
   };
