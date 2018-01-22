@@ -4,7 +4,7 @@ import Result from './Result';
 
 import commonStyles from '../commonStyles';
 
-const Searcher = ({ onButtonClick, latestArticle, currentView, onAddFeatureClick, onVisitClick }) => (
+const Searcher = ({ onButtonClick, latestArticle, features, onAddFeatureClick, onVisitClick }) => (
   <div style={commonStyles.container}>
     <h3>WikiLayers</h3>
     <p>Wikipediaの記事を地図で見よう</p>
@@ -16,6 +16,7 @@ const Searcher = ({ onButtonClick, latestArticle, currentView, onAddFeatureClick
       latestArticle={latestArticle}
       onAddFeatureClick={(feature) => onAddFeatureClick(feature)}
       onVisitClick={(feature) => onVisitClick(feature)}
+      features={features}
     />
   </div>
 );

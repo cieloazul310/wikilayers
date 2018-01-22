@@ -5,11 +5,12 @@ import Proj from 'ol/proj';
 function articleToFeature(article) {
   const coord = article.coordinates[0];
   const feature = new olFeature({
-    geometry: new geomPoint(Proj.fromLonLat([coord.lon, coord.lat])),
+    ...article,
     name: article.title,
-    pageid: article.pageid,
+    geometry: new geomPoint(Proj.fromLonLat([coord.lon, coord.lat])),
     visibility: true,
-    selected: false
+    selected: false,
+    removed: false
   });
 
   return feature;

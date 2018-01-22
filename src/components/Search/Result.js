@@ -1,24 +1,18 @@
 import React, { Component } from 'react';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import Snackbar from 'material-ui/Snackbar';
+import Paper from 'material-ui/Paper';
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import articleToFeature from '../map/articleToFeature';
-import commonStyles from '../commonStyles';
+import articleToFeature from '../../map/articleToFeature';
+import commonStyles from '../../commonStyles';
 
 class Result extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      snackbarVisible: false
-    };
-  }
-
   render() {
     const latestArticle = this.props.latestArticle;
     return (
-      <div
-        hidden={!latestArticle.hasOwnProperty('title')}>
-        <Card style={commonStyles.result}>
+        <Card
+          style={commonStyles.result}
+          hidden={!latestArticle.hasOwnProperty('title')}>
+        >
           <CardHeader
             title={latestArticle.title || 'title'}
             subtitle={
@@ -35,8 +29,7 @@ class Result extends Component {
               disabled={!latestArticle.hasOwnProperty('coordinates')}
               primary={true}
               onClick={() => {
-                  this.setState({'snackbarVisible': true});
-                  this.props.onAddFeatureClick(articleToFeature(latestArticle));
+                  this.props.addFeature(articleToFeature(latestArticle));
                 }
               }
             />
@@ -49,19 +42,6 @@ class Result extends Component {
             {latestArticle.extract}
           </CardText>
         </Card>
-        <Snackbar
-          open={this.state.snackbarVisible}
-          message={`地図に追加しました`}
-          autoHideDuration={5000}
-          action={
-            <span
-              onClick={() => this.props.onVisitClick(this.props.features[this.props.features.length - 1])}
-            >
-              地図で見る
-            </span>
-          }
-        />
-      </div>
     );
   }
 };

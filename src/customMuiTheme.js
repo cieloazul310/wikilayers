@@ -3,6 +3,7 @@ import commonStyles from './commonStyles';
 
 const customMuiTheme = getMuiTheme({
   palette: commonStyles.pallete,
+  fontFamily: commonStyles.fontFamily
 });
 
 export default customMuiTheme;

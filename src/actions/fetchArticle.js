@@ -48,16 +48,17 @@ function titleParser(input) {
   }
 }
 
-const requestURL = 'https://ja.wikipedia.org/w/api.php?origin=*'
- + '&action=query' + '&prop=extracts|pageimages|coordinates'
- + '&exintro&explaintext'
- + '&pithumbsize=200'
- + '&coprimary=all' + '&coprop=type|name|dim|country|region'
- + '&format=json' + '&formatversion=2'
+const requestURL = 'https://ja.wikipedia.org/w/api.php?'
+  + 'origin=*'
+  + '&action=query' + '&prop=extracts|pageimages|coordinates'
+  + '&exintro&explaintext'
+  + '&pithumbsize=200'
+  + '&coprimary=all' + '&coprop=type|name|dim|country|region'
+  + '&format=json' + '&formatversion=2'
 
 export function fetchArticle(input) {
   return dispatch => {
-    if (title === '') return;
+    if (input === '') return;
 
     const title = titleParser(input);
 
@@ -72,7 +73,13 @@ export function fetchArticle(input) {
       .then(response => {
         return response.json();
       })
-      .then(json => dispatch(receiveArticle(title, json)))
+      .then(json => {
+        if (json.query.pages[0].hasOwnProperty('missing')) {
+          dispatch(invalidateTitle(title));
+        } else {
+          dispatch(receiveArticle(title, json));
+        }
+      })
       .catch(err => console.log(`There has been a problem with your fetch operation: ${err.message}`));
   }
 }

@@ -4,6 +4,7 @@ import {
   lightBlue100, lightBlue500, lightBlueA700,
   white
 } from 'material-ui/styles/colors';
+import './fonts.css';
 
 const bottomNavHeight = 56;
 const pallete = {
@@ -25,6 +26,7 @@ const pallete = {
 
 const commonStyles = {
   pallete,
+  fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic UI", "Original Yu Gothic", "Yu Gothic", YuGothic, Verdana, Meiryo, sans-serif',
   appField: {
     backgroundColor: pallete.primary3Color,
     height: window.innerHeight - bottomNavHeight,
@@ -34,10 +36,26 @@ const commonStyles = {
     height: bottomNavHeight,
     overflow: 'hidden'
   },
-  container: {
-    backgroundColor: white,
-    margin: '0 auto',
+  pageHeader: {
+    textAlign: 'center',
+    marginBottom: '2em',
+  },
+  appTitle: {
+    fontSize: 48,
+    fontWeight: 100,
+  },
+  pageTitle: {
+    fontSize: 24,
+    fontWeight: 100,
+  },
+  containerOuter: {
+    margin: '.5em auto',
+    width: '100%',
     maxWidth: 800,
+  },
+  containerInner: {
+    margin: '0',
+    padding: '.5em',
   },
   map: {
     width: '100%',

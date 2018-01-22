@@ -18,14 +18,15 @@ const iconButtonElement = (
   </IconButton>
 );
 
-const FeatureList = ({ features, handleVisibility, onVisitClick }) => (
+const FeatureList = ({ features, handleVisibility, onVisitClick, onRemoveClick }) => (
   <div>
   {
-    features.length === 0 ? <div /> :
+    features.filter(feature => !feature.get('removed')).length === 0 ? <div /> :
     <List>
       <Subheader>マーカー</Subheader>
       {
-        features.map((feature, index) => (
+        features.filter(feature => !feature.get('removed'))
+                .map((feature, index) => (
           <ListItem
             key={index}
             primaryText={feature.get('name')}
@@ -39,7 +40,7 @@ const FeatureList = ({ features, handleVisibility, onVisitClick }) => (
                 targetOrigin={{ vertical: 'top', horizontal: 'right'}}
               >
                 <MenuItem
-                  onClick={() => handleVisibility(index)}
+                  onClick={() => handleVisibility(feature)}
                 >
                   {feature.get('visibility') ? '表示中' : '非表示'}
                 </MenuItem>
@@ -51,7 +52,9 @@ const FeatureList = ({ features, handleVisibility, onVisitClick }) => (
                 <MenuItem>
                   記事を読む
                 </MenuItem>
-                <MenuItem>
+                <MenuItem
+                  onClick={() => onRemoveClick(feature)}
+                >
                   削除
                 </MenuItem>
               </IconMenu>

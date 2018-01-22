@@ -3,26 +3,30 @@ export const REMOVE_FEATURE = 'REMOVE_FEATURE';
 export const TOGGLE_FEATURE = 'TOGGLE_FEATURE';
 export const SELECT_FEATURE = 'SELECT_FEATURE';
 export const CLEAR_SELECTED_FEATURE = 'CLEAR_SELECTED_FEATURE';
-export const SET_FEATURE_VIEW = 'SET_FEATURE_VIEW';
+export const SET_TO_FEATURE = 'SET_TO_FEATURE';
+export const ZOOM_TO_FEATURE = 'ZOOM_TO_FEATURE';
+
+let featureId = 0;
 
 export function addFeature(feature) {
+  feature.setId(featureId++);
   return {
     type: ADD_FEATURE,
     feature
   };
 }
 
-export function removeFeature(index) {
+export function removeFeature(feature) {
   return {
     type: REMOVE_FEATURE,
-    index
+    feature
   };
 }
 
-export function toggleFeature(index) {
+export function toggleFeature(feature) {
   return {
     type: TOGGLE_FEATURE,
-    index
+    feature
   };
 }
 
@@ -39,9 +43,16 @@ export function clearSelectedFeature() {
   }
 }
 
-export function setFeatureView(feature) {
+export function setToFeature(feature) {
   return {
-    type: SET_FEATURE_VIEW,
+    type: SET_TO_FEATURE,
+    feature
+  };
+}
+
+export function zoomToFeature(feature) {
+  return {
+    type: ZOOM_TO_FEATURE,
     feature
   };
 }

@@ -7,7 +7,7 @@ import rootReducer from './reducers';
 
 const loggerMiddleware = createLogger();
 export const history = createHistory({
-  basename: '/wikilayers'
+  basename: '/wikilayers/'
 });
 
 export default function configureStore(preloadedState) {

@@ -3,16 +3,15 @@ import {
   updateMapView,
   selectFeature,
   clearSelectedFeature,
-  zoomToFeature
-} from '../actions';
-import Mapper from '../components/Mapper';
+} from '../../actions';
+import MapApp from '../../components/Map/MapApp';
 
 const mapStateToProps = ({ baseLayers, features, mapView, selectedFeature }) => {
   return {
     baseLayers,
     features,
     mapView,
-    selectedFeature: selectedFeature
+    selectedFeature
   };
 };
 
@@ -26,16 +25,13 @@ const mapDispatchToProps = dispatch => {
     },
     clearSelectedFeature: () => {
       dispatch(clearSelectedFeature());
-    },
-    zoomToFeature: (feature) => {
-      dispatch(zoomToFeature(feature));
     }
   }
 }
 
-const WikiMapper = connect(
+const WikiMapApp = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Mapper);
+)(MapApp);
 
-export default WikiMapper;
+export default WikiMapApp;

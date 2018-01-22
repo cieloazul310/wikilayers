@@ -1,14 +1,11 @@
 import { SELECT_FEATURE, CLEAR_SELECTED_FEATURE } from '../actions';
 
-function selectedFeature(state = {}, action) {
+function selectedFeature(state = false, action) {
   switch (action.type) {
     case SELECT_FEATURE:
-      action.feature.setProperties({
-        selected: true
-      });
       return action.feature;
     case CLEAR_SELECTED_FEATURE:
-      return {};
+      return false;
     default:
       return state;
   }

@@ -1,32 +1,30 @@
 import { connect } from 'react-redux';
 import {
-  toggleLayer,
   toggleFeature,
   selectFeature,
+  setToFeature,
+  zoomToFeature,
   removeFeature,
-  setToFeature
-} from '../actions';
+} from '../../actions';
 import { push } from 'react-router-redux';
-import Setter from '../components/Setter';
 
-const mapStateToProps = ({ baseLayers, features }) => {
+import FeatureList from '../../components/Search/FeatureList';
+
+const mapStateToProps = ({ features }) => {
   return {
-    baseLayers,
     features,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLayerClick: (index) => {
-      dispatch(toggleLayer(index));
-    },
-    handleVisibility: (feature) => {
+    toggleFeature: (feature) => {
       dispatch(toggleFeature(feature));
     },
     onVisitClick: (feature) => {
       dispatch(selectFeature(feature));
       dispatch(setToFeature(feature));
+      dispatch(zoomToFeature(feature));
       dispatch(push('/map'));
     },
     onRemoveClick: (feature) => {
@@ -35,9 +33,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const WikiSetter = connect(
+const WikiFeatureList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Setter);
+)(FeatureList);
 
-export default WikiSetter;
+export default WikiFeatureList;

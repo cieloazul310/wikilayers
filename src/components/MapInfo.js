@@ -4,15 +4,21 @@ import FlatButton from 'material-ui/FlatButton';
 
 import commonStyles from '../commonStyles';
 
-const MapInfo = ({title}) => (
+const MapInfo = ({ feature }) => (
   <Card style={commonStyles.mapInfo}>
     <CardHeader
-      title={title}
-      actAsExpander={true}
-      showExpandableButton={title !== '選択なし'}
+      title={feature ? feature.get('name') : '選択なし'}
+      actAsExpander={typeof feature !== 'boolean'}
+      showExpandableButton={typeof feature !== 'boolean'}
     />
+    <CardText expandable={true} >
+      {feature ? `${feature.get('extract').slice(0, 80)}...` : ''}
+    </CardText>
     <CardActions expandable={true} >
-      <FlatButton label="記事を読む" />
+      <FlatButton
+        label="続きを読む"
+        primary={true}
+      />
     </CardActions>
   </Card>
 );

@@ -73,7 +73,7 @@ class Mapper extends Component {
           </div>
       </div>
       <MapInfo
-        title={this.props.selectedFeatureTitle}
+        feature={this.props.selectedFeature}
       />
     </div>
   );

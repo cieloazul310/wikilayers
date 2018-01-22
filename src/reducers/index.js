@@ -9,9 +9,9 @@ import { routerReducer } from 'react-router-redux'
 const rootReducer = combineReducers({
   router: routerReducer,
   latestArticle,
-  selectedFeature,
   baseLayers,
   features,
+  selectedFeature,
   mapView,
 });
 

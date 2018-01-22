@@ -10,28 +10,32 @@ import commonStyles from '../commonStyles';
 
 function vectorStyle(feature, resolution) {
   if (!feature.get('visibility')) return new Style();
+  if (feature.get('removed')) return new Style();
+  const isSelected = feature.get('selected');
   const styleArr = [
     new Style({
+      zIndex: isSelected ? 10 : 1,
       image: new IconStyle({
         anchor: [0.5, 24],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
-        src: feature.get('selected') ? selectedPlace : Place
+        src: isSelected ? selectedPlace : Place
       })
     })
   ];
-  if (resolution < 610) {
+  if (resolution < 610 && !isSelected) {
     styleArr.push(new Style({
+      zIndex: isSelected ? 10 : 1,
       text: new TextStyle({
         text: feature.get('name'),
-        font: '14px sans-serif',
+        font: `12px ${commonStyles.fontFamily}`,
         offsetY: 8,
         fill: new Fill({
           color: 'white'
         }),
         stroke: new Stroke({
-          color: feature.get('selected') ? commonStyles.pallete.primary1Color : '#333',
-          width: 4
+          color: isSelected ? commonStyles.pallete.primary1Color : '#333',
+          width: 3
         })
       })
     }));

@@ -4,5 +4,5 @@ export function updateMapView(view) {
   return {
     type: UPDATE_MAPVIEW,
     view
-  }
+  };
 }

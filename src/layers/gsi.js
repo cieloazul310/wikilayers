@@ -76,6 +76,6 @@ export const specialRelief = new Group({
       })
     })
   ],
-  title: '色別標高図+傾斜量図',
+  title: '地形スペシャル',
   summary: '色別標高図に傾斜量図を乗算合成した地図'
 });
