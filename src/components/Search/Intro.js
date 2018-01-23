@@ -1,6 +1,4 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import FontIcon from 'material-ui/FontIcon';
 
 import commonStyles from '../../commonStyles';
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
 import Visibility from 'material-ui/svg-icons/action/visibility';
@@ -21,23 +20,25 @@ const iconButtonElement = (
   </IconButton>
 );
 
-const FeatureList = ({ features, toggleFeature, onVisitClick, onRemoveClick }) => (
+const FeatureList = ({ features, onFeatureClick, toggleFeature, onVisitClick, onRemoveClick }) => (
   <div>
   {
     features.filter(feature => !feature.get('removed')).length === 0 ? <div /> :
         <List>
           <Subheader>アイテム</Subheader>
           {
-            features.filter(feature => !feature.get('removed'))
+            features.map(feature => feature)
                     .sort((a, b) => b.getId() - a.getId())
                     .map((feature, index) => (
               <ListItem
                 key={index}
                 primaryText={feature.get('name')}
-                secondaryTextLines={2}
                 leftIcon={
-                  feature.get('visibility') ? <Visibility /> :    <VisibilityOff style={{fill: 'silver'}} />
+                  feature.get('visibility') ?
+                  <Visibility style={{fill: feature.get('selected') ? commonStyles.pallete.primary1Color : grey400}}/> :
+                  <VisibilityOff style={{fill: 'silver'}} />
                 }
+                onClick={() => onFeatureClick(feature)}
                 rightIconButton={
                   <IconMenu
                     iconButtonElement={iconButtonElement}

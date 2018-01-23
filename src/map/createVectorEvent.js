@@ -3,6 +3,7 @@ function createVectorEvent(map, obj) {
     const feature = map.forEachFeatureAtPixel(evt.pixel,
       feature => feature,
       {
+        layerFilter: (layer) => layer.get('title') === 'features',
         hitTolerance: 5
       });
     if (feature) {

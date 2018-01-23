@@ -3,7 +3,6 @@ import Paper from 'material-ui/Paper';
 
 import Intro from './Intro';
 import WikiForms from '../../containers/Search/WikiForms';
-import WikiDummy from '../../containers/Search/WikiDummy';
 import WikiResult from '../../containers/Search/WikiResult';
 import WikiFeatureList from '../../containers/Search/WikiFeatureList';
 
@@ -14,7 +13,6 @@ const Searcher = () => (
     <Paper style={commonStyles.containerInner}>
       <Intro />
       <WikiForms />
-      <WikiDummy />
       <WikiResult />
       <WikiFeatureList />
     </Paper>

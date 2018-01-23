@@ -5,6 +5,7 @@ import {
   setToFeature,
   zoomToFeature,
   removeFeature,
+  clearSelectedFeature
 } from '../../actions';
 import { push } from 'react-router-redux';
 
@@ -18,6 +19,13 @@ const mapStateToProps = ({ features }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    onFeatureClick: (feature) => {
+      if (feature.get('selected')) {
+        dispatch(clearSelectedFeature());
+      } else {
+        dispatch(selectFeature(feature));
+      }
+    },
     toggleFeature: (feature) => {
       dispatch(toggleFeature(feature));
     },

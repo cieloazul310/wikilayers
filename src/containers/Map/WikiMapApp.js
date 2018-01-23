@@ -6,12 +6,13 @@ import {
 } from '../../actions';
 import MapApp from '../../components/Map/MapApp';
 
-const mapStateToProps = ({ baseLayers, features, mapView, selectedFeature }) => {
+const mapStateToProps = ({ baseLayers, features, mapView, selectedFeature, mapConfigure }) => {
   return {
     baseLayers,
     features,
     mapView,
-    selectedFeature
+    selectedFeature,
+    mapConfigure
   };
 };
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
 
 const AppInfo = () => (

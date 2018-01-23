@@ -5,7 +5,7 @@ import setLayerBlend from '../map/setLayerBlend';
 
 const initialLayers = [cjstd, osm, seamless, relief, slope, specialRelief];
 
-setLayerBlend(specialRelief.getLayers().getArray()[1]);
+setLayerBlend(specialRelief.getLayers().getArray()[2]);
 
 initialLayers.forEach((layer, index) => {
   layer.setVisible(index === 0);

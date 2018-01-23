@@ -1,8 +1,7 @@
 import {
-  blueGrey100,
-  cyan300,
-  lightBlue100, lightBlue500, lightBlueA700,
-  white
+  grey50,
+  cyan100, cyan300,
+  lightBlue500, lightBlueA700,
 } from 'material-ui/styles/colors';
 import './fonts.css';
 
@@ -10,9 +9,9 @@ const bottomNavHeight = 56;
 const pallete = {
   primary1Color: lightBlueA700,
   primary2Color: lightBlue500,
-  primary3Color: lightBlue100,
-  accent1Color: cyan300,/*
-  accent2Color: grey100,
+  primary3Color: grey50,
+  accent1Color: cyan300,
+  accent2Color: cyan100,/*
   accent3Color: grey500,
   textColor: darkBlack,
   alternateTextColor: white,
@@ -53,9 +52,9 @@ const commonStyles = {
     width: '100%',
     maxWidth: 800,
   },
-  containerInner: {
+  containerInner: {/*
     margin: '0',
-    padding: '.5em',
+    padding: '0',*/
   },
   map: {
     width: '100%',
@@ -71,7 +70,7 @@ const commonStyles = {
   },
   result: {
     margin: '0 auto',
-    width: '90%'
+    maxWidth: 600
   }
 };
 

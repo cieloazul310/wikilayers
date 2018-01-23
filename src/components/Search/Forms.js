@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
+import WikiDummy from '../../containers/Search/WikiDummy';
 import commonStyles from '../../commonStyles';
 
 class Forms extends Component {
@@ -43,7 +43,11 @@ class Forms extends Component {
                 onClick={() => {
                   this.props.fetchArticle(this.state.title);
                 }}
+                style={{
+                  marginRight: '.5em'
+                }}
               />
+              <WikiDummy />
             </div>
           </div>
     );

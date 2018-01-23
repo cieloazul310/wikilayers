@@ -1,5 +1,6 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
+import WikiMapSettings from '../../containers/Settings/WikiMapSettings';
 import WikiLayerList from '../../containers/Settings/WikiLayerList';
 import AppInfo from './AppInfo';
 import commonStyles from '../../commonStyles';
@@ -12,6 +13,7 @@ const Settings = () => (
           設定
         </h2>
       </div>
+      <WikiMapSettings />
       <WikiLayerList />
       <AppInfo />
     </Paper>

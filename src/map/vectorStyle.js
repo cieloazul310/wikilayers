@@ -10,7 +10,6 @@ import commonStyles from '../commonStyles';
 
 function vectorStyle(feature, resolution) {
   if (!feature.get('visibility')) return new Style();
-  if (feature.get('removed')) return new Style();
   const isSelected = feature.get('selected');
   const styleArr = [
     new Style({
@@ -23,8 +22,44 @@ function vectorStyle(feature, resolution) {
       })
     })
   ];
+  const label = new Style({
+    zIndex: isSelected ? 10 : 1,
+    text: new TextStyle({
+      text: feature.get('name'),
+      font: `12px ${commonStyles.fontFamily}`,
+      offsetY: 8,
+      fill: new Fill({
+        color: 'white'
+      }),
+      stroke: new Stroke({
+        color: '#333',
+        width: 3
+      })
+    })
+  });
+
   if (resolution < 610 && !isSelected) {
-    styleArr.push(new Style({
+    styleArr.push(label);
+  } else if (resolution > 610 && isSelected) {
+    styleArr.push(label);
+  }
+  return styleArr;
+};
+
+function allLabelStyle(feature) {
+  if (!feature.get('visibility')) return new Style();
+  const isSelected = feature.get('selected');
+  return [
+    new Style({
+      zIndex: isSelected ? 10 : 1,
+      image: new IconStyle({
+        anchor: [0.5, 24],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        src: isSelected ? selectedPlace : Place
+      })
+    }),
+    new Style({
       zIndex: isSelected ? 10 : 1,
       text: new TextStyle({
         text: feature.get('name'),
@@ -38,9 +73,8 @@ function vectorStyle(feature, resolution) {
           width: 3
         })
       })
-    }));
-  }
-  return styleArr;
+    })
+  ];
 };
 
-export default vectorStyle;
+export { vectorStyle, allLabelStyle };

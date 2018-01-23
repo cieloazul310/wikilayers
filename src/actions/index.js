@@ -1,5 +1,5 @@
 export * from './fetchArticle';
-export * from './toggleLayer';
+export * from './mapConfigure';
 export * from './handleFeature';
 export * from './mapToState';
 

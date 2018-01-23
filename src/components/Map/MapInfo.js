@@ -14,8 +14,12 @@ const MapInfo = ({ selectedFeature }) => (
     <CardText
       expandable={true}
       hidden={!selectedFeature}
+      style={{
+        maxHeight: 100,
+        overflow: 'scroll'
+      }}
     >
-      {selectedFeature ? `${selectedFeature.get('extract').slice(0, 80)}...` : ''}
+      {selectedFeature ? `${selectedFeature.get('article').extract}` : ''}
     </CardText>
     <CardActions
       expandable={true}

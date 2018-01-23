@@ -4,13 +4,13 @@ import Map from 'ol/map';
 import VectorLayer from 'ol/layer/vector';
 import VectorSource from 'ol/source/vector';
 import Group from 'ol/layer/group';
-import Overlay from 'ol/overlay';
 import 'ol/ol.css';
 
 import commonStyles from '../../commonStyles';
-import vectorStyle from '../../map/vectorStyle';
+import { vectorStyle, allLabelStyle } from '../../map/vectorStyle';
 import customControl from '../../map/customControl';
 import createVectorEvent from '../../map/createVectorEvent';
+import setGeolocation from '../../map/setGeolocation';
 
 class MapApp extends Component {
   constructor(props) {
@@ -33,7 +33,9 @@ class MapApp extends Component {
       source: new VectorSource({
         features: this.props.features
       }),
-      style: vectorStyle,
+      style: this.props.mapConfigure.showLabels ?
+        allLabelStyle : vectorStyle,
+      title: 'features',
     });
 
     this.map = new Map({
@@ -56,6 +58,10 @@ class MapApp extends Component {
       selectFeature: this.props.selectFeature,
       clearSelectedFeature: this.props.clearSelectedFeature
     });
+
+    if (this.props.mapConfigure.geolocation.getTracking()) {
+      setGeolocation(this.map, this.props.mapConfigure.geolocation);
+    }
 
   }
 
