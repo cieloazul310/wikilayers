@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
-import Visibility from 'material-ui/svg-icons/action/visibility';
-import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
+import LocationOn from 'material-ui/svg-icons/communication/location-on';
+import LocationOff from 'material-ui/svg-icons/communication/location-off';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
-
-import { grey400 } from 'material-ui/styles/colors';
+import { grey500, grey300 } from 'material-ui/styles/colors';
 
 import commonStyles from '../../commonStyles';
 
@@ -16,7 +17,7 @@ const iconButtonElement = (
   <IconButton
     touch={true}
   >
-    <MoreVertIcon color={grey400} />
+    <MoreVertIcon color={grey500} />
   </IconButton>
 );
 
@@ -35,8 +36,8 @@ const FeatureList = ({ features, onFeatureClick, toggleFeature, onVisitClick, on
                 primaryText={feature.get('name')}
                 leftIcon={
                   feature.get('visibility') ?
-                  <Visibility style={{fill: feature.get('selected') ? commonStyles.pallete.primary1Color : grey400}}/> :
-                  <VisibilityOff style={{fill: 'silver'}} />
+                  <LocationOn style={{fill: feature.get('selected') ? 'red' : commonStyles.pallete.primary2Color}}/> :
+                  <LocationOff style={{fill: grey300}} />
                 }
                 onClick={() => onFeatureClick(feature)}
                 rightIconButton={
@@ -71,5 +72,15 @@ const FeatureList = ({ features, onFeatureClick, toggleFeature, onVisitClick, on
   }
   </div>
 );
+
+FeatureList.propTypes = {
+  features: PropTypes.arrayOf(
+    PropTypes.object
+  ).isRequired,
+  onFeatureClick: PropTypes.func.isRequired,
+  toggleFeature: PropTypes.func.isRequired,
+  onVisitClick: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired,
+};
 
 export default FeatureList;

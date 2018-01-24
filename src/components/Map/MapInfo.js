@@ -5,7 +5,8 @@ import FlatButton from 'material-ui/FlatButton';
 import commonStyles from '../../commonStyles';
 
 const MapInfo = ({ selectedFeature }) => (
-  <Card style={commonStyles.mapInfo}>
+  <Card style={commonStyles.mapInfo}
+        hidden={selectedFeature ? false : true}>
     <CardHeader
       title={selectedFeature ? selectedFeature.get('name') : '選択なし'}
       actAsExpander={typeof selectedFeature !== 'boolean'}

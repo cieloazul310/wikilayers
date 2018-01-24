@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onMenuClick: pathname => {
       dispatch(push(pathname));
-    }
+    },
   }
 };
 

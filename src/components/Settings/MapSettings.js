@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
 import CheckCircle from 'material-ui/svg-icons/action/check-circle';
@@ -30,5 +32,14 @@ const MapSettings = ({ mapConfigure, toggleGeolocation, toggleShowLabels }) => (
     </List>
   </div>
 );
+
+MapSettings.propTypes = {
+  mapConfigure: PropTypes.shape({
+    geolocation: PropTypes.object,
+    showLabels: PropTypes.bool
+  }).isRequired,
+  toggleGeolocation: PropTypes.func.isRequired,
+  toggleShowLabels: PropTypes.func.isRequired,
+};
 
 export default MapSettings;

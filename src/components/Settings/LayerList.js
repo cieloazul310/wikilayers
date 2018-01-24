@@ -1,12 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
-import Visibility from 'material-ui/svg-icons/action/visibility';
-import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
+import CheckCircle from 'material-ui/svg-icons/action/check-circle';
+import Remove from 'material-ui/svg-icons/content/remove';
 import Info from 'material-ui/svg-icons/action/info';
 import IconButton from 'material-ui/IconButton';
 import {
-  grey300, grey500,
+  grey500, greenA700,
 } from 'material-ui/styles/colors';
 
 const LayerList = ({ baseLayers, toggleLayer }) => (
@@ -17,14 +19,13 @@ const LayerList = ({ baseLayers, toggleLayer }) => (
         <ListItem
           key={index}
           primaryText={layer.get('title')}
+          secondaryText={layer.get('subtitle')}
           leftIcon={
             layer.getVisible() ?
-            <Visibility
-              color={grey500}
+            <CheckCircle
+              color={greenA700}
             /> :
-            <VisibilityOff
-              color={grey300}
-            />
+            <Remove/>
           }
           onClick={() => {
             toggleLayer(index);
@@ -38,9 +39,7 @@ const LayerList = ({ baseLayers, toggleLayer }) => (
                 fontSize: 11
               }}
             >
-              <Info
-                color={grey500}
-              />
+              <Info color={grey500}/>
             </IconButton>
           }
         />
@@ -48,5 +47,12 @@ const LayerList = ({ baseLayers, toggleLayer }) => (
     </List>
   </div>
 );
+
+LayerList.propTypes = {
+  baseLayers: PropTypes.arrayOf(
+    PropTypes.object
+  ).isRequired,
+  toggleLayer: PropTypes.func.isRequired
+};
 
 export default LayerList;

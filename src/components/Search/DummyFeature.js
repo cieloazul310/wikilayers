@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import RaisedButton from 'material-ui/RaisedButton';
 
 import olFeature from 'ol/feature';
@@ -32,5 +34,9 @@ const DummyFeature = ({ addFeature }) => (
         }}
       />
 );
+
+DummyFeature.propTypes = {
+  addFeature: PropTypes.func.isRequired
+};
 
 export default DummyFeature;

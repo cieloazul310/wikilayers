@@ -1,8 +1,10 @@
 import React from 'react';
 import Subheader from 'material-ui/Subheader';
 
+import commonStyles from '../../commonStyles';
+
 const AppInfo = () => (
-  <div>
+  <div style={commonStyles.components}>
     <Subheader>About WikiLayers!</Subheader>
     <p>WikiLayersは位置情報を持つWikipediaの記事を地図上に表示するアプリケーションです。</p>
     <ul>

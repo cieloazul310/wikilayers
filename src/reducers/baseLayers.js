@@ -1,9 +1,10 @@
 import {  TOGGLE_LAYER} from '../actions';
 import { cjstd, seamless, relief, slope, specialRelief } from '../layers/gsi';
 import { osm } from '../layers/osm';
+import { StamenTerrain, StamenToner } from '../layers/stamen';
 import setLayerBlend from '../map/setLayerBlend';
 
-const initialLayers = [cjstd, osm, seamless, relief, slope, specialRelief];
+const initialLayers = [cjstd, osm, seamless, relief, slope, specialRelief, StamenTerrain, StamenToner];
 
 setLayerBlend(specialRelief.getLayers().getArray()[2]);
 

@@ -8,7 +8,8 @@ import Proj from 'ol/proj';
 
 const initialView = new View({
   center: Proj.fromLonLat([137.834473, 35.799994]),
-  zoom: 4.5
+  zoom: 4.5,
+  enableRotation: false
 });
 
 function mapView(state = initialView, action) {

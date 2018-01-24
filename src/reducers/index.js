@@ -5,6 +5,7 @@ import mapView from './mapView';
 import selectedFeature from './selectedFeature';
 import featureCard from './featureCard';
 import mapConfigure from './mapConfigure';
+import textCache from './textCache';
 import { routerReducer } from 'react-router-redux'
 
 const rootReducer = combineReducers({
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   selectedFeature,
   mapView,
   featureCard,
-  mapConfigure
+  mapConfigure,
+  textCache
 });
 
 export default rootReducer;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Map from 'ol/map';
 import VectorLayer from 'ol/layer/vector';
@@ -81,5 +82,22 @@ class MapApp extends Component {
     );
   }
 }
+
+MapApp.propTypes = {
+  features: PropTypes.arrayOf(
+    PropTypes.object
+  ).isRequired,
+  baseLayers: PropTypes.arrayOf(
+    PropTypes.object
+  ).isRequired,
+  mapConfigure: PropTypes.shape({
+    geolocation: PropTypes.object,
+    showLabels: PropTypes.bool
+  }),
+  mapView: PropTypes.object.isRequired,
+  updateMapView: PropTypes.func.isRequired,
+  selectFeature: PropTypes.func.isRequired,
+  clearSelectedFeature: PropTypes.func.isRequired
+};
 
 export default MapApp;

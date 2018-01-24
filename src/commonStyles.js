@@ -1,14 +1,14 @@
 import {
   grey50,
   cyan100, cyan300,
-  lightBlue500, lightBlueA700,
+  lightBlue300, lightBlueA700,
 } from 'material-ui/styles/colors';
 import './fonts.css';
 
 const bottomNavHeight = 56;
 const pallete = {
   primary1Color: lightBlueA700,
-  primary2Color: lightBlue500,
+  primary2Color: lightBlue300,
   primary3Color: grey50,
   accent1Color: cyan300,
   accent2Color: cyan100,/*
@@ -38,23 +38,31 @@ const commonStyles = {
   pageHeader: {
     textAlign: 'center',
     marginBottom: '2em',
+    paddingTop: '2em',
   },
   appTitle: {
     fontSize: 48,
     fontWeight: 100,
+    margin: 'auto'
   },
   pageTitle: {
     fontSize: 24,
     fontWeight: 100,
+    margin: 'auto'
   },
   containerOuter: {
-    margin: '.5em auto',
+    margin: '6px auto .5em auto',
     width: '100%',
     maxWidth: 800,
   },
-  containerInner: {/*
+  containerInner: {
     margin: '0',
-    padding: '0',*/
+    padding: '0',
+    minHeight: window.innerHeight - bottomNavHeight - 22,
+  },
+  components: {
+    margin: '1em auto',
+    padding: '1em',
   },
   map: {
     width: '100%',
@@ -70,7 +78,7 @@ const commonStyles = {
   },
   result: {
     margin: '0 auto',
-    maxWidth: 600
+    maxWidth: 400
   }
 };
 

@@ -2,6 +2,7 @@ export * from './fetchArticle';
 export * from './mapConfigure';
 export * from './handleFeature';
 export * from './mapToState';
+export * from './fetchText';
 
 export const RELOAD = 'RELOAD';
 
