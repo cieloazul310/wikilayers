@@ -20,8 +20,7 @@ class Result extends Component {
       return (
         <div style={{
           position: 'relative',
-          mixHeight: 180,
-          height: 180
+          height: commonStyles.containerInner.minHeight - commonStyles.form.height - 10
         }}>
           <CircularProgress style={{
             top: '50%',
@@ -55,16 +54,24 @@ class Result extends Component {
         <div
           className='result-bg'
           style={{
-            background: featureCard.article.hasOwnProperty('thumbnail') ?  `url(${featureCard.article.thumbnail.source})` : 'white',
-            backgroundSize: `cover`,
+            backgroundColor: featureCard.article.hasOwnProperty('thumbnail') ? 'white' : 'silver',
+            backgroundImage: featureCard.article.hasOwnProperty('thumbnail') ?  `url(${featureCard.article.thumbnail.source})` : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
             zIndex: 0,
+            height: commonStyles.containerInner.minHeight - commonStyles.form.height - 50,
             position: 'relative',
             overflow: 'hidden',
-            transition: 'background .5s linear'
+            padding: '20px .5em 20px .5em',
+            transition: 'background-image .5s linear'
           }}
         >
           <Card
             style={commonStyles.result}
+            zDepth={3}
+            containerStyle={{
+              maxHeight: '100%'
+            }}
           >
             <CardHeader
               title={featureCard.title}
@@ -72,8 +79,6 @@ class Result extends Component {
                 featureCard.article.hasOwnProperty('coordinates') ? formatCoords(featureCard.article.coordinates[0].lon, featureCard.article.coordinates[0].lat) :
                 'この記事には座標がありません'
               }
-              actAsExpander={true}
-              showExpandableButton={true}
             />
             <CardActions>
               {
@@ -91,7 +96,8 @@ class Result extends Component {
               />
             </CardActions>
             <CardText
-              expandable={true}
+              expandable={false}
+              style={commonStyles.resultText}
             >
               {featureCard.article.extract}
             </CardText>

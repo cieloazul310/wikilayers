@@ -6,7 +6,8 @@ export const StamenTerrain = new Tile({
     layer: 'terrain',
   }),
   title: 'World Terrain',
-  subtitle: 'Stamen Terrain Map'
+  subtitle: 'Stamen Terrain Map',
+  summary: '全世界対応の地勢地図'
 });
 
 export const StamenToner = new Tile({
@@ -14,5 +15,6 @@ export const StamenToner = new Tile({
     layer: 'toner',
   }),
   title: 'monochrome',
-  subtitle: 'Stamen Toner Map'
+  subtitle: 'Stamen Toner Map',
+  summary: '全世界対応のモノクロ地図'
 });

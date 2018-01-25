@@ -6,6 +6,8 @@ import {
 import './fonts.css';
 
 const bottomNavHeight = 56;
+const formHeight = 120;
+const pageHeightMargin = 22;
 const pallete = {
   primary1Color: lightBlueA700,
   primary2Color: lightBlue300,
@@ -47,7 +49,7 @@ const commonStyles = {
   },
   pageTitle: {
     fontSize: 24,
-    fontWeight: 100,
+    fontWeight: 400,
     margin: 'auto'
   },
   containerOuter: {
@@ -58,11 +60,15 @@ const commonStyles = {
   containerInner: {
     margin: '0',
     padding: '0',
-    minHeight: window.innerHeight - bottomNavHeight - 22,
+    minHeight: window.innerHeight - bottomNavHeight - pageHeightMargin,
   },
   components: {
-    margin: '1em auto',
+    margin: '0 auto 1em auto',
     padding: '1em',
+  },
+  form: {
+    height: formHeight,
+    boxSizing: 'border-box',
   },
   map: {
     width: '100%',
@@ -78,8 +84,15 @@ const commonStyles = {
   },
   result: {
     margin: '0 auto',
-    maxWidth: 400
+    maxWidth: 400,
+    maxHeight: '100%'
+  },
+  resultText: {
+    overflowY: 'scroll',
+    boxSizing: 'border-box'
   }
 };
+
+commonStyles.resultText.maxHeight = commonStyles.containerInner.minHeight - commonStyles.form.height - 50 - 72 - 52;
 
 export default commonStyles;

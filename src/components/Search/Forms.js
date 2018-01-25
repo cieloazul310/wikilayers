@@ -26,7 +26,7 @@ class Forms extends Component {
 
   render() {
     return (
-          <div style={commonStyles.components}>
+          <div style={Object.assign({}, commonStyles.components, commonStyles.form)}>
             <div>
               <TextField
                 hintText="https://ja.wikipedia.org/wiki/偕楽園 or 偕楽園"

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchTextIfNeeded } from '../../actions';
+import { fetchTextIfNeeded, showText } from '../../actions';
 import TheContent from '../../components/Article/TheContent';
 
 const mapStateToProps = ({ selectedFeature, textCache }) => {
@@ -13,6 +13,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchText: (article) => {
       dispatch(fetchTextIfNeeded(article));
+    },
+    showText: (article) => {
+      dispatch(showText(article));
     }
   };
 }

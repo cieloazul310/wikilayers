@@ -2,6 +2,7 @@ import {
   REQUEST_ARTICLE,
   RECEIVE_ARTICLE,
   INVALIDATE_TITLE,
+  ADD_FEATURE,
   SELECT_FEATURE,
   CLEAR_SELECTED_FEATURE
 } from '../actions';
@@ -29,6 +30,11 @@ function featureCard(state = initialState, action) {
         status: 'failure',
         title: action.title,
         article: {},
+      };
+    case ADD_FEATURE:
+      return {
+        ...state,
+        status: 'existing'
       };
     case SELECT_FEATURE:
       return {

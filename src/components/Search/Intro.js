@@ -1,9 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import commonStyles from '../../commonStyles';
 
-const Intro = () => (
-  <div style={commonStyles.pageHeader}>
+const Intro = ({ featureCard }) => (
+  <div
+    style={commonStyles.pageHeader}
+    hidden={featureCard.status !== 'none'}
+  >
     <h1 style={commonStyles.appTitle}>
       WikiLayers
     </h1>
@@ -15,5 +19,9 @@ const Intro = () => (
     </p>
   </div>
 );
+
+Intro.propTypes = {
+  featureCard: PropTypes.object
+};
 
 export default Intro;

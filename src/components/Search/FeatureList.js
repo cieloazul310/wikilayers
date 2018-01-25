@@ -21,7 +21,7 @@ const iconButtonElement = (
   </IconButton>
 );
 
-const FeatureList = ({ features, onFeatureClick, toggleFeature, onVisitClick, onRemoveClick }) => (
+const FeatureList = ({ features, onFeatureClick, toggleFeature, onVisitClick, onRemoveClick, moveToArticle }) => (
   <div>
   {
     features.filter(feature => !feature.get('removed')).length === 0 ? <div /> :
@@ -55,7 +55,9 @@ const FeatureList = ({ features, onFeatureClick, toggleFeature, onVisitClick, on
                     >
                       地図で見る
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem
+                      onClick={() => moveToArticle(feature)}
+                    >
                       記事を読む
                     </MenuItem>
                     <MenuItem
@@ -81,6 +83,7 @@ FeatureList.propTypes = {
   toggleFeature: PropTypes.func.isRequired,
   onVisitClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
+  moveToArticle: PropTypes.func.isRequired,
 };
 
 export default FeatureList;

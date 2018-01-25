@@ -38,6 +38,10 @@ const mapDispatchToProps = dispatch => {
     onRemoveClick: (feature) => {
       dispatch(removeFeature(feature));
     },
+    moveToArticle: (feature) => {
+      dispatch(selectFeature(feature));
+      dispatch(push('/article'));
+    }
   };
 };
 

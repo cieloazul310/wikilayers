@@ -1,5 +1,6 @@
 export const REQUEST_TEXT = 'REQUEST_TEXT';
 export const RECEIVE_TEXT = 'RECEIVE_TEXT';
+export const SHOW_TEXT = 'SHOW_TEXT';
 
 export function requestText(article) {
   return {
@@ -12,6 +13,13 @@ export function receiveText(page) {
   return {
     type: RECEIVE_TEXT,
     page
+  };
+}
+
+export function showText(article) {
+  return {
+    type: SHOW_TEXT,
+    article
   };
 }
 
@@ -35,7 +43,8 @@ function fetchText(article) {
 
 // Do not fetch text if textCache has the same text.
 function shouldFetchText(state, article) {
-  const page = state.textCache.pages.hasOwnProperty(article.pageid);
+  console.log('shouldFetchText');
+  const page = state.textCache.pages[article.lang].hasOwnProperty(article.pageid);
   if (!page) {
     return true;
   } else {

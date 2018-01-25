@@ -10,7 +10,7 @@ import Article from './components/Article';
 import Settings from './components/Settings';
 
 import { history } from './configureStore';
-import './App.css';
+//import './App.css';
 import commonStyles from './commonStyles';
 
 injectTapEventPlugin();
@@ -20,12 +20,10 @@ class App extends Component {
     return (
       <Router history={history}>
         <div>
-          <div style={commonStyles.appField}>
-            <Route path="/map" component={Map} />
-            <Route exact path="/" component={Search} />
-            <Route path="/article" component={Article} />
-            <Route path="/settings" component={Settings} />
-          </div>
+          <Route path="/map" component={Map} />
+          <Route exact path="/" component={Search} />
+          <Route path="/article" component={Article} />
+          <Route path="/settings" component={Settings} />
           <div style={commonStyles.bottomNav}>
             <CustomHeader />
           </div>
