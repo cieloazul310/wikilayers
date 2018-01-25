@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import CircularProgress from 'material-ui/CircularProgress';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import AddLocation from 'material-ui/svg-icons/maps/add-location';
+
+import Loader from '../Loader';
 
 import articleToFeature from '../../map/articleToFeature';
 import formatCoords from '../../map/formatCoords';
@@ -18,17 +21,10 @@ class Result extends Component {
 
     } else if (featureCard.status === 'fetching') {
       return (
-        <div style={{
-          position: 'relative',
-          height: commonStyles.containerInner.minHeight - commonStyles.form.height - 10
-        }}>
-          <CircularProgress style={{
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            display: 'block'
-          }} />
-        </div>
+        <Loader style={{
+          height: commonStyles.containerInner.minHeight - commonStyles.form.height - 10,
+          backgroundColor: '#eee'
+        }} />
       );
     } else if (featureCard.status === 'failure') {
       return (
@@ -40,7 +36,11 @@ class Result extends Component {
               title="記事の取得に失敗しました。"
             />
             <CardText>
-              検索のヒント: 正式名称を入れてみよう
+              <p>検索のヒント: 正式名称を入れてみよう</p>
+              <ul>
+                <li>例: <b>太田城 (常陸国)</b>の場合、名前と注釈の間に半角スペース、カギ括弧は半角で入力</li>
+                <li>例: <b>オールド・トラッフォード</b>の場合、区切りの位置で点(・)を入力</li>
+              </ul>
             </CardText>
             <CardActions>
               <FlatButton label="閉じる"
@@ -53,25 +53,11 @@ class Result extends Component {
       return (
         <div
           className='result-bg'
-          style={{
-            backgroundColor: featureCard.article.hasOwnProperty('thumbnail') ? 'white' : 'silver',
-            backgroundImage: featureCard.article.hasOwnProperty('thumbnail') ?  `url(${featureCard.article.thumbnail.source})` : 'none',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            zIndex: 0,
-            height: commonStyles.containerInner.minHeight - commonStyles.form.height - 50,
-            position: 'relative',
-            overflow: 'hidden',
-            padding: '20px .5em 20px .5em',
-            transition: 'background-image .5s linear'
-          }}
+          style={commonStyles.resultBg(featureCard, this.props.windowSize.height)}
         >
           <Card
             style={commonStyles.result}
             zDepth={3}
-            containerStyle={{
-              maxHeight: '100%'
-            }}
           >
             <CardHeader
               title={featureCard.title}
@@ -82,10 +68,11 @@ class Result extends Component {
             />
             <CardActions>
               {
-                <FlatButton
-                  label="地図に加える"
+                <RaisedButton
+                  label="地図に追加"
                   disabled={!featureCard.article.hasOwnProperty('coordinates') || featureCard.status === 'existing'}
                   primary={true}
+                  icon={<AddLocation />}
                   onClick={() => {
                       this.props.addFeature(articleToFeature(featureCard.article, featureCard.title));
                     }

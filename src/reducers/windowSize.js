@@ -1,4 +1,4 @@
-import { RESIZE_WINDOW } from '../actions';
+import { RESIZE } from '../actions';
 
 const initialState = {
   width: window.innerWidth,
@@ -7,10 +7,10 @@ const initialState = {
 
 function windowSize(state = initialState, action) {
   switch (action.type) {
-    case RESIZE_WINDOW:
+    case RESIZE:
       return {
-        width: action.win.innerWidth,
-        height: action.win.innerHeight
+        width: action.width,
+        height: action.height
       };
     default:
       return state;

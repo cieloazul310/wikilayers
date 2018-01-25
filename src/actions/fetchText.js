@@ -43,7 +43,6 @@ function fetchText(article) {
 
 // Do not fetch text if textCache has the same text.
 function shouldFetchText(state, article) {
-  console.log('shouldFetchText');
   const page = state.textCache.pages[article.lang].hasOwnProperty(article.pageid);
   if (!page) {
     return true;

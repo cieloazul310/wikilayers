@@ -28,11 +28,11 @@ const pallete = {
 const commonStyles = {
   pallete,
   fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic UI", "Original Yu Gothic", "Yu Gothic", YuGothic, Verdana, Meiryo, sans-serif',
-  appField: {
+  appField: (windowHeight) => ({
     backgroundColor: pallete.primary3Color,
-    height: window.innerHeight - bottomNavHeight,
+    height: windowHeight - bottomNavHeight,
     overflowY: 'scroll'
-  },
+  }),
   bottomNav: {
     height: bottomNavHeight,
     overflow: 'hidden'
@@ -90,7 +90,19 @@ const commonStyles = {
   resultText: {
     overflowY: 'scroll',
     boxSizing: 'border-box'
-  }
+  },
+  resultBg: (featureCard, windowHeight) => ({
+    backgroundColor: featureCard.article.hasOwnProperty('thumbnail') ? 'white' : '#eee',
+    backgroundImage: featureCard.article.hasOwnProperty('thumbnail') ?  `url(${featureCard.article.thumbnail.source})` : 'none',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    zIndex: 0,
+    height: windowHeight - bottomNavHeight - pageHeightMargin - formHeight - 50,
+    position: 'relative',
+    overflow: 'hidden',
+    padding: '20px .5em 20px .5em',
+    transition: 'background-image .5s linear'
+  })
 };
 
 commonStyles.resultText.maxHeight = commonStyles.containerInner.minHeight - commonStyles.form.height - 50 - 72 - 52;

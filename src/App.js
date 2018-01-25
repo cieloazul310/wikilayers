@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'react-router-redux';
 import CustomHeader from './containers/CustomHeader';
 
+import ResizeEventListener from './ResizeEventListener';
 import Map from './components/Map';
 import Search from './components/Search';
 import Article from './components/Article';
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <Router history={history}>
         <div>
+          <ResizeEventListener />
           <Route path="/map" component={Map} />
           <Route exact path="/" component={Search} />
           <Route path="/article" component={Article} />

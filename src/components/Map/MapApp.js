@@ -75,7 +75,11 @@ class MapApp extends Component {
         <div
           className="map"
           id="map"
-          style={commonStyles.map}
+          style={{
+            width: '100%',
+            height: this.props.windowSize.height - commonStyles.bottomNav.height,
+            backgroundColor: '#fff',
+          }}
         >
         </div>
       </div>

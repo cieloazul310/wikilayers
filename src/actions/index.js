@@ -6,6 +6,7 @@ export * from './fetchText';
 
 export const RELOAD = 'RELOAD';
 export const RESIZE_WINDOW = 'RESIZE_WINDOW';
+export const RESIZE = 'RESIZE';
 
 export function reload(date) {
   return {
@@ -14,9 +15,10 @@ export function reload(date) {
   };
 };
 
-export function resizeWindow(win) {
+export function resize(width, height) {
   return {
-    type: RESIZE_WINDOW,
-    win
+    type: RESIZE,
+    width,
+    height,
   };
 }

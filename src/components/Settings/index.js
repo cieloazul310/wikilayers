@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Paper from 'material-ui/Paper';
+
+import WikiPageWrapper from '../../containers/WikiPageWrapper';
 import WikiMapSettings from '../../containers/Settings/WikiMapSettings';
 import WikiLayerList from '../../containers/Settings/WikiLayerList';
 import AppInfo from './AppInfo';
@@ -8,8 +10,7 @@ import AdBox from '../AdBox';
 
 import commonStyles from '../../commonStyles';
 
-const Settings = () => (
-  <div style={commonStyles.appField}>
+const SettingsComponent = () => (
   <div style={commonStyles.containerOuter}>
     <Paper style={commonStyles.containerInner}>
       <div style={commonStyles.pageHeader}>
@@ -23,6 +24,11 @@ const Settings = () => (
       <AdBox />
     </Paper>
   </div>
+);
+
+const Settings = () => (
+  <div>
+    <WikiPageWrapper component={<SettingsComponent />} />
   </div>
 );
 

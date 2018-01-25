@@ -9,15 +9,26 @@ import './theContent.css';
 // @TODO: Remove Selected Feature
 
 class TheContent extends Component {
+  componentWillMount() {
+    console.log('componentWillMount');
+  }
   componentDidMount() {
+    console.log('componentDidMount');
     const { status, reserved, pages } = this.props.textCache;
     // Fetch Text
     if (status === 'Reserve' && !pages[reserved.lang].hasOwnProperty(reserved.pageid)) {
       this.props.fetchText(reserved);
     }
   }
+  componentWillReceiveProps() {
+    console.log('componentWillReceiveProps');
+  }
+  componentWillUpdate() {
+    console.log('componentWillUpdate');
+  }
 
   componentDidUpdate() {
+    console.log('componentDidUpdate');
     const { status, reserved, last } = this.props.textCache;
     const article = (status === 'none' && reserved.length) ? last :
                   reserved;
@@ -27,11 +38,15 @@ class TheContent extends Component {
     }
   }
 
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+  }
+
   render() {
+    console.log('render');
     const { status, reserved, last, pages } = this.props.textCache;
     const isInitial = (status === 'none' && !reserved.length);
     const isExist = pages[reserved.lang] &&  pages[reserved.lang].hasOwnProperty(reserved.pageid);
-    console.log(isExist ? 'isExist!' : 'NotExist');
     const article = (status === 'none' && reserved.length) ? last :
                   reserved;
     const baseurl = `https://${article.lang}.wikipedia.org/wiki/`;
@@ -42,9 +57,9 @@ class TheContent extends Component {
     return (
       <div>
         <div style={commonStyles.pageHeader}>
-          <h3 style={commonStyles.pageTitle}>
+          <h2 style={commonStyles.pageTitle}>
             {isInitial ? '記事' : article.title}
-          </h3>
+          </h2>
           <p style={{
             textAlign: 'right',
             marginRight: '1em'
