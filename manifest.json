@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "./wikilayers/",
   "display": "standalone",
   "theme_color": "#0091EA",
   "background_color": "#0091EA"
