@@ -1,36 +1,29 @@
 import { fetch } from 'cross-fetch';
 
-export const REQUEST_ARTICLE = 'REQUEST_ARTICLE';
-export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE';
-export const SELECT_TITLE = 'SELECT_TITLE';
-export const INVALIDATE_TITLE = 'INVALIDATE_TITLE';
+export const REQUEST_NAME = 'REQUEST_NAME';
+export const RECEIVE_SUMMARY = 'RECEIVE_SUMMARY';
+export const INVALIDATE_NAME = 'INVALIDATE_NAME';
 
-export function selectTitle(title) {
+export function invalidateName(name) {
   return {
-    type: SELECT_TITLE,
-    title
+    type: INVALIDATE_NAME,
+    name
   };
 }
 
-export function invalidateTitle(title) {
+function requestName(name) {
   return {
-    type: INVALIDATE_TITLE,
-    title
+    type: REQUEST_NAME,
+    name
   };
 }
 
-function requestTitle(title) {
+function receiveSummary(summary, name) {
   return {
-    type: REQUEST_ARTICLE,
-    title
-  };
-}
-
-function receiveArticle(article, title) {
-  return {
-    type: RECEIVE_ARTICLE,
-    article,
-    title
+    type: RECEIVE_SUMMARY,
+    summary,
+    name,
+    date: Date.now()
   }
 }
 
@@ -50,7 +43,7 @@ function titleParser(input) {
     return {
       origin: url.origin,
       lang: url.hostname.split('.')[0],
-      title: decodeURI(url.pathname.split('/')[2]),
+      name: decodeURI(url.pathname.split('/')[2]),
     };
   } else if (splitBySlash[0].split('.').indexOf('wikipedia') > 0) {
     /** 1) ja . wikipedia . org / wiki / title
@@ -60,12 +53,12 @@ function titleParser(input) {
     return {
       origin: url.origin,
       lang: url.hostname.split('.')[0],
-      title: decodeURI(url.pathname.split('/')[2])
+      name: decodeURI(url.pathname.split('/')[2])
     };
   } else {
     return {
       origin: 'https://ja.wikipedia.org',
-      title: input,
+      name: input,
       lang: 'ja'
     };
   }
@@ -95,49 +88,49 @@ function createURLByLang(lang) {
   return `https://${lang.lang}.wikipedia.org/w/${query2}&titles=${encodeURI(lang.title)}`;
 }
 
-export function fetchArticle(input) {
+export function fetchSummary(input) {
 
   return dispatch => {
     if (input === '') return;
 
     const post = titleParser(input);
-    const firstURL = createFirstURL(post.lang, post.title);
+    const firstURL = createFirstURL(post.lang, post.name);
 
-    dispatch(requestTitle(post.title));
+    dispatch(requestName(post.name));
 
     return fetch(firstURL, fetchOptions)
       .then(response => response.json())
       .then(json => {
-        const article = json.query.pages[0];
-        article.lang = post.lang;
+        const summary = json.query.pages[0];
+        summary.lang = post.lang;
 
-        if (article.hasOwnProperty('missing')) {
-          dispatch(invalidateTitle(post.title));
-        } else if (article.hasOwnProperty('coordinates')) {
-          dispatch(receiveArticle(article, post.title));
-        } else if (article.hasOwnProperty('langlinks')) {
+        if (summary.hasOwnProperty('missing')) {
+          dispatch(invalidateName(post.name));
+        } else if (summary.hasOwnProperty('coordinates')) {
+          dispatch(receiveSummary(summary, post.name));
+        } else if (summary.hasOwnProperty('langlinks')) {
 
-          const langs = article.langlinks
+          const langs = summary.langlinks
                           .filter(obj => langOrder.indexOf(obj.lang) >= 0)
                           .sort((a, b) => langOrder.indexOf(a.lang) - langOrder.indexOf(b.lang));
 
-          function fetchAnotherBites(lang, article) {
+          function fetchAnotherBites(lang, summary) {
             return () => {
               return new Promise((resolve, reject) => {
                 console.log(lang.lang);
-                if (!article.hasOwnProperty('coordinates')) {
+                if (!summary.hasOwnProperty('coordinates')) {
                   console.log(`${lang.lang} fetching!`);
                   fetch(createURLByLang(lang), fetchOptions)
                     .then(response => response.json())
                     .then(data => {
                       const page = data.query.pages[0];
                       if (page.hasOwnProperty('coordinates')) {
-                        article.coordinates = page.coordinates;
+                        summary.coordinates = page.coordinates;
                         return data;
                       }
                     })
                     .then(data => {
-                      dispatch(receiveArticle(article, post.title));
+                      dispatch(receiveSummary(summary, post.name));
                       resolve();
                     })
                     .catch(err => console.log(`There has been a problem with your fetch operation: ${err.message}`));
@@ -148,12 +141,12 @@ export function fetchArticle(input) {
             }
           }
 
-          langs.map(lang => fetchAnotherBites(lang, article))
+          langs.map(lang => fetchAnotherBites(lang, summary))
               .reduce((prev, curr) => prev.then(curr), Promise.resolve());
-          dispatch(receiveArticle(article, post.title));
+          dispatch(receiveSummary(summary, post.name));
 
         } else {
-          dispatch(receiveArticle(article, post.title));
+          dispatch(receiveSummary(summary, post.name));
         }
       })
       .catch(err => console.log(`There has been a problem with your fetch operation: ${err.message}`));

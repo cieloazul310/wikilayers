@@ -10,8 +10,8 @@ function features(state = [], action) {
   switch (action.type) {
     case ADD_FEATURE:
       // Don't add feature which already exists.
-      if (state.map(feature => feature.properties.article.pageid)
-                .indexOf(action.feature.properties.article.pageid) >= 0) {
+      if (state.map(feature => feature.properties.summary.pageid)
+                .indexOf(action.feature.properties.summary.pageid) >= 0) {
         return state;
       } else {
         return [...state, action.feature];

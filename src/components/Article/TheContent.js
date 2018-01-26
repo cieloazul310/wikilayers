@@ -6,8 +6,6 @@ import PageHeader from '../PageHeader';
 import commonStyles from '../../commonStyles';
 import './theContent.css';
 
-// @TODO: Remove Selected Feature
-
 class TheContent extends Component {
   componentDidMount() {
     const { status, reserved, pages } = this.props.textCache;
@@ -98,7 +96,7 @@ TheContent.propTypes = {
   textCache: PropTypes.shape({
     status: PropTypes.string.isRequired,
     reserved: PropTypes.object.isRequired,
-    last: PropTypes.object.isRequired,
+    last: PropTypes.object,
     pages: PropTypes.object.isRequired
   }).isRequired,
   fetchText: PropTypes.func.isRequired,

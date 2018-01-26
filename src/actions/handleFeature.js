@@ -5,11 +5,10 @@ export const SELECT_FEATURE = 'SELECT_FEATURE';
 export const CLEAR_SELECTED_FEATURE = 'CLEAR_SELECTED_FEATURE';
 export const SET_TO_FEATURE = 'SET_TO_FEATURE';
 export const ZOOM_TO_FEATURE = 'ZOOM_TO_FEATURE';
-
-let featureId = 0;
+export const CLEAR_FEATURE_CARD = 'CLEAR_FEATURE_CARD';
 
 export function addFeature(feature) {
-  feature.id = featureId++;
+  feature.id = feature.properties.summary.date;
   return {
     type: ADD_FEATURE,
     feature
@@ -40,7 +39,7 @@ export function selectFeature(feature) {
 export function clearSelectedFeature() {
   return {
     type: CLEAR_SELECTED_FEATURE
-  }
+  };
 }
 
 export function setToFeature(feature) {
@@ -54,5 +53,11 @@ export function zoomToFeature(feature) {
   return {
     type: ZOOM_TO_FEATURE,
     feature
+  };
+}
+
+export function clearFeatureCard() {
+  return {
+    type: CLEAR_FEATURE_CARD,
   };
 }

@@ -2,10 +2,9 @@ import { connect } from 'react-redux';
 import { fetchTextIfNeeded, showText } from '../../actions';
 import TheContent from '../../components/Article/TheContent';
 
-const mapStateToProps = ({ selectedFeature, textCache }) => {
+const mapStateToProps = ({ textCache }) => {
   return {
-    selectedFeature,
-    textCache
+    textCache,
   };
 }
 

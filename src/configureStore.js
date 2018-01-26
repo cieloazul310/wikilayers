@@ -15,6 +15,7 @@ export const history = createHistory({
 const persistConfig = {
   key: 'root',
   storage: storage,
+  blacklist: ['router', 'textCache', 'windowSize', 'selectedFeature']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
