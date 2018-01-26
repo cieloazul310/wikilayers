@@ -24,19 +24,18 @@ const iconButtonElement = (
 const FeatureList = ({ features, onFeatureClick, toggleFeature, onVisitClick, onRemoveClick, moveToArticle }) => (
   <div>
   {
-    features.filter(feature => !feature.get('removed')).length === 0 ? <div /> :
+    features.length === 0 ? <div /> :
         <List>
           <Subheader>アイテム</Subheader>
           {
-            features.map(feature => feature)
-                    .sort((a, b) => b.getId() - a.getId())
+            features.sort((a, b) => b.id - a.id)
                     .map((feature, index) => (
               <ListItem
                 key={index}
-                primaryText={feature.get('name')}
+                primaryText={feature.properties.name}
                 leftIcon={
-                  feature.get('visibility') ?
-                  <LocationOn style={{fill: feature.get('selected') ? 'red' : commonStyles.pallete.primary2Color}}/> :
+                  feature.properties.visibility ?
+                  <LocationOn style={{fill: feature.properties.selected ? 'red' : commonStyles.pallete.primary2Color}}/> :
                   <LocationOff style={{fill: grey300}} />
                 }
                 onClick={() => onFeatureClick(feature)}
@@ -48,7 +47,7 @@ const FeatureList = ({ features, onFeatureClick, toggleFeature, onVisitClick, on
                     <MenuItem
                       onClick={() => toggleFeature(feature)}
                     >
-                      {feature.get('visibility') ? '表示中' : '非表示'}
+                      {feature.properties.visibility ? '表示中' : '非表示'}
                     </MenuItem>
                     <MenuItem
                       onClick={() => onVisitClick(feature)}

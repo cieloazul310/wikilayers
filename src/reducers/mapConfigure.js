@@ -1,20 +1,32 @@
 import {
   TOGGLE_GEOLOCATION,
-  TOGGLE_SHOW_LABELS
+  TOGGLE_SHOW_LABELS,
+  SAVE_GEOLOCATION,
 } from '../actions';
 
 import Geolocation from 'ol/geolocation';
 
 const initialConfigure = {
-  geolocation: new Geolocation(),
+  geolocation: {
+    tracking: false,
+  },
   showLabels: false,
 };
 
 function mapConfigure(state = initialConfigure, action) {
   switch (action.type) {
     case TOGGLE_GEOLOCATION:
-      state.geolocation.setTracking(!state.geolocation.getTracking());
-      return {...state};
+      return {
+        ...state,
+        geolocation: Object.assign({}, state.geolocation, {
+          tracking: !state.geolocation.tracking
+        })
+      };
+    case SAVE_GEOLOCATION:
+      return {
+        ...state,
+        geolocation: action.geolocation
+      };
     case TOGGLE_SHOW_LABELS:
       return {
         ...state,

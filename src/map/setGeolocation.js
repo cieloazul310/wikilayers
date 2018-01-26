@@ -11,10 +11,8 @@ import Icon from '../img/geolocation.svg';
 
 function setGeolocation(map, geolocation) {
 
-  geolocation.setProjection(map.getView().getProjection());
-
   const positionFeature = new Feature({
-    geometry: geolocation.getPosition() ? new GeomPoint(geolocation.getPosition()) : null
+    geometry: geolocation.get('cachedPosition') ? new GeomPoint(geolocation.get('cachedPosition')) : null
   });
   positionFeature.setStyle(new Style({
     image: new IconStyle({
@@ -48,6 +46,7 @@ function setGeolocation(map, geolocation) {
 
   new VectorLayer({
     map: map,
+    title: 'geolocation layer',
     source: new VectorSource({
       features: [accuracyFeature, positionFeature]
     })

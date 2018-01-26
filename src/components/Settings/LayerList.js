@@ -11,29 +11,31 @@ import {
   grey500, greenA700,
 } from 'material-ui/styles/colors';
 
-const LayerList = ({ baseLayers, toggleLayer }) => (
+import { layersConfig } from '../../map/initialBaseLayers';
+
+const LayerList = ({ toggleLayer, visibleBaseLayer }) => (
   <div>
     <List>
       <Subheader>背景地図</Subheader>
-      {baseLayers.map((layer, index) => (
+      {layersConfig.map((layer, index) => (
         <ListItem
           key={index}
-          primaryText={layer.get('title')}
-          secondaryText={layer.get('subtitle')}
+          primaryText={layer.title}
+          secondaryText={layer.subtitle}
           leftIcon={
-            layer.getVisible() ?
+            layer.title === visibleBaseLayer ?
             <CheckCircle
               color={greenA700}
             /> :
             <Remove/>
           }
           onClick={() => {
-            toggleLayer(index);
+            toggleLayer(layer.title);
           }}
           rightIconButton={
             <IconButton
               touch={true}
-              tooltip={layer.get('summary')}
+              tooltip={layer.summary}
               tooltipPosition="top-left"
               tooltipStyles={{
                 fontSize: 11
@@ -49,9 +51,7 @@ const LayerList = ({ baseLayers, toggleLayer }) => (
 );
 
 LayerList.propTypes = {
-  baseLayers: PropTypes.arrayOf(
-    PropTypes.object
-  ).isRequired,
+  visibleBaseLayer: PropTypes.string.isRequired,
   toggleLayer: PropTypes.func.isRequired
 };
 

@@ -7,8 +7,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import AddLocation from 'material-ui/svg-icons/maps/add-location';
 
 import Loader from '../Loader';
-
+/*
 import articleToFeature from '../../map/articleToFeature';
+*/
+import { createFeature } from '../../map/createFeature';
 import formatCoords from '../../map/formatCoords';
 import commonStyles from '../../commonStyles';
 import './result.css';
@@ -74,7 +76,7 @@ class Result extends Component {
                   primary={true}
                   icon={<AddLocation />}
                   onClick={() => {
-                      this.props.addFeature(articleToFeature(featureCard.article, featureCard.title));
+                      this.props.addFeature(createFeature(featureCard.article, featureCard.title));
                     }
                   }
                 />
