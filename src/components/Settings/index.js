@@ -6,6 +6,8 @@ import WikiPageWrapper from '../../containers/WikiPageWrapper';
 import WikiMapSettings from '../../containers/Settings/WikiMapSettings';
 import WikiLayerList from '../../containers/Settings/WikiLayerList';
 import AppInfo from './AppInfo';
+import PageHeader from '../PageHeader';
+import Basic from '../Basic';
 import AdBox from '../AdBox';
 
 import commonStyles from '../../commonStyles';
@@ -13,15 +15,11 @@ import commonStyles from '../../commonStyles';
 const SettingsComponent = () => (
   <div style={commonStyles.containerOuter}>
     <Paper style={commonStyles.containerInner}>
-      <div style={commonStyles.pageHeader}>
-        <h2 style={commonStyles.pageTitle}>
-          設定
-        </h2>
-      </div>
+      <PageHeader title="設定" />
       <WikiMapSettings />
       <WikiLayerList />
       <AppInfo />
-      <AdBox />
+      <Basic component={<AdBox />} />
     </Paper>
   </div>
 );

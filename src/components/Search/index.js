@@ -18,7 +18,7 @@ const SearcherComponent = () => (
       <WikiForms />
       <WikiResult />
       <WikiFeatureList />
-      <AdBox />
+      <AdBox type="top" />
     </Paper>
   </div>
 );

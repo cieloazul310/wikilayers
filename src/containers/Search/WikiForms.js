@@ -2,8 +2,10 @@ import { connect } from 'react-redux';
 import { fetchArticle } from '../../actions';
 import Forms from '../../components/Search/Forms';
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = ({ windowSize }) => {
+  return {
+    windowSize
+  };
 };
 
 const mapDispatchToProps = dispatch => {

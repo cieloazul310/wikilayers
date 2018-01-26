@@ -3,7 +3,7 @@ import { toggleGeolocation, toggleShowLabels } from '../../actions';
 
 import MapSettings from '../../components/Settings/MapSettings';
 
-const mapStateToProps = ({ mapConfigure }) => {
+const mapStateToProps = ({ mapConfigure, }) => {
   return {
     mapConfigure,
   };

@@ -63,7 +63,7 @@ class Result extends Component {
               title={featureCard.title}
               subtitle={
                 featureCard.article.hasOwnProperty('coordinates') ? formatCoords(featureCard.article.coordinates[0].lon, featureCard.article.coordinates[0].lat) :
-                'この記事には座標がありません'
+                '座標がありません'
               }
             />
             <CardActions>
@@ -84,7 +84,7 @@ class Result extends Component {
             </CardActions>
             <CardText
               expandable={false}
-              style={commonStyles.resultText}
+              style={commonStyles.resultText(this.props.windowSize.height)}
             >
               {featureCard.article.extract}
             </CardText>
@@ -96,6 +96,10 @@ class Result extends Component {
 };
 
 Result.propTypes = {
+  windowSize: PropTypes.shape({
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+  }),
   featureCard: PropTypes.shape({
     status: PropTypes.string.isRequired,
     article: PropTypes.object.isRequired

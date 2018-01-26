@@ -87,23 +87,28 @@ const commonStyles = {
     maxWidth: 400,
     maxHeight: '100%'
   },
-  resultText: {
+  resultText: (windowHeight) => ({
+    maxHeight: innerMinHeight(windowHeight) - formHeight - 50 - 72 - 52,
     overflowY: 'scroll',
     boxSizing: 'border-box'
-  },
+  }),
   resultBg: (featureCard, windowHeight) => ({
     backgroundColor: featureCard.article.hasOwnProperty('thumbnail') ? 'white' : '#eee',
     backgroundImage: featureCard.article.hasOwnProperty('thumbnail') ?  `url(${featureCard.article.thumbnail.source})` : 'none',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     zIndex: 0,
-    height: windowHeight - bottomNavHeight - pageHeightMargin - formHeight - 50,
+    height: innerMinHeight(windowHeight) - formHeight - 50,
     position: 'relative',
     overflow: 'hidden',
     padding: '20px .5em 20px .5em',
     transition: 'background-image .5s linear'
   })
 };
+
+function innerMinHeight(windowHeight) {
+  return windowHeight - bottomNavHeight - pageHeightMargin;
+}
 
 commonStyles.resultText.maxHeight = commonStyles.containerInner.minHeight - commonStyles.form.height - 50 - 72 - 52;
 

@@ -33,6 +33,9 @@ class Forms extends Component {
                 value={this.state.title}
                 onChange={this.handleChange}
                 fullWidth={true}
+                hintStyle={{
+                  fontSize: this.props.windowSize.width < 450 ? '80%' : '100%'
+                }}
               />
             </div>
             <div style={{
