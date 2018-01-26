@@ -6,7 +6,7 @@ import {
 import './fonts.css';
 
 const bottomNavHeight = 56;
-const formHeight = 120;
+const formHeight = 70;
 const pageHeightMargin = 22;
 const pallete = {
   primary1Color: lightBlueA700,
@@ -41,6 +41,7 @@ const commonStyles = {
     textAlign: 'center',
     marginBottom: '2em',
     paddingTop: '2em',
+    transition: 'height 0.2s linear'
   },
   appTitle: {
     fontSize: 48,
@@ -72,7 +73,7 @@ const commonStyles = {
   },
   map: {
     width: '100%',
-    height: window.innerHeight - bottomNavHeight,
+    height: window.innerHeight - bottomNavHeight - 1,
     backgroundColor: '#fff',
   },
   mapInfo: {
@@ -93,8 +94,8 @@ const commonStyles = {
     boxSizing: 'border-box'
   }),
   resultBg: (featureCard, windowHeight) => ({
-    backgroundColor: featureCard.article.hasOwnProperty('thumbnail') ? 'white' : '#eee',
-    backgroundImage: featureCard.article.hasOwnProperty('thumbnail') ?  `url(${featureCard.article.thumbnail.source})` : 'none',
+    backgroundColor: featureCard.summary.hasOwnProperty('thumbnail') ? 'white' : '#eee',
+    backgroundImage: featureCard.summary.hasOwnProperty('thumbnail') ?  `url(${featureCard.summary.thumbnail.source})` : 'none',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     zIndex: 0,
@@ -102,7 +103,7 @@ const commonStyles = {
     position: 'relative',
     overflow: 'hidden',
     padding: '20px .5em 20px .5em',
-    transition: 'background-image .5s linear'
+    transition: 'background-image .5s linear, height .2s linear'
   })
 };
 

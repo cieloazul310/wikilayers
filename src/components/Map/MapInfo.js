@@ -23,7 +23,7 @@ const MapInfo = ({ selectedFeature, moveToArticle }) => (
         overflowY: 'scroll'
       }}
     >
-      {selectedFeature ? `${selectedFeature.properties.article.extract}` : ''}
+      {selectedFeature ? `${selectedFeature.properties.summary.extract}` : ''}
     </CardText>
     <CardActions
       expandable={true}

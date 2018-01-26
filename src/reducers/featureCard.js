@@ -1,35 +1,40 @@
 import {
-  REQUEST_ARTICLE,
-  RECEIVE_ARTICLE,
-  INVALIDATE_TITLE,
+  REQUEST_NAME,
+  RECEIVE_SUMMARY,
+  INVALIDATE_NAME,
   ADD_FEATURE,
   SELECT_FEATURE,
-  CLEAR_SELECTED_FEATURE
+  CLEAR_SELECTED_FEATURE,
+  CLEAR_FEATURE_CARD
 } from '../actions';
 
 const initialState = {
   status: 'none',
-  article: {},
+  summary: {},
 };
 
 function featureCard(state = initialState, action) {
   switch (action.type) {
-    case REQUEST_ARTICLE:
+    case REQUEST_NAME:
       return {
         status: 'fetching',
-        article: {},
+        summary: {},
       };
-    case RECEIVE_ARTICLE:
+    case RECEIVE_SUMMARY:
       return {
         status: 'success',
-        title: action.title,
-        article: action.article,
+        name: action.name,
+        summary: {
+          ...action.summary,
+          name: action.name,
+          date: action.date,
+        },
       };
-    case INVALIDATE_TITLE:
+    case INVALIDATE_NAME:
       return {
         status: 'failure',
-        title: action.title,
-        article: {},
+        name: action.name,
+        summary: {},
       };
     case ADD_FEATURE:
       return {
@@ -39,10 +44,11 @@ function featureCard(state = initialState, action) {
     case SELECT_FEATURE:
       return {
         status: 'existing',
-        title: action.feature.properties.name,
-        article: action.feature.properties.article
+        name: action.feature.properties.name,
+        summary: action.feature.properties.summary
       };
     case CLEAR_SELECTED_FEATURE:
+    case CLEAR_FEATURE_CARD:
       return initialState;
     default:
       return state;

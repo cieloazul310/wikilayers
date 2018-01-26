@@ -5,18 +5,25 @@ import commonStyles from '../../commonStyles';
 
 const Intro = ({ featureCard }) => (
   <div
-    style={commonStyles.pageHeader}
-    hidden={featureCard.status !== 'none'}
+    style={featureCard.status === 'none' ? commonStyles.pageHeader : {
+      height: 0,
+    }}
   >
-    <h1 style={commonStyles.appTitle}>
-      WikiLayers
-    </h1>
-    <p style={{
-      fontSize: 14,
-      color: '#777'
-    }}>
-      Wikipediaを検索して地図に表示しよう！
-    </p>
+    {
+      featureCard.status !== 'none' ? <div /> : (
+        <div>
+          <h1 style={commonStyles.appTitle}>
+            WikiLayers
+          </h1>
+          <p style={{
+            fontSize: 14,
+            color: '#777'
+          }}>
+          Wikipediaを検索して地図に表示しよう！
+          </p>
+        </div>
+      )
+    }
   </div>
 );
 

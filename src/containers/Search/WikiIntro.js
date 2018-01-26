@@ -7,12 +7,6 @@ const mapStateToProps = ({ featureCard }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-
-  };
-};
-
 const WikiIntro = connect(
   mapStateToProps,
 )(Intro);

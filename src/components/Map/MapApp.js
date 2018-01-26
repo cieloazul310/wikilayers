@@ -7,8 +7,8 @@ import VectorLayer from 'ol/layer/vector';
 import VectorSource from 'ol/source/vector';
 import Group from 'ol/layer/group';
 import Geolocation from 'ol/geolocation';
-import Proj from 'ol/proj';
-import 'ol/ol.css';
+import Attribution from 'ol/attribution';
+import '../../map/ol.css';
 
 import commonStyles from '../../commonStyles';
 import { initialBaseLayers } from '../../map/initialBaseLayers';
@@ -25,12 +25,10 @@ class MapApp extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     this.createMap();
   }
 
-  componentDidUpdate() {
-    console.log('componentDidUpdate');/*
+  componentDidUpdate() {/*
     this.createMap();*/
     // TODO: this.updateMap();
     this.vector.getSource().forEachFeature(olFeature => {
@@ -52,15 +50,14 @@ class MapApp extends Component {
   }
 
   createMap() {
-    console.log('createMap');
     if (this.map) return;
-    console.log('compose Map!');
-    console.log(this.props.features.map(feature => createOlFeature (feature)));
-    console.log(this.props.features.map(feature => createOlFeature(feature).getProperties()));
 
     this.vector = new VectorLayer({
       source: new VectorSource({
-        features: this.props.features.map(feature => createOlFeature (feature))
+        features: this.props.features.map(feature => createOlFeature (feature)),
+        attributions: [new Attribution({
+          html: '<a href="https://ja.wikipedia.org" target="_blank">Wikipedia</a>'
+        })]
       }),
       style: this.props.mapConfigure.showLabels ?
         allLabelStyle : vectorStyle,

@@ -4,8 +4,6 @@ import {
   SAVE_GEOLOCATION,
 } from '../actions';
 
-import Geolocation from 'ol/geolocation';
-
 const initialConfigure = {
   geolocation: {
     tracking: false,

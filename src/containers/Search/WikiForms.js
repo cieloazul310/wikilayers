@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchArticle } from '../../actions';
+import { fetchSummary } from '../../actions';
 import Forms from '../../components/Search/Forms';
 
 const mapStateToProps = ({ windowSize }) => {
@@ -10,8 +10,8 @@ const mapStateToProps = ({ windowSize }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchArticle: (title) => {
-      dispatch(fetchArticle(title));
+    fetchSummary: (name) => {
+      dispatch(fetchSummary(name));
     }
   }
 }

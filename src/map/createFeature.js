@@ -3,17 +3,19 @@ import geomPoint from 'ol/geom/point';
 
 import Proj from 'ol/proj';
 
-export function createFeature(article, name) {
-  const coord = article.coordinates[0];
+export function createFeature(featureCard) {
+  const { name, summary } = featureCard;
+  const coord = summary.coordinates[0];
   return {
     type: "Feature",
+    id: summary.date,
     geometry: {
       type: "Point",
       coordinates: Proj.fromLonLat([coord.lon, coord.lat])
     },
     properties: {
-      name: name || article.title,
-      article,
+      name: name || summary.title,
+      summary,
       visibility: true,
       selected: false,
     }
@@ -30,7 +32,7 @@ export function createOlFeature(feature) {
 }
 
 export function reverseOlFeature(olFeature) {
-  const { name, article, visibility, selected } = olFeature.getProperties();
+  const { name, summary, visibility, selected } = olFeature.getProperties();
   return {
     type: "Feature",
     id: olFeature.getId(),
@@ -40,7 +42,7 @@ export function reverseOlFeature(olFeature) {
     },
     properties: {
       name,
-      article,
+      summary,
       visibility,
       selected
     }

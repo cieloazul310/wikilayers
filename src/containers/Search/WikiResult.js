@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addFeature } from '../../actions';
+import { addFeature, clearFeatureCard } from '../../actions';
 import Result from '../../components/Search/Result';
 
 const mapStateToProps = ({ latestArticle, featureCard, windowSize }) => {
@@ -15,6 +15,9 @@ const mapDispatchToProps = dispatch => {
     addFeature: (feature) => {
       dispatch(addFeature(feature));
     },
+    clearFeatureCard: () => {
+      dispatch(clearFeatureCard());
+    }
   };
 };
 

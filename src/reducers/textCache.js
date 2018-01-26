@@ -8,8 +8,8 @@ import {
 
 const initialState = {
   status: 'none',
-  reserved: {}, // article {lang, pageid}
-  last: {}, // article {lang, pageid}
+  reserved: {}, // summary {lang, pageid}
+  last: {}, // summary {lang, pageid}
   pages: {
     // ja: {13145: {}, 535636: {}, 4153564: {}},
     // en: {4141: {}, 79523: {}},
@@ -17,9 +17,9 @@ const initialState = {
 };
 
 function createNewLangCache(state, action) {
-  const article = action.feature.properties.article;
+  const summary = action.feature.properties.summary;
   const pages = state.pages;
-  pages[article.lang] = state.pages[article.lang] || {};
+  pages[summary.lang] = state.pages[summary.lang] || {};
 
   return pages;
 }
@@ -27,8 +27,8 @@ function createNewLangCache(state, action) {
 function textCache(state = initialState, action) {
   switch (action.type) {
     case SELECT_FEATURE:
-      const article = action.feature.properties.article;
-      if (action.feature.properties.article.pageid === state.reserved) {
+      const summary = action.feature.properties.summary;
+      if (summary.pageid === state.reserved) {
         return {
           ...state,
           pages: createNewLangCache(state, action),
@@ -38,12 +38,13 @@ function textCache(state = initialState, action) {
       } else {
         return {
           ...state,
+          pages: createNewLangCache(state, action),
           status: 'Reserve',
-          reserved: article,
+          reserved: summary,
         };
       }
     case ADD_FEATURE:
-      const art = action.feature.properties.article;
+      const art = action.feature.properties.summary;
       return {
         ...state,
         pages: createNewLangCache(state, action),
@@ -66,7 +67,7 @@ function textCache(state = initialState, action) {
       return {
         ...state,
         status: 'Reserve',
-        last: action.article,
+        last: action.summary,
       };
     default:
       return state;
