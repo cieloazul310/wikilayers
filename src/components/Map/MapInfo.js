@@ -11,7 +11,7 @@ const MapInfo = ({ selectedFeature, moveToArticle }) => (
         zDepth={3}
         hidden={selectedFeature ? false : true}>
     <CardHeader
-      title={selectedFeature ? selectedFeature.get('name') : '選択なし'}
+      title={selectedFeature ? selectedFeature.properties.name : '選択なし'}
       actAsExpander={typeof selectedFeature !== 'boolean'}
       showExpandableButton={typeof selectedFeature !== 'boolean'}
     />
@@ -23,7 +23,7 @@ const MapInfo = ({ selectedFeature, moveToArticle }) => (
         overflowY: 'scroll'
       }}
     >
-      {selectedFeature ? `${selectedFeature.get('article').extract}` : ''}
+      {selectedFeature ? `${selectedFeature.properties.article.extract}` : ''}
     </CardText>
     <CardActions
       expandable={true}

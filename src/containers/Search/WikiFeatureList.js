@@ -20,7 +20,7 @@ const mapStateToProps = ({ features }) => {
 const mapDispatchToProps = dispatch => {
   return {
     onFeatureClick: (feature) => {
-      if (feature.get('selected')) {
+      if (feature.properties.selected) {
         dispatch(clearSelectedFeature());
       } else {
         dispatch(selectFeature(feature));

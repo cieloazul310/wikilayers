@@ -23,7 +23,7 @@ const MapSettings = ({ mapConfigure, toggleGeolocation, toggleShowLabels }) => (
       <ListItem
         onClick={() => toggleGeolocation()}
         leftIcon={
-          mapConfigure.geolocation.getTracking() ?
+          mapConfigure.geolocation.tracking ?
           <CheckCircle color={greenA700} /> : <Remove />
         }
       >

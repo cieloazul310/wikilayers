@@ -2,16 +2,16 @@ import { connect } from 'react-redux';
 import { toggleLayer } from '../../actions';
 import LayerList from '../../components/Settings/LayerList';
 
-const mapStateToProps = ({ baseLayers }) => {
+const mapStateToProps = ({ visibleBaseLayer }) => {
   return {
-    baseLayers
+    visibleBaseLayer
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    toggleLayer: (index) => {
-      dispatch(toggleLayer(index));
+    toggleLayer: (title) => {
+      dispatch(toggleLayer(title));
     }
   };
 }

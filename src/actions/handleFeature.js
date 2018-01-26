@@ -9,7 +9,7 @@ export const ZOOM_TO_FEATURE = 'ZOOM_TO_FEATURE';
 let featureId = 0;
 
 export function addFeature(feature) {
-  feature.setId(featureId++);
+  feature.id = featureId++;
   return {
     type: ADD_FEATURE,
     feature

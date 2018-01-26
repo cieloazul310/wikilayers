@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
 import {
   updateMapView,
+  saveGeolocation,
   selectFeature,
   clearSelectedFeature,
 } from '../../actions';
 import MapApp from '../../components/Map/MapApp';
 
-const mapStateToProps = ({ baseLayers, features, mapView, selectedFeature, mapConfigure, windowSize }) => {
+const mapStateToProps = ({ visibleBaseLayer, features, mapView, selectedFeature, mapConfigure, windowSize }) => {
   return {
-    baseLayers,
+    visibleBaseLayer,
     features,
     mapView,
     selectedFeature,
@@ -21,6 +22,9 @@ const mapDispatchToProps = dispatch => {
   return {
     updateMapView: (view) => {
       dispatch(updateMapView(view));
+    },
+    saveGeolocation: (glObj) => {
+      dispatch(saveGeolocation(glObj));
     },
     selectFeature: (feature) => {
       dispatch(selectFeature(feature));

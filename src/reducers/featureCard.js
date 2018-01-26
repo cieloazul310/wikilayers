@@ -39,8 +39,8 @@ function featureCard(state = initialState, action) {
     case SELECT_FEATURE:
       return {
         status: 'existing',
-        title: action.feature.get('name'),
-        article: action.feature.get('article')
+        title: action.feature.properties.name,
+        article: action.feature.properties.article
       };
     case CLEAR_SELECTED_FEATURE:
       return initialState;
