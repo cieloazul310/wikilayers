@@ -5,9 +5,6 @@ import {
 } from 'material-ui/styles/colors';
 import './fonts.css';
 
-const bottomNavHeight = 56;
-const formHeight = 70;
-const pageHeightMargin = 22;
 const pallete = {
   primary1Color: lightBlueA700,
   primary2Color: lightBlue300,
@@ -25,18 +22,83 @@ const pallete = {
   shadowColor: fullBlack,*/
 };
 
+export const bottomNav = {
+  height: 56,
+  overflow: 'hidden',
+  position: 'fixed',
+  width: '100%',
+  left: 0,
+  bottom: 0,
+  zIndex: 10,
+};
+export const appField = {
+  backgroundColor: pallete.primary3Color,
+  overflowY: 'scroll',
+  maxHeight: '100vh',
+  paddingBottom: bottomNav.height
+};
+export const pageContainer = {
+  marginTop: '6px',
+  marginRight: 'auto',
+  marginLeft: 'auto',
+  marginBottom: '6px',
+  width: '100%',
+  maxWidth: 800,
+  minHeight: `calc(100vh - ${bottomNav.height}px - 16px)`,
+};
+export const mapWrapper = {
+  width: '100%',
+  height: `calc(100vh - ${bottomNav.height}px)`,
+  minHeight: `calc(100vh - ${bottomNav.height}px)`
+};
+export const mapInfo = {
+  width: 320,
+  maxWidth: '75%',
+  position: 'absolute',
+  top: '.5em',
+  right: '.5em',
+};
+export const pageHeader = {
+  wrapper: {
+    textAlign: 'center',
+    marginBottom: '2em',
+    paddingTop: '2em',
+    transition: 'height 0.2s linear'
+  },
+  appTitle: {
+    fontSize: 48,
+    fontWeight: 100,
+    margin: 'auto'
+  },
+  appSubTitle: {
+    color: '#777',
+    fontSize: 14,
+    fontWeight: 300,
+    margin: 'auto'
+  },
+  pageTitle: {
+    fontSize: 24,
+    fontWeight: 400,
+    margin: 'auto'
+  },
+  pageSubTitle: {
+    color: '#777',
+    fontSize: 14,
+    fontWeight: 300,
+    margin: 'auto'
+  },
+};
+
+
+const formHeight = 70;
+const pageHeightMargin = 22;
+
 const commonStyles = {
   pallete,
+  appField,
+  bottomNav,
+  pageContainer,
   fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic UI", "Original Yu Gothic", "Yu Gothic", YuGothic, Verdana, Meiryo, sans-serif',
-  appField: (windowHeight) => ({
-    backgroundColor: pallete.primary3Color,
-    height: windowHeight - bottomNavHeight,
-    overflowY: 'scroll'
-  }),
-  bottomNav: {
-    height: bottomNavHeight,
-    overflow: 'hidden'
-  },
   pageHeader: {
     textAlign: 'center',
     marginBottom: '2em',
@@ -53,15 +115,9 @@ const commonStyles = {
     fontWeight: 400,
     margin: 'auto'
   },
-  containerOuter: {
-    margin: '6px auto .5em auto',
-    width: '100%',
-    maxWidth: 800,
-  },
   containerInner: {
     margin: '0',
     padding: '0',
-    minHeight: window.innerHeight - bottomNavHeight - pageHeightMargin,
   },
   components: {
     margin: '0 auto 1em auto',
@@ -70,18 +126,6 @@ const commonStyles = {
   form: {
     height: formHeight,
     boxSizing: 'border-box',
-  },
-  map: {
-    width: '100%',
-    height: window.innerHeight - bottomNavHeight - 1,
-    backgroundColor: '#fff',
-  },
-  mapInfo: {
-    width: 320,
-    maxWidth: '75%',
-    position: 'absolute',
-    top: '.5em',
-    right: '.5em',
   },
   result: {
     margin: '0 auto',
@@ -109,7 +153,7 @@ const commonStyles = {
 };
 
 function innerMinHeight(windowHeight) {
-  return windowHeight - bottomNavHeight - pageHeightMargin;
+  return windowHeight - bottomNav.height - pageHeightMargin;
 }
 
 commonStyles.resultText.maxHeight = commonStyles.containerInner.minHeight - commonStyles.form.height - 50 - 72 - 52;

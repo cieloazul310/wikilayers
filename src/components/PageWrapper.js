@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import commonStyles from '../commonStyles';
+import { appField } from '../commonStyles';
 
-const PageWrapper = ({component, windowSize }) => (
-  <div className="app-field" style={commonStyles.appField(windowSize.height)}>
+const PageWrapper = ({component}) => (
+  <div className="app-field" style={appField}>
     {component}
   </div>
 );
 
 PageWrapper.propTypes = {
-  windowSize: PropTypes.object.isRequired,
   component: PropTypes.element.isRequired
 };
 

@@ -110,13 +110,17 @@ class MapApp extends Component {
       <div
         className="map-container"
         ref={node => this.node = node}
+        style={{
+          width: '100%',
+          height: '100%'
+        }}
       >
         <div
           className="map"
           id="map"
           style={{
             width: '100%',
-            height: this.props.windowSize.height - commonStyles.bottomNav.height,
+            height: '100%',
             backgroundColor: '#fff',
           }}
         >

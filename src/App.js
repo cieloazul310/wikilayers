@@ -20,7 +20,11 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <div>
+        <div style={{
+          width: '100%',
+          height: '100%',
+          minHeight: '100vh',
+        }}>
           <ResizeEventListener />
           <Route path="/map" component={Map} />
           <Route exact path="/" component={Search} />

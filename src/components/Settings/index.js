@@ -1,8 +1,7 @@
 import React from 'react';
 
-import Paper from 'material-ui/Paper';
-
-import WikiPageWrapper from '../../containers/WikiPageWrapper';
+import PageContainer from '../PageContainer';
+import PageWrapper from '../PageWrapper';
 import WikiMapSettings from '../../containers/Settings/WikiMapSettings';
 import WikiLayerList from '../../containers/Settings/WikiLayerList';
 import WikiMapActions from '../../containers/Settings/WikiMapActions';
@@ -11,25 +10,17 @@ import PageHeader from '../PageHeader';
 import Basic from '../Basic';
 import AdBox from '../AdBox';
 
-import commonStyles from '../../commonStyles';
-
-const SettingsComponent = () => (
-  <div style={commonStyles.containerOuter}>
-    <Paper style={commonStyles.containerInner}>
-      <PageHeader title="設定" />
-      <WikiMapSettings />
-      <WikiLayerList />
-      <WikiMapActions />
-      <AppInfo />
-      <Basic component={<AdBox />} />
-    </Paper>
-  </div>
-);
-
-const Settings = () => (
+const SettingsComponent = () => <PageContainer component={(
   <div>
-    <WikiPageWrapper component={<SettingsComponent />} />
+    <PageHeader title="設定" />
+    <WikiMapSettings />
+    <WikiLayerList />
+    <WikiMapActions />
+    <AppInfo />
+    <AdBox />
   </div>
-);
+)} />;
+
+const Settings = () => <PageWrapper component={<SettingsComponent />} />;
 
 export default Settings;
