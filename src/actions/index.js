@@ -4,21 +4,11 @@ export * from './handleFeature';
 export * from './mapToState';
 export * from './fetchText';
 
-export const RELOAD = 'RELOAD';
-export const RESIZE_WINDOW = 'RESIZE_WINDOW';
-export const RESIZE = 'RESIZE';
+export const INITIALIZE = 'INITIALIZE';
 
-export function reload(date) {
+export function initialize(target) {
   return {
-    type: RELOAD,
-    date
-  };
-};
-
-export function resize(width, height) {
-  return {
-    type: RESIZE,
-    width,
-    height,
-  };
+    type: INITIALIZE,
+    target
+  }
 }

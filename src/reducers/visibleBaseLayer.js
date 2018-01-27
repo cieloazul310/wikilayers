@@ -1,9 +1,18 @@
-import { TOGGLE_LAYER } from '../actions';
+import { TOGGLE_LAYER, INITIALIZE } from '../actions';
 
-function visibleBaseLayer(state = '地理院地図', action) {
+// @TODO: should use another key
+const initialState = '地理院地図';
+
+function visibleBaseLayer(state = initialState, action) {
   switch (action.type) {
     case TOGGLE_LAYER:
       return action.title;
+    case INITIALIZE:
+      if (action.target === 'visibleBaseLayer' || action.target === 'ALL') {
+        return initialState;
+      } else {
+        return state;
+      }
     default:
       return state;
   }

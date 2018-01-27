@@ -2,6 +2,7 @@ import {
   UPDATE_MAPVIEW,
   SET_TO_FEATURE,
   ZOOM_TO_FEATURE,
+  INITIALIZE,
  } from '../actions';
 import Proj from 'ol/proj';
 
@@ -25,6 +26,12 @@ function mapView(state = initialView, action) {
         center: action.feature.geometry.coordinates,
         zoom: 14
       };
+    case INITIALIZE:
+      if (action.target === 'mapView' || action.target === 'ALL') {
+        return initialView;
+      } else {
+        return state;
+      }
     default:
       return state;
   }

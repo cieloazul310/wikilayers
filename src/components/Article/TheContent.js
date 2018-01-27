@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import CircularProgress from 'material-ui/CircularProgress';
 import PageHeader from '../PageHeader';
-import commonStyles from '../../commonStyles';
-import './theContent.css';
+import Loader from '../Loader';
+import Basic from '../Basic';
+import '../article.css';
 
 class TheContent extends Component {
   componentDidMount() {
@@ -39,55 +39,43 @@ class TheContent extends Component {
     }
 
     return (
-      <div>
+      <article>
         <PageHeader
           title={isInitial ? '記事' : article.title}
-        />
-        <p style={{
-          textAlign: 'right',
-          marginRight: '1em'
-        }}>
-          {
-            isInitial ? <span /> :
-            <a href={`${baseurl}${encodeURI(article.title)}`} target="_blank" style={{
-              color: 'gray',
-              fontSize: '75%'
-            }}>
+          subElement={isInitial ? null :
+            <a
+              href={`${baseurl}${encodeURI(article.title)}`}
+              target="_blank"
+              style={{
+                color: '#777',
+                textDecolation: 'none',
+              }}
+            >
               {`${baseurl}${article.title}`}
             </a>
           }
-        </p>
-        <article>
-          <div
-            style={commonStyles.components}
-          >
-            <div className="article" id="article">
-                {
-                  isInitial ? (<p>{'選択したアイテムの記事はこのページで読むことができます。'}</p>) :
-                  isExist ? (<div dangerouslySetInnerHTML={createMarkup(pages, article)} />)
-                  : (<p>{article.extract}</p>)
-                }
-
-              <div
-                style={{
-                  position: 'relative',
-                  mixHeight: 180,
-                  height: 180
-                }}
-                hidden={this.props.textCache.status !== 'Fetching'}
-              >
-                <CircularProgress style={{
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  display: 'block'
-                }} />
-              </div>
-
-            </div>
+          subElementStyle={{
+            textAlign: 'right',
+            marginRight: '1em'
+          }}
+        />
+        <Basic component={(
+          <div className="article">
+            {
+              isInitial ? (<p>{'選択したアイテムの記事はこのページで読むことができます。'}</p>) :
+              isExist ? (<div dangerouslySetInnerHTML={createMarkup(pages, article)} />)
+              : (<p>{article.extract}</p>)
+            }
+            <Loader
+              style={{
+                maxHeight: 180,
+                height: 180
+              }}
+              hidden={this.props.textCache.status !== 'Fetching'}
+            />
           </div>
-        </article>
-      </div>
+        )} />
+      </article>
     );
   }
 }

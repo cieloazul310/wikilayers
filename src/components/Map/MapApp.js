@@ -10,7 +10,6 @@ import Geolocation from 'ol/geolocation';
 import Attribution from 'ol/attribution';
 import '../../map/ol.css';
 
-import commonStyles from '../../commonStyles';
 import { initialBaseLayers } from '../../map/initialBaseLayers';
 import { vectorStyle, allLabelStyle } from '../../map/vectorStyle';
 import customControl from '../../map/customControl';
@@ -110,13 +109,17 @@ class MapApp extends Component {
       <div
         className="map-container"
         ref={node => this.node = node}
+        style={{
+          width: '100%',
+          height: '100%'
+        }}
       >
         <div
           className="map"
           id="map"
           style={{
             width: '100%',
-            height: this.props.windowSize.height - commonStyles.bottomNav.height,
+            height: '100%',
             backgroundColor: '#fff',
           }}
         >

@@ -1,20 +1,18 @@
 import React from 'react';
 
-import WikiPageWrapper from '../../containers/WikiPageWrapper';
+import PageWrapper from '../PageWrapper';
 import WikiMapApp from '../../containers/Map/WikiMapApp';
 import WikiMapInfo from '../../containers/Map/WikiMapInfo';
 
+import { mapWrapper } from '../../commonStyles';
+
 const MapComponent = () => (
-  <div>
+  <div style={mapWrapper}>
     <WikiMapApp />
     <WikiMapInfo />
   </div>
 );
 
-const Map = () => (
-  <div>
-    <WikiPageWrapper component={<MapComponent />} />
-  </div>
-);
+const Map = () => <PageWrapper component={<MapComponent />} />;
 
 export default Map;

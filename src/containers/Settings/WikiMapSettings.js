@@ -1,5 +1,9 @@
 import { connect } from 'react-redux';
-import { toggleGeolocation, toggleShowLabels } from '../../actions';
+import {
+  toggleGeolocation,
+  toggleShowLabels,
+  initialize,
+ } from '../../actions';
 
 import MapSettings from '../../components/Settings/MapSettings';
 
@@ -16,6 +20,9 @@ const mapDispatchToProps = dispatch => {
     },
     toggleShowLabels: () => {
       dispatch(toggleShowLabels());
+    },
+    initialize: () => {
+      dispatch(initialize());
     }
   };
 }

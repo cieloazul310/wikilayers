@@ -4,6 +4,8 @@ import {
   TOGGLE_FEATURE,
   SELECT_FEATURE,
   CLEAR_SELECTED_FEATURE,
+  CLEAR_FEATURE_CARD,
+  INITIALIZE,
 } from '../actions';
 
 function features(state = [], action) {
@@ -31,10 +33,17 @@ function features(state = [], action) {
         return feature;
       });
     case CLEAR_SELECTED_FEATURE:
+    case CLEAR_FEATURE_CARD:
       return state.map(feature => {
         feature.properties.selected = false;
         return feature;
       });
+    case INITIALIZE:
+      if (action.target === 'features' || action.target === 'ALL') {
+        return [];
+      } else {
+        return state;
+      }
     default:
       return state;
   }

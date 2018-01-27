@@ -1,40 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PageHeader = ({ title, subtitle, style }) => (
-  <div style={{
-    textAlign: 'center',
-    marginBottom: '2em',
-    paddingTop: '2em',
-  }}>
-    <h2 style={{
-      fontSize: 24,
-      fontWeight: 400,
-      margin: 'auto'
-    }}>
-      {title}
-    </h2>
-    <h5
-      hidden={!subtitle || true}
-      style={{
-        color: '#777',
-        fontWeight: 300,
-        margin: 'auto'
-      }}
-    >
+import { pageHeader } from '../commonStyles';
+
+const PageHeader = ({ title, subtitle, subElement, subElementStyle }) => (
+  <header style={pageHeader.wrapper}>
+    <h2 style={pageHeader.pageTitle}>{title}</h2>
+    <h5 hidden={!subtitle} style={pageHeader.pageSubTitle}>
       {subtitle}
     </h5>
-  </div>
+    <h5 hidden={!subElement} style={Object.assign({}, pageHeader.pageSubTitle, subElementStyle)}>
+      {subElement}
+    </h5>
+  </header>
 );
 
 PageHeader.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
-  style: PropTypes.shape({
-    wrapper: PropTypes.object,
-    title: PropTypes.object,
-    subtitle: PropTypes.object
-  })
+  subElement: PropTypes.element,
+  subElementStyle: PropTypes.object
 };
 
 export default PageHeader;

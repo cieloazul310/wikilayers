@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
-import commonStyles from '../../commonStyles';
+import { form as formStyle } from '../../commonStyles';
 
 class Forms extends Component {
   constructor(props) {
@@ -24,14 +24,10 @@ class Forms extends Component {
   }
 
   render() {
-    const { width } = this.props.windowSize;
+    const width = window.innerWidth;
     const isMobile = width < 450;
     return (
-      <div style={Object.assign({}, commonStyles.form, {
-        margin: '0 auto .5em auto',
-        padding: '1em .2em',
-        textAlign: 'center',
-      })}>
+      <div style={formStyle}>
         <TextField
           hintText="https://ja.wikipedia.org/wiki/偕楽園 or 偕楽園"
           value={this.state.name}
@@ -61,10 +57,6 @@ class Forms extends Component {
 
 Forms.propTypes = {
   fetchSummary: PropTypes.func.isRequired,
-  windowSize: PropTypes.shape({
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-  }).isRequired
 };
 
 export default Forms;

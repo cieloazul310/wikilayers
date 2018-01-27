@@ -2,6 +2,7 @@ import {
   TOGGLE_GEOLOCATION,
   TOGGLE_SHOW_LABELS,
   SAVE_GEOLOCATION,
+  INITIALIZE,
 } from '../actions';
 
 const initialConfigure = {
@@ -30,6 +31,12 @@ function mapConfigure(state = initialConfigure, action) {
         ...state,
         showLabels: !state.showLabels
       };
+    case INITIALIZE:
+      if (action.target === 'mapConfigure' || action.target === 'ALL') {
+        return initialConfigure;
+      } else {
+        return state;
+      }
     default:
       return state;
   }

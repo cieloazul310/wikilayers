@@ -5,10 +5,7 @@ import {
 } from 'material-ui/styles/colors';
 import './fonts.css';
 
-const bottomNavHeight = 56;
-const formHeight = 70;
-const pageHeightMargin = 22;
-const pallete = {
+export const pallete = {
   primary1Color: lightBlueA700,
   primary2Color: lightBlue300,
   primary3Color: grey50,
@@ -25,19 +22,44 @@ const pallete = {
   shadowColor: fullBlack,*/
 };
 
-const commonStyles = {
-  pallete,
-  fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic UI", "Original Yu Gothic", "Yu Gothic", YuGothic, Verdana, Meiryo, sans-serif',
-  appField: (windowHeight) => ({
-    backgroundColor: pallete.primary3Color,
-    height: windowHeight - bottomNavHeight,
-    overflowY: 'scroll'
-  }),
-  bottomNav: {
-    height: bottomNavHeight,
-    overflow: 'hidden'
-  },
-  pageHeader: {
+export const bottomNav = {
+  height: 56,
+  overflow: 'hidden',
+  position: 'fixed',
+  width: '100%',
+  left: 0,
+  bottom: 0,
+  zIndex: 10,
+};
+export const appField = {
+  backgroundColor: pallete.primary3Color,
+  overflowY: 'scroll',
+  maxHeight: '100vh',
+  paddingBottom: bottomNav.height
+};
+export const pageContainer = {
+  marginTop: '6px',
+  marginRight: 'auto',
+  marginLeft: 'auto',
+  marginBottom: '6px',
+  width: '100%',
+  maxWidth: 800,
+  minHeight: `calc(100vh - ${bottomNav.height}px - 16px)`,
+};
+export const mapWrapper = {
+  width: '100%',
+  height: `calc(100vh - ${bottomNav.height}px)`,
+  minHeight: `calc(100vh - ${bottomNav.height}px)`
+};
+export const mapInfo = {
+  width: 320,
+  maxWidth: '75%',
+  position: 'absolute',
+  top: '.5em',
+  right: '.5em',
+};
+export const pageHeader = {
+  wrapper: {
     textAlign: 'center',
     marginBottom: '2em',
     paddingTop: '2em',
@@ -48,69 +70,97 @@ const commonStyles = {
     fontWeight: 100,
     margin: 'auto'
   },
+  appSubTitle: {
+    color: '#777',
+    fontSize: 14,
+    fontWeight: 300,
+    margin: 'auto'
+  },
   pageTitle: {
     fontSize: 24,
     fontWeight: 400,
     margin: 'auto'
   },
-  containerOuter: {
-    margin: '6px auto .5em auto',
-    width: '100%',
-    maxWidth: 800,
+  pageSubTitle: {
+    color: '#777',
+    fontSize: 14,
+    fontWeight: 300,
+    margin: 'auto'
   },
-  containerInner: {
-    margin: '0',
-    padding: '0',
-    minHeight: window.innerHeight - bottomNavHeight - pageHeightMargin,
-  },
-  components: {
-    margin: '0 auto 1em auto',
-    padding: '1em',
-  },
-  form: {
-    height: formHeight,
+};
+export const formHeight = 70;
+export const form = {
+  height: 70,
+  maxHeight: 70,
+  margin: '0 auto',
+  padding: '1em .2em',
+  textAlign: 'center',
+  boxSizing: 'border-box',
+};
+
+const resultCardHeight = {
+  header: 76,
+  actions: 52,
+}
+
+export const resultCard = {
+  resultBg: {
+    backgroundColor: '#eee',
+    backgroundImage: 'none',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    zIndex: 0,
+    // Card Bg Height = windowHeight - bottomNav.height - form.height - pageMargin
+    height: `calc(100vh - ${bottomNav.height + form.height + 12}px)`,
+    position: 'relative',
+    overflow: 'hidden',
     boxSizing: 'border-box',
+    padding: '20px .5em 20px .5em',
+    transition: 'background .3s linear, background-image .3s linear, height .3s linear',
+    '&::before': {
+      content: '""',
+      background: 'inherit',
+      filter: 'blur(5px)',
+      position: 'absolute',
+      top: '-5px',
+      left: '-5px',
+      right: '-5px',
+      bottom: '-5px',
+      zIndex: -1,
+    }
   },
-  map: {
-    width: '100%',
-    height: window.innerHeight - bottomNavHeight - 1,
-    backgroundColor: '#fff',
-  },
-  mapInfo: {
-    width: 320,
-    maxWidth: '75%',
-    position: 'absolute',
-    top: '.5em',
-    right: '.5em',
-  },
-  result: {
+  card: {
     margin: '0 auto',
     maxWidth: 400,
     maxHeight: '100%'
   },
-  resultText: (windowHeight) => ({
-    maxHeight: innerMinHeight(windowHeight) - formHeight - 50 - 72 - 52,
+  resultHeader: {
+    height: resultCardHeight.header,/*
+    minHeight: resultCardHeight.header,*/
+  },
+  resultHeaderText: {
+    paddingRight: '1em',
+  },
+  resultActions: {
+    height: resultCardHeight.actions,
+  },
+  resultText: {
+    // Card Txt Height = Card Bg(windowHeight - bottomNav.height - form.height - pageMargin) - CardBGPadding - CardHeader - CardActions - CardBottomPadding
+    maxHeight: `calc(100vh - ${bottomNav.height + form.height + resultCardHeight.header + resultCardHeight.actions + 80}px)`,
     overflowY: 'scroll',
-    boxSizing: 'border-box'
-  }),
-  resultBg: (featureCard, windowHeight) => ({
-    backgroundColor: featureCard.summary.hasOwnProperty('thumbnail') ? 'white' : '#eee',
-    backgroundImage: featureCard.summary.hasOwnProperty('thumbnail') ?  `url(${featureCard.summary.thumbnail.source})` : 'none',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    zIndex: 0,
-    height: innerMinHeight(windowHeight) - formHeight - 50,
-    position: 'relative',
-    overflow: 'hidden',
-    padding: '20px .5em 20px .5em',
-    transition: 'background-image .5s linear, height .2s linear'
-  })
+    boxSizing: 'border-box',
+  }
 };
 
-function innerMinHeight(windowHeight) {
-  return windowHeight - bottomNavHeight - pageHeightMargin;
-}
+export const basic = {
+  margin: '0 auto 1em auto',
+  padding: '1em',
+};
 
-commonStyles.resultText.maxHeight = commonStyles.containerInner.minHeight - commonStyles.form.height - 50 - 72 - 52;
+const commonStyles = {
+  pallete,
+  fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic UI", "Original Yu Gothic", "Yu Gothic", YuGothic, Verdana, Meiryo, sans-serif',
+};
+
 
 export default commonStyles;
