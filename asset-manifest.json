@@ -1,9 +1,10 @@
 {
-  "main.css": "static/css/main.e5fa20ae.css",
-  "main.css.map": "static/css/main.e5fa20ae.css.map",
-  "main.js": "static/js/main.25fedc43.js",
-  "main.js.map": "static/js/main.25fedc43.js.map",
+  "main.css": "static/css/main.bb8877dc.css",
+  "main.css.map": "static/css/main.bb8877dc.css.map",
+  "main.js": "static/js/main.4647dffa.js",
+  "main.js.map": "static/js/main.4647dffa.js.map",
   "static/media/geolocation.svg": "static/media/geolocation.6d2ff796.svg",
+  "static/media/lakes.topojson": "static/media/lakes.155cd268.topojson",
   "static/media/place.svg": "static/media/place.51115316.svg",
   "static/media/selectedPlace.svg": "static/media/selectedPlace.c3663994.svg"
 }
