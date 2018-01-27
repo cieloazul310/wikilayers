@@ -4,6 +4,8 @@ import XYZ from 'ol/source/xyz';
 import Attribution from 'ol/attribution';
 import Proj from 'ol/proj';
 
+import { lakes } from './ksj';
+
 const gsiAttribution = new Attribution({
   html: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>'
 });
@@ -104,6 +106,7 @@ export const specialRelief = new Group({
       extent: JapanExtent,
       opacity: 0.7
     }),
+    lakes,
     new Tile({
       source: new XYZ({
         url: '//cyberjapandata.gsi.go.jp/xyz/slopemap/{z}/{x}/{y}.png',
@@ -112,7 +115,7 @@ export const specialRelief = new Group({
         minZoom: 3,
       }),
       extent: JapanExtent,
-    })
+    }),
   ],
   title: '地形スペシャル',
   subtitle: 'Special Terrain Maps',

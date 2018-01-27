@@ -88,8 +88,9 @@ const commonStyles = {
     maxWidth: 400,
     maxHeight: '100%'
   },
-  resultText: (windowHeight) => ({
-    maxHeight: innerMinHeight(windowHeight) - formHeight - 50 - 72 - 52,
+  resultText: (windowHeight, status) => ({
+    maxHeight: status !== 'failure' ?
+      innerMinHeight(windowHeight) - formHeight - 50 - 78 - 52 : innerMinHeight(windowHeight) - formHeight - 50 - 78,
     overflowY: 'scroll',
     boxSizing: 'border-box'
   }),

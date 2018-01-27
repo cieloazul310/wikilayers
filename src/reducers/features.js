@@ -4,6 +4,7 @@ import {
   TOGGLE_FEATURE,
   SELECT_FEATURE,
   CLEAR_SELECTED_FEATURE,
+  INITIALIZE,
 } from '../actions';
 
 function features(state = [], action) {
@@ -35,6 +36,12 @@ function features(state = [], action) {
         feature.properties.selected = false;
         return feature;
       });
+    case INITIALIZE:
+      if (action.target === 'features' || action.target === 'ALL') {
+        return [];
+      } else {
+        return state;
+      }
     default:
       return state;
   }

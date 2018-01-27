@@ -12,6 +12,6 @@ export const layersConfig = layers.map(lyr => ({
 }));
 
 export function initialBaseLayers() {
-  setLayerBlend(specialRelief.getLayers().getArray()[2]);
+  setLayerBlend(specialRelief.getLayers().getArray()[3]);
   return layers;
 }

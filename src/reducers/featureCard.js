@@ -5,7 +5,8 @@ import {
   ADD_FEATURE,
   SELECT_FEATURE,
   CLEAR_SELECTED_FEATURE,
-  CLEAR_FEATURE_CARD
+  CLEAR_FEATURE_CARD,
+  INITIALIZE,
 } from '../actions';
 
 const initialState = {
@@ -50,6 +51,12 @@ function featureCard(state = initialState, action) {
     case CLEAR_SELECTED_FEATURE:
     case CLEAR_FEATURE_CARD:
       return initialState;
+    case INITIALIZE:
+      if (action.target === 'featureCard' || action.target === 'ALL') {
+        return initialState;
+      } else {
+        return state;
+      }
     default:
       return state;
   }

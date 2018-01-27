@@ -5,9 +5,10 @@ import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
 import CheckCircle from 'material-ui/svg-icons/action/check-circle';
 import Remove from 'material-ui/svg-icons/content/remove';
+import Restore from 'material-ui/svg-icons/action/restore';
 import { greenA700 } from 'material-ui/styles/colors';
 
-const MapSettings = ({ mapConfigure, toggleGeolocation, toggleShowLabels }) => (
+const MapSettings = ({ mapConfigure, toggleGeolocation, toggleShowLabels, initialize }) => (
   <div>
     <List>
       <Subheader>地図の設定</Subheader>

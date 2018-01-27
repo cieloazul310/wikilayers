@@ -3,7 +3,8 @@ import {
   RECEIVE_TEXT,
   ADD_FEATURE,
   SELECT_FEATURE,
-  SHOW_TEXT
+  SHOW_TEXT,
+  INITIALIZE
 } from '../actions';
 
 const initialState = {
@@ -69,6 +70,12 @@ function textCache(state = initialState, action) {
         status: 'Reserve',
         last: action.summary,
       };
+    case INITIALIZE:
+      if (action.target === 'textCache' || action.target === 'ALL') {
+        return initialState;
+      } else {
+        return state;
+      }
     default:
       return state;
   }

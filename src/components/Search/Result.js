@@ -49,10 +49,11 @@ class Result extends Component {
                     title={status === 'failure' ? "記事の取得に失敗しました。" : featureCard.name}
                     subtitle={status === 'failure' ? false : summary.hasOwnProperty('coordinates') ? formatCoords(summary.coordinates[0].lon, summary.coordinates[0].lat) :
                     '座標がありません'}
+                    textStyle={{paddingRight: '1em'}}
                   />
-                  <CardActions>
-                    {
-                      status === 'failure' ? <span /> : (
+                  {
+                    status === 'failure' ? <span /> :(
+                      <CardActions>
                         <RaisedButton
                           label="地図に追加"
                           disabled={!featureCard.summary.hasOwnProperty('coordinates') || featureCard.status === 'existing'}
@@ -62,16 +63,16 @@ class Result extends Component {
                               this.props.addFeature(createFeature(featureCard));
                             }
                           }
-                        />
-                      )
-                    }
-                    <FlatButton
-                      label="閉じる"
-                      onClick={() => this.props.clearFeatureCard()}
-                    />
-                  </CardActions>
+                      />
+                      <FlatButton
+                        label="閉じる"
+                        onClick={() => this.props.clearFeatureCard()}
+                      />
+                    </CardActions>
+                  )
+                }
                   <CardText
-                    style={commonStyles.resultText(this.props.windowSize.height)}
+                    style={commonStyles.resultText(this.props.windowSize.height, status)}
                   >
                     {
                       status === 'failure' ? (
