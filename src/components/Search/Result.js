@@ -7,12 +7,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import AddLocation from 'material-ui/svg-icons/maps/add-location';
 
 import Loader from '../Loader';
-/*
-import summaryToFeature from '../../map/articleToFeature';
-*/
+
 import { createFeature } from '../../map/createFeature';
 import formatCoords from '../../map/formatCoords';
-import commonStyles from '../../commonStyles';
+import { resultCard } from '../../commonStyles';
 import './result.css';
 
 class Result extends Component {
@@ -22,7 +20,7 @@ class Result extends Component {
     if (status === 'none') {
       return <div style={{
         height: 0,
-        transition: 'background-image .5s linear, height .2s linear'
+        transition: 'background .3s linear, background-image .3s linear, height .3s linear',
       }}></div>;
 
     } else {
@@ -31,30 +29,33 @@ class Result extends Component {
       // (status === 'success' or 'existing')
       return (
         <div
-          className={status === 'fetching' || status === 'failure' ? 'not-result' : 'result-bg'}
-          style={commonStyles.resultBg(featureCard, this.props.windowSize.height)}
+          // @TODO: should configure style only in JSS instead of CSS file
+          className="result-bg"
+          style={featureCard.summary.hasOwnProperty('thumbnail') ? Object.assign({}, resultCard.resultBg, {
+            backgroundImage: `url(${featureCard.summary.thumbnail.source})`
+          }) : resultCard.resultBg}
         >
           <Loader
             style={{
               height: '100%',
               width: '100%',
-              backgroundColor: '#eee'
             }}
             hidden={status !== 'fetching'}
           />
           <Card
-            style={commonStyles.result}
+            style={resultCard.card}
             zDepth={3}
           >
             <CardHeader
               title={status === 'failure' ? "記事の取得に失敗しました。" : featureCard.name}
               subtitle={status === 'failure' ? false : summary.hasOwnProperty('coordinates') ? formatCoords(summary.coordinates[0].lon, summary.coordinates[0].lat) :
               '座標がありません'}
-              textStyle={{paddingRight: '1em'}}
+              style={resultCard.resultHeader}
+              textStyle={resultCard.resultHeaderText}
             />
             {
               status === 'failure' ? <span /> :(
-                <CardActions>
+                <CardActions style={resultCard.actions}>
                   <RaisedButton
                     label="地図に追加"
                     disabled={!featureCard.summary.hasOwnProperty('coordinates') || featureCard.status === 'existing'}
@@ -72,9 +73,7 @@ class Result extends Component {
                 </CardActions>
               )
             }
-            <CardText
-              style={commonStyles.resultText(this.props.windowSize.height, status)}
-            >
+            <CardText style={resultCard.resultText}>
               {
                 status === 'failure' ? (
                   <div>
@@ -95,10 +94,6 @@ class Result extends Component {
 };
 
 Result.propTypes = {
-  windowSize: PropTypes.shape({
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-  }),
   featureCard: PropTypes.shape({
     status: PropTypes.string.isRequired,
     name: PropTypes.string,

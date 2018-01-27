@@ -4,7 +4,6 @@ import PageWrapper from '../PageWrapper';
 import PageContainer from '../PageContainer';
 import WikiContent from '../../containers/Article/WikiContent';
 import AdBox from '../AdBox';
-import Basic from '../Basic';
 
 const ArticleComponent = () => <PageContainer component={(
   <div>

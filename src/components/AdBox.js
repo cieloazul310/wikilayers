@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';/*
-import AdSense from 'react-adsense';*/
+import PropTypes from 'prop-types';
 
 class AdBox extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }

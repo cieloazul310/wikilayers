@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import CircularProgress from 'material-ui/CircularProgress';
 import PageHeader from '../PageHeader';
 import Loader from '../Loader';
 import Basic from '../Basic';

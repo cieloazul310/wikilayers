@@ -2,6 +2,7 @@ import React from 'react';
 import Subheader from 'material-ui/Subheader';
 
 import Basic from '../Basic';
+import Icon from '../../img/icon256.png';
 import '../article.css';
 
 const AppInfo = () => (
@@ -9,6 +10,10 @@ const AppInfo = () => (
     <Subheader>About WikiLayers!</Subheader>
     <Basic component={(
       <div className="article">
+        <div style={{textAlign: 'center'}}>
+          <img src={Icon} style={{width: 80}} alt="水戸地図" />
+          <h5 style={{margin: 'auto'}}>水戸地図</h5>
+        </div>
         <p>WikiLayersはWikipediaの地理情報を地図で表示するアプリケーションです。</p>
         <p>このアプリケーションはWIKIMEDIA FOUNDATIONの定める[利用規約]、[ウィキペディアを二次利用する][二次利用]、及び[国土地理院コンテンツ利用規約]に基づき作成されています。<br />
         上記のWikipediaを情報源としている部分においては、[クリエイティブ・コモンズ 表示-継承 3.0 非移植(CC-BY-SA 3.0) ライセンス][CC-BY-SA 3.0]に基づきWikipediaが出典であることを明示して、誰でも自由に利用可能です。</p>

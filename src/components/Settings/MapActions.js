@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
 import Restore from 'material-ui/svg-icons/action/restore';
-import LayersClear from 'material-ui/svg-icons/maps/layers-clear';
+import LayersClear from 'material-ui/svg-icons/maps/layers-clear';/*
 import FileDownload from 'material-ui/svg-icons/file/file-download';
-
+*/
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 

@@ -16,6 +16,7 @@ const MapInfo = ({ selectedFeature, moveToArticle }) => {
         title={isSelected ? selectedFeature.properties.name : '選択なし'}
         actAsExpander={isSelected}
         showExpandableButton={isSelected}
+        textStyle={{paddingRight: '1em'}}
       />
       <CardText
         expandable={true}

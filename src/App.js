@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'react-router-redux';
 import CustomHeader from './containers/CustomHeader';
 
-import ResizeEventListener from './ResizeEventListener';
 import Map from './components/Map';
 import Search from './components/Search';
 import Article from './components/Article';
@@ -12,7 +11,7 @@ import Settings from './components/Settings';
 
 import { history } from './configureStore';
 //import './App.css';
-import commonStyles from './commonStyles';
+import { bottomNav } from './commonStyles';
 
 injectTapEventPlugin();
 
@@ -25,12 +24,11 @@ class App extends Component {
           height: '100%',
           minHeight: '100vh',
         }}>
-          <ResizeEventListener />
           <Route path="/map" component={Map} />
           <Route exact path="/" component={Search} />
           <Route path="/article" component={Article} />
           <Route path="/settings" component={Settings} />
-          <div style={commonStyles.bottomNav}>
+          <div style={bottomNav}>
             <CustomHeader />
           </div>
         </div>

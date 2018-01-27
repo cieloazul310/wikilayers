@@ -7,7 +7,6 @@ import WikiLayerList from '../../containers/Settings/WikiLayerList';
 import WikiMapActions from '../../containers/Settings/WikiMapActions';
 import AppInfo from './AppInfo';
 import PageHeader from '../PageHeader';
-import Basic from '../Basic';
 import AdBox from '../AdBox';
 
 const SettingsComponent = () => <PageContainer component={(
