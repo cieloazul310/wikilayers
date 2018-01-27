@@ -8,7 +8,7 @@ import AdBox from '../AdBox';
 const ArticleComponent = () => <PageContainer component={(
   <div>
     <WikiContent />
-    <AdBox />
+    <AdBox type="top" />
   </div>
 )} />
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { pageHeader } from '../commonStyles';
 
 const PageHeader = ({ title, subtitle, subElement, subElementStyle }) => (
-  <div style={pageHeader.wrapper}>
+  <header style={pageHeader.wrapper}>
     <h2 style={pageHeader.pageTitle}>{title}</h2>
     <h5 hidden={!subtitle} style={pageHeader.pageSubTitle}>
       {subtitle}
@@ -12,7 +12,7 @@ const PageHeader = ({ title, subtitle, subElement, subElementStyle }) => (
     <h5 hidden={!subElement} style={Object.assign({}, pageHeader.pageSubTitle, subElementStyle)}>
       {subElement}
     </h5>
-  </div>
+  </header>
 );
 
 PageHeader.propTypes = {

@@ -28,9 +28,9 @@ class App extends Component {
           <Route exact path="/" component={Search} />
           <Route path="/article" component={Article} />
           <Route path="/settings" component={Settings} />
-          <div style={bottomNav}>
+          <nav style={bottomNav}>
             <CustomHeader />
-          </div>
+          </nav>
         </div>
       </Router>
     );

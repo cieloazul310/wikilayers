@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { pageHeader } from '../../commonStyles';
 
 const Intro = ({ featureCard }) => (
-  <div
+  <header
     style={featureCard.status === 'none' ? pageHeader.wrapper : {
       height: 0,
     }}
@@ -21,7 +21,7 @@ const Intro = ({ featureCard }) => (
         </div>
       )
     }
-  </div>
+  </header>
 );
 
 Intro.propTypes = {

@@ -39,7 +39,7 @@ class TheContent extends Component {
     }
 
     return (
-      <div>
+      <article>
         <PageHeader
           title={isInitial ? '記事' : article.title}
           subElement={isInitial ? null :
@@ -59,25 +59,23 @@ class TheContent extends Component {
             marginRight: '1em'
           }}
         />
-        <article>
-          <Basic component={(
-            <div className="article">
-              {
-                isInitial ? (<p>{'選択したアイテムの記事はこのページで読むことができます。'}</p>) :
-                isExist ? (<div dangerouslySetInnerHTML={createMarkup(pages, article)} />)
-                : (<p>{article.extract}</p>)
-              }
-              <Loader
-                style={{
-                  maxHeight: 180,
-                  height: 180
-                }}
-                hidden={this.props.textCache.status !== 'Fetching'}
-              />
-            </div>
-          )} />
-        </article>
-      </div>
+        <Basic component={(
+          <div className="article">
+            {
+              isInitial ? (<p>{'選択したアイテムの記事はこのページで読むことができます。'}</p>) :
+              isExist ? (<div dangerouslySetInnerHTML={createMarkup(pages, article)} />)
+              : (<p>{article.extract}</p>)
+            }
+            <Loader
+              style={{
+                maxHeight: 180,
+                height: 180
+              }}
+              hidden={this.props.textCache.status !== 'Fetching'}
+            />
+          </div>
+        )} />
+      </article>
     );
   }
 }
