@@ -58,6 +58,6 @@ export function zoomToFeature(feature) {
 
 export function clearFeatureCard() {
   return {
-    type: CLEAR_FEATURE_CARD,
+    type: CLEAR_FEATURE_CARD
   };
 }
