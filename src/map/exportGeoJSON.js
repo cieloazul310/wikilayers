@@ -1,24 +1,27 @@
 import Proj from 'ol/proj';
 
-function featuresToGeoJSON(features) {
+export function featuresToGeoJSON(features) {
   return {
     type: "FeatureCollection",
     features: features.map(feature => {
       const { geometry, properties } = feature;
-      delete properties.selected;
-      delete properties.visibility;
+      const { name, summary } = properties;
 
       return {
         type: "Feature",
         geometry: {
           type: "Point",
-          coordinates: Proj.toLonLat(feature.geometry.coordinates)
+          coordinates: Proj.toLonLat(geometry.coordinates)
         },
-        properties
+        properties: {
+          name,
+          summary
+        }
       };
     })
   };
 }
+
 /*
 JSON.stringify(featuresToGeoJSON(features), null, '\t');
 */

@@ -31,6 +31,10 @@ export const bottomNav = {
   bottom: 0,
   zIndex: 10,
 };
+const pageContainerMargins = {
+  top: 6,
+  bottom: 6,
+}
 export const appField = {
   backgroundColor: pallete.primary3Color,
   overflowY: 'scroll',
@@ -38,13 +42,13 @@ export const appField = {
   paddingBottom: bottomNav.height
 };
 export const pageContainer = {
-  marginTop: '6px',
+  marginTop: pageContainerMargins.top,
   marginRight: 'auto',
   marginLeft: 'auto',
-  marginBottom: '6px',
+  marginBottom: pageContainerMargins.bottom,
   width: '100%',
   maxWidth: 800,
-  minHeight: `calc(100vh - ${bottomNav.height}px - 16px)`,
+  minHeight: `calc(100vh - ${bottomNav.height + pageContainerMargins.top + pageContainerMargins.bottom + 4}px)`,
 };
 export const mapWrapper = {
   width: '100%',
@@ -61,14 +65,14 @@ export const mapInfo = {
 export const pageHeader = {
   wrapper: {
     textAlign: 'center',
-    marginBottom: '2em',
     paddingTop: '2em',
     transition: 'height 0.2s linear'
   },
   appTitle: {
     fontSize: 48,
     fontWeight: 100,
-    margin: 'auto'
+    margin: 'auto',
+    padding: '.2em'
   },
   appSubTitle: {
     color: '#777',
@@ -88,7 +92,6 @@ export const pageHeader = {
     margin: 'auto'
   },
 };
-export const formHeight = 70;
 export const form = {
   height: 70,
   maxHeight: 70,
@@ -135,8 +138,7 @@ export const resultCard = {
     maxHeight: '100%'
   },
   resultHeader: {
-    height: resultCardHeight.header,/*
-    minHeight: resultCardHeight.header,*/
+    height: resultCardHeight.header,
   },
   resultHeaderText: {
     paddingRight: '1em',
@@ -145,15 +147,15 @@ export const resultCard = {
     height: resultCardHeight.actions,
   },
   resultText: {
-    // Card Txt Height = Card Bg(windowHeight - bottomNav.height - form.height - pageMargin) - CardBGPadding - CardHeader - CardActions - CardBottomPadding
-    maxHeight: `calc(100vh - ${bottomNav.height + form.height + resultCardHeight.header + resultCardHeight.actions + 80}px)`,
+    // Card Txt Height = Card Bg(windowHeight - bottomNav.height - form.height - pageMargin(12)) - CardBGPadding(20 * 2) - CardHeader - CardActions - CardBottomPadding(8?)
+    maxHeight: `calc(100vh - ${bottomNav.height + form.height + resultCardHeight.header + resultCardHeight.actions + 50}px)`,
     overflowY: 'scroll',
     boxSizing: 'border-box',
   }
 };
 
 export const basic = {
-  margin: '0 auto 1em auto',
+  margin: '0 auto',
   padding: '1em',
 };
 

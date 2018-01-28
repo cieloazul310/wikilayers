@@ -95,7 +95,7 @@ export const specialRelief = new Group({
         maxZoom: 18,
         minZoom: 2,
       }),
-      maxResolution: 4.78
+      maxResolution: 4.77
     }),
     new Tile({
       source: new XYZ({

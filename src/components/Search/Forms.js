@@ -24,6 +24,7 @@ class Forms extends Component {
   }
 
   render() {
+    // @TODO: should remove window.innerWidth
     const width = window.innerWidth;
     const isMobile = width < 450;
     return (
@@ -33,10 +34,11 @@ class Forms extends Component {
           value={this.state.name}
           onChange={this.handleChange}
           hintStyle={{
+            // @TODO: should remove isMobile
             fontSize: isMobile ? '70%' : '100%'
           }}
           style={{
-            width: Math.min(width * 0.8, 600 * 0.8)
+            width: '80%'
           }}
         />
         <RaisedButton
@@ -47,7 +49,7 @@ class Forms extends Component {
           }}
           style={{
             minWidth: 40,
-            width: Math.min(width * 0.15, 600 * 0.15)
+            width: '15%'
           }}
         />
       </div>

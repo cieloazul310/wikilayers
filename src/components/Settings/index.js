@@ -15,6 +15,7 @@ const SettingsComponent = () => <PageContainer component={(
     <WikiMapSettings />
     <WikiLayerList />
     <WikiMapActions />
+    <AdBox type="article" />
     <AppInfo />
     <AdBox />
   </div>

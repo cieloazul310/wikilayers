@@ -5,8 +5,8 @@ import {
 
 import MapActions from '../../components/Settings/MapActions';
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = ({ features }) => {
+  return { features };
 };
 
 const mapDispatchToProps = dispatch => {
