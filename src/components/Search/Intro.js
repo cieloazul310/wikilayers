@@ -10,7 +10,7 @@ const Intro = ({ featureCard }) => (
     }}
   >
     {
-      featureCard.status !== 'none' ? <div /> : (
+      featureCard.status !== 'none' ? null : (
         <div>
           <h1 style={pageHeader.appTitle}>
             WikiLayers

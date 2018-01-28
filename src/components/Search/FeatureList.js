@@ -14,75 +14,83 @@ import { grey500, grey300 } from 'material-ui/styles/colors';
 import commonStyles from '../../commonStyles';
 
 const iconButtonElement = (
-  <IconButton
-    touch={true}
-  >
+  <IconButton touch={true}>
     <MoreVertIcon color={grey500} />
   </IconButton>
 );
 
-const FeatureList = ({ features, onFeatureClick, toggleFeature, onVisitClick, onRemoveClick, moveToArticle }) => (
+const FeatureList = ({
+  features,
+  onFeatureClick,
+  toggleFeature,
+  onVisitClick,
+  onRemoveClick,
+  moveToArticle
+}) => (
   <div>
-  {
-    features.length === 0 ? <div /> :
-        <List>
-          <Subheader>アイテム</Subheader>
-          {
-            features.sort((a, b) => b.id - a.id)
-                    .map((feature, index) => (
-              <ListItem
-                key={index}
-                primaryText={feature.properties.name}
-                leftIcon={
-                  feature.properties.visibility ?
-                  <LocationOn style={{fill: feature.properties.selected ? 'red' : commonStyles.pallete.primary2Color}}/> :
-                  <LocationOff style={{fill: grey300}} />
-                }
-                onClick={() => onFeatureClick(feature)}
-                rightIconButton={
-                  <IconMenu
-                    iconButtonElement={iconButtonElement}
-                    targetOrigin={{ vertical: 'top', horizontal: 'right'}}
-                  >
-                    <MenuItem
-                      onClick={() => toggleFeature(feature)}
-                    >
-                      {feature.properties.visibility ? '表示中' : '非表示'}
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => onVisitClick(feature)}
-                    >
-                      地図で見る
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => moveToArticle(feature)}
-                    >
-                      記事を読む
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => onRemoveClick(feature)}
-                    >
-                      削除
-                    </MenuItem>
-                  </IconMenu>
-                }
-              />
-            ))
-          }
-        </List>
-  }
+    {features.length === 0 ? (
+      <div />
+    ) : (
+      <List>
+        <Subheader>アイテム</Subheader>
+        {features.sort((a, b) => b.id - a.id).map((feature, index) => (
+          <ListItem
+            key={index}
+            primaryText={feature.properties.name}
+            leftIcon={
+              feature.properties.visibility ? (
+                <LocationOn
+                  style={{
+                    fill: feature.properties.selected
+                      ? 'red'
+                      : commonStyles.pallete.primary2Color
+                  }}
+                />
+              ) : (
+                <LocationOff style={{ fill: grey300 }} />
+              )
+            }
+            onClick={() => onFeatureClick(feature)}
+            rightIconButton={
+              <IconMenu
+                iconButtonElement={iconButtonElement}
+                targetOrigin={{ vertical: 'top', horizontal: 'right' }}
+              >
+                <MenuItem
+                  primaryText={
+                    feature.properties.visibility ? '表示中' : '非表示'
+                  }
+                  onClick={() => toggleFeature(feature)}
+                />
+
+                <MenuItem
+                  primaryText="地図で見る"
+                  onClick={() => onVisitClick(feature)}
+                />
+                <MenuItem
+                  primaryText="記事を読む"
+                  onClick={() => moveToArticle(feature)}
+                />
+                <MenuItem
+                  primaryText="削除"
+                  onClick={() => onRemoveClick(feature)}
+                />
+              </IconMenu>
+            }
+          />
+        ))}
+      </List>
+    )}
   </div>
 );
 
 FeatureList.propTypes = {
-  features: PropTypes.arrayOf(
-    PropTypes.object
-  ).isRequired,
+  features: PropTypes.arrayOf(PropTypes.object).isRequired,
   onFeatureClick: PropTypes.func.isRequired,
   toggleFeature: PropTypes.func.isRequired,
   onVisitClick: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
-  moveToArticle: PropTypes.func.isRequired,
+  moveToArticle: PropTypes.func.isRequired
 };
 
 export default FeatureList;

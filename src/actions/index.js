@@ -10,5 +10,5 @@ export function initialize(target) {
   return {
     type: INITIALIZE,
     target
-  }
+  };
 }

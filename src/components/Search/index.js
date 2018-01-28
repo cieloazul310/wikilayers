@@ -7,17 +7,28 @@ import WikiIntro from '../../containers/Search/WikiIntro';
 import WikiForms from '../../containers/Search/WikiForms';
 import WikiResult from '../../containers/Search/WikiResult';
 import WikiFeatureList from '../../containers/Search/WikiFeatureList';
+import HowTo from './HowTo';
+import CopyRight from '../CopyRight';
 import AdBox from '../AdBox';
 
-const SearcherComponent = () => <PageContainer component={(
-  <div>
-    <WikiIntro />
-    <WikiForms />
-    <WikiResult />
-    <AdBox type="article" style={{maxHeight: '50vw'}}/>
-    <WikiFeatureList />
-  </div>
-)} />;
+import { adBelowForm } from '../../commonStyles';
+
+const SearcherComponent = () => (
+  <PageContainer
+    component={
+      <div>
+        <WikiIntro />
+        <WikiForms />
+        <AdBox type="top" style={adBelowForm} />
+        <WikiResult />
+        <WikiFeatureList />
+        <HowTo />
+        <AdBox />
+        <CopyRight />
+      </div>
+    }
+  />
+);
 
 const Searcher = () => <PageWrapper component={<SearcherComponent />} />;
 

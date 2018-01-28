@@ -5,12 +5,17 @@
   line-height: 1.8;
 }
 
-.article ul {
+.article ul, .article ol {
   padding-left: 1em;
 }
 
 .article dd {
   margin-left: 1em;
+}
+
+.article a {
+  color: #12acc7;
+  text-decoration: none;
 }
 
 @media (max-width: 400px) {

@@ -17,81 +17,103 @@ class Result extends Component {
   render() {
     const featureCard = this.props.featureCard;
     const { status, summary } = featureCard;
-    if (status === 'none') {
-      return <div style={{
-        height: 0,
-        transition: 'background .3s linear, background-image .3s linear, height .3s linear',
-      }}></div>;
-
-    } else {
-      // (status === 'fetching')
-      // (status === 'failure')
-      // (status === 'success' or 'existing')
-      return (
-        <div
-          // @TODO: should configure style only in JSS instead of CSS file
-          className="result-bg"
-          style={featureCard.summary.hasOwnProperty('thumbnail') ? Object.assign({}, resultCard.resultBg, {
-            backgroundImage: `url(${featureCard.summary.thumbnail.source})`
-          }) : resultCard.resultBg}
-        >
-          <Loader
-            style={{
-              height: '100%',
-              width: '100%',
-            }}
-            hidden={status !== 'fetching'}
-          />
-          <Card
-            style={resultCard.card}
-            zDepth={3}
-          >
+    // (status === 'fetching')
+    // (status === 'failure')
+    // (status === 'success' or 'existing')
+    return (
+      <div
+        // @TODO: should configure style only in JSS instead of CSS file
+        className="result-bg"
+        style={
+          status === 'none'
+            ? Object.assign({}, resultCard.resultBg, {
+                height: 0,
+                padding: 0
+              })
+            : featureCard.summary.hasOwnProperty('thumbnail')
+              ? Object.assign({}, resultCard.resultBg, {
+                  backgroundImage: `url(${
+                    featureCard.summary.thumbnail.source
+                  })`
+                })
+              : resultCard.resultBg
+        }
+      >
+        <Loader
+          style={{
+            height: '100%',
+            width: '100%'
+          }}
+          hidden={status !== 'fetching'}
+        />
+        {status === 'none' ? (
+          null
+        ) : (
+          <Card style={resultCard.card} zDepth={3}>
             <CardHeader
-              title={status === 'failure' ? "記事の取得に失敗しました。" : featureCard.name}
-              subtitle={status === 'failure' ? false : summary.hasOwnProperty('coordinates') ? formatCoords(summary.coordinates[0].lon, summary.coordinates[0].lat) :
-              '座標がありません'}
+              title={
+                status === 'failure'
+                  ? '記事の取得に失敗しました。'
+                  : featureCard.name
+              }
+              subtitle={
+                status === 'failure'
+                  ? false
+                  : summary.hasOwnProperty('coordinates')
+                    ? formatCoords(
+                        summary.coordinates[0].lon,
+                        summary.coordinates[0].lat
+                      )
+                    : '座標がありません'
+              }
               style={resultCard.resultHeader}
               textStyle={resultCard.resultHeaderText}
             />
-            {
-              status === 'failure' ? <span /> :(
-                <CardActions style={resultCard.actions}>
-                  <RaisedButton
-                    label="地図に追加"
-                    disabled={!featureCard.summary.hasOwnProperty('coordinates') || featureCard.status === 'existing'}
-                    primary={true}
-                    icon={<AddLocation />}
-                    onClick={() => {
-                        this.props.addFeature(createFeature(featureCard));
-                      }
-                    }
-                  />
-                  <FlatButton
-                    label="閉じる"
-                    onClick={() => this.props.clearFeatureCard()}
-                  />
-                </CardActions>
-              )
-            }
+            {status === 'failure' ? (
+              null
+            ) : (
+              <CardActions style={resultCard.actions}>
+                <RaisedButton
+                  label="地図に追加"
+                  disabled={
+                    !featureCard.summary.hasOwnProperty('coordinates') ||
+                    featureCard.status === 'existing'
+                  }
+                  primary={true}
+                  icon={<AddLocation />}
+                  onClick={() => {
+                    this.props.addFeature(createFeature(featureCard));
+                  }}
+                />
+                <FlatButton
+                  label="閉じる"
+                  onClick={() => this.props.clearFeatureCard()}
+                />
+              </CardActions>
+            )}
             <CardText style={resultCard.resultText}>
-              {
-                status === 'failure' ? (
-                  <div>
-                    <p>検索のヒント: 正式名称を入れてみよう</p>
-                    <ul>
-                      <li>例: <b>太田城 (常陸国)</b>の場合、名前と注釈の間に半角スペース、カギ括弧は半角で入力</li>
-                      <li>例: <b>オールド・トラッフォード</b>の場合、区切りの位置で点(・)を入力</li>
-                    </ul>
-                  </div>
-                ) : featureCard.summary.extract
-              }
+              {status === 'failure' ? (
+                <div>
+                  <p>検索のヒント: 正式名称を入れてみよう</p>
+                  <ul>
+                    <li>
+                      例: <b>太田城 (常陸国)</b>の場合、名前と注釈の間に半角スペース、カギ括弧は半角で入力
+                    </li>
+                    <li>
+                      例: <b>オールド・トラッフォード</b>の場合、区切りの位置で点(・)を入力
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                featureCard.summary.extract
+              )}
             </CardText>
           </Card>
-        </div>
-      )
-    }
+        )}
+      </div>
+    );
   }
-};
+}
 
 Result.propTypes = {
   featureCard: PropTypes.shape({
@@ -100,7 +122,7 @@ Result.propTypes = {
     date: PropTypes.number,
     summary: PropTypes.object.isRequired
   }).isRequired,
-  addFeature: PropTypes.func.isRequired,
+  addFeature: PropTypes.func.isRequired
 };
 
 export default Result;

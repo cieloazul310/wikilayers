@@ -12,7 +12,7 @@ class Forms extends Component {
     super(props);
 
     this.state = {
-      name: '',
+      name: ''
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -37,6 +37,11 @@ class Forms extends Component {
             // @TODO: should remove isMobile
             fontSize: isMobile ? '70%' : '100%'
           }}
+          onKeyPress={e => {
+            if (e.key === 'Enter' && this.state.name !== '') {
+              this.props.fetchSummary(this.state.name);
+            }
+          }}
           style={{
             width: '80%'
           }}
@@ -58,7 +63,7 @@ class Forms extends Component {
 }
 
 Forms.propTypes = {
-  fetchSummary: PropTypes.func.isRequired,
+  fetchSummary: PropTypes.func.isRequired
 };
 
 export default Forms;

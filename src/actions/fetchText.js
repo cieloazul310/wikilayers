@@ -24,26 +24,36 @@ export function showText(article) {
 }
 
 function createUrl(article) {
-  return `https://${article.lang}.wikipedia.org/w/api.php?origin=*&action=query&prop=extracts&format=json&formatversion=2&pageids=${article.pageid}`;
+  return `https://${
+    article.lang
+  }.wikipedia.org/w/api.php?origin=*&action=query&prop=extracts&format=json&formatversion=2&pageids=${
+    article.pageid
+  }`;
 }
 
 function fetchText(article) {
   return dispatch => {
     dispatch(requestText(article));
-    return fetch(createUrl(article), {method: 'GET', mode: 'cors'})
-            .then(response => response.json())
-            .then(json => {
-              const page = json.query.pages[0];
-              dispatch(receiveText(page));
-              return page;
-            })
-            .catch(err => console.log(`There has been a problem with your fetch operation: ${err.message}`));
-  }
+    return fetch(createUrl(article), { method: 'GET', mode: 'cors' })
+      .then(response => response.json())
+      .then(json => {
+        const page = json.query.pages[0];
+        dispatch(receiveText(page));
+        return page;
+      })
+      .catch(err =>
+        console.log(
+          `There has been a problem with your fetch operation: ${err.message}`
+        )
+      );
+  };
 }
 
 // Do not fetch text if textCache has the same text.
 function shouldFetchText(state, article) {
-  const page = state.textCache.pages[article.lang].hasOwnProperty(article.pageid);
+  const page = state.textCache.pages[article.lang].hasOwnProperty(
+    article.pageid
+  );
   if (!page) {
     return true;
   } else {
@@ -56,5 +66,5 @@ export function fetchTextIfNeeded(article) {
     if (shouldFetchText(getState(), article)) {
       return dispatch(fetchText(article));
     }
-  }
+  };
 }

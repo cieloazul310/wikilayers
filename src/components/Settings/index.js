@@ -6,6 +6,7 @@ import WikiMapSettings from '../../containers/Settings/WikiMapSettings';
 import WikiLayerList from '../../containers/Settings/WikiLayerList';
 import WikiMapActions from '../../containers/Settings/WikiMapActions';
 import AppInfo from './AppInfo';
+import CopyRight from '../CopyRight';
 import PageHeader from '../PageHeader';
 import AdBox from '../AdBox';
 
@@ -18,6 +19,7 @@ const SettingsComponent = () => <PageContainer component={(
     <AdBox type="article" />
     <AppInfo />
     <AdBox />
+    <CopyRight />
   </div>
 )} />;
 

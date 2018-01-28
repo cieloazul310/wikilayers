@@ -1,7 +1,9 @@
 import {
   grey50,
-  cyan100, cyan300,
-  lightBlue300, lightBlueA700,
+  cyan100,
+  cyan300,
+  lightBlue300,
+  lightBlueA700
 } from 'material-ui/styles/colors';
 import './fonts.css';
 
@@ -10,7 +12,7 @@ export const pallete = {
   primary2Color: lightBlue300,
   primary3Color: grey50,
   accent1Color: cyan300,
-  accent2Color: cyan100,/*
+  accent2Color: cyan100 /*
   accent3Color: grey500,
   textColor: darkBlack,
   alternateTextColor: white,
@@ -29,12 +31,12 @@ export const bottomNav = {
   width: '100%',
   left: 0,
   bottom: 0,
-  zIndex: 10,
+  zIndex: 10
 };
 const pageContainerMargins = {
   top: 6,
-  bottom: 6,
-}
+  bottom: 6
+};
 export const appField = {
   backgroundColor: pallete.primary3Color,
   overflowY: 'scroll',
@@ -48,19 +50,22 @@ export const pageContainer = {
   marginBottom: pageContainerMargins.bottom,
   width: '100%',
   maxWidth: 800,
-  minHeight: `calc(100vh - ${bottomNav.height + pageContainerMargins.top + pageContainerMargins.bottom + 4}px)`,
+  minHeight: `calc(100vh - ${bottomNav.height +
+    pageContainerMargins.top +
+    pageContainerMargins.bottom +
+    4}px)`
 };
 export const mapWrapper = {
   width: '100%',
-  height: `calc(100vh - ${bottomNav.height}px)`,
-  minHeight: `calc(100vh - ${bottomNav.height}px)`
+  height: `calc(100vh - ${bottomNav.height + 1}px)`,
+  minHeight: `calc(100vh - ${bottomNav.height + 1}px)`
 };
 export const mapInfo = {
   width: 320,
   maxWidth: '75%',
   position: 'absolute',
   top: '.5em',
-  right: '.5em',
+  right: '.5em'
 };
 export const pageHeader = {
   wrapper: {
@@ -90,7 +95,7 @@ export const pageHeader = {
     fontSize: 14,
     fontWeight: 300,
     margin: 'auto'
-  },
+  }
 };
 export const form = {
   height: 70,
@@ -98,13 +103,16 @@ export const form = {
   margin: '0 auto',
   padding: '1em .2em',
   textAlign: 'center',
-  boxSizing: 'border-box',
+  boxSizing: 'border-box'
 };
-
+export const adBelowForm = {
+  height: 60,
+  maxHeight: 60
+};
 const resultCardHeight = {
   header: 76,
-  actions: 52,
-}
+  actions: 52
+};
 
 export const resultCard = {
   resultBg: {
@@ -114,12 +122,13 @@ export const resultCard = {
     backgroundPosition: 'center',
     zIndex: 0,
     // Card Bg Height = windowHeight - bottomNav.height - form.height - pageMargin
-    height: `calc(100vh - ${bottomNav.height + form.height + 12}px)`,
+    height: `calc(100vh - ${bottomNav.height + form.height + adBelowForm.height + 12}px)`,
     position: 'relative',
     overflow: 'hidden',
     boxSizing: 'border-box',
     padding: '20px .5em 20px .5em',
-    transition: 'background .3s linear, background-image .3s linear, height .3s linear',
+    transition:
+      'background .3s linear, background-image .3s linear, height .3s linear',
     '&::before': {
       content: '""',
       background: 'inherit',
@@ -129,7 +138,7 @@ export const resultCard = {
       left: '-5px',
       right: '-5px',
       bottom: '-5px',
-      zIndex: -1,
+      zIndex: -1
     }
   },
   card: {
@@ -138,31 +147,36 @@ export const resultCard = {
     maxHeight: '100%'
   },
   resultHeader: {
-    height: resultCardHeight.header,
+    height: resultCardHeight.header
   },
   resultHeaderText: {
-    paddingRight: '1em',
+    paddingRight: '1em'
   },
   resultActions: {
-    height: resultCardHeight.actions,
+    height: resultCardHeight.actions
   },
   resultText: {
     // Card Txt Height = Card Bg(windowHeight - bottomNav.height - form.height - pageMargin(12)) - CardBGPadding(20 * 2) - CardHeader - CardActions - CardBottomPadding(8?)
-    maxHeight: `calc(100vh - ${bottomNav.height + form.height + resultCardHeight.header + resultCardHeight.actions + 50}px)`,
+    maxHeight: `calc(100vh - ${bottomNav.height +
+      form.height +
+      resultCardHeight.header +
+      resultCardHeight.actions +
+      adBelowForm.height +
+      54}px)`,
     overflowY: 'scroll',
-    boxSizing: 'border-box',
+    boxSizing: 'border-box'
   }
 };
 
 export const basic = {
   margin: '0 auto',
-  padding: '1em',
+  padding: '1em'
 };
 
 const commonStyles = {
   pallete,
-  fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic UI", "Original Yu Gothic", "Yu Gothic", YuGothic, Verdana, Meiryo, sans-serif',
+  fontFamily:
+    '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic UI", "Original Yu Gothic", "Yu Gothic", YuGothic, Verdana, Meiryo, sans-serif'
 };
-
 
 export default commonStyles;

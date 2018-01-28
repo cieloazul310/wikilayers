@@ -24,31 +24,34 @@ function receiveSummary(summary, name) {
     summary,
     name,
     date: Date.now()
-  }
+  };
 }
 
 /** Input Parser
-  *
-  * return Object {...url, title}
-  */
+ *
+ * return Object {...url, title}
+ */
 function titleParser(input) {
   // parse URL ex. https://ja.wikipedia.org/wiki/%E9%81%8A%E5%AD%90%E6%B0%B4%E8%8D%B7%E6%B5%A6%E3%81%AE%E6%AE%B5%E7%95%91
   const splitBySlash = input.split('/');
-  if (splitBySlash[1] === '' && splitBySlash[2].split('.').indexOf('wikipedia') > 0) {
+  if (
+    splitBySlash[1] === '' &&
+    splitBySlash[2].split('.').indexOf('wikipedia') > 0
+  ) {
     /** https: / / ja . wikipedia . org / wiki / title
-      *         ^
-      *   splitBySlash[1] === 0
-      */
+     *         ^
+     *   splitBySlash[1] === 0
+     */
     const url = new URL(input);
     return {
       origin: url.origin,
       lang: url.hostname.split('.')[0],
-      name: decodeURI(url.pathname.split('/')[2]),
+      name: decodeURI(url.pathname.split('/')[2])
     };
   } else if (splitBySlash[0].split('.').indexOf('wikipedia') > 0) {
     /** 1) ja . wikipedia . org / wiki / title
-      * 2) ja . m . wikipedia . org / wiki / title
-      */
+     * 2) ja . m . wikipedia . org / wiki / title
+     */
     const url = new URL(`https://${input}`);
     return {
       origin: url.origin,
@@ -66,18 +69,28 @@ function titleParser(input) {
 
 /*
 const requestURL = 'https://ja.wikipedia.org/w/';*/
-const query = 'api.php?' + 'origin=*'
-  + '&action=query' + '&prop=extracts|pageimages|coordinates|langlinks'
-  + '&exintro&explaintext'
-  + '&pithumbsize=200'
-  + '&coprimary=all'
-  + '&format=json' + '&formatversion=2' + '&redirects';
+const query =
+  'api.php?' +
+  'origin=*' +
+  '&action=query' +
+  '&prop=extracts|pageimages|coordinates|langlinks' +
+  '&exintro&explaintext' +
+  '&pithumbsize=200' +
+  '&coprimary=all' +
+  '&format=json' +
+  '&formatversion=2' +
+  '&redirects';
 
-const query2 = 'api.php?' + 'origin=*'
-  + '&action=query' + '&prop=coordinates' + '&coprimary=all'
-  + '&format=json' + '&formatversion=2';
+const query2 =
+  'api.php?' +
+  'origin=*' +
+  '&action=query' +
+  '&prop=coordinates' +
+  '&coprimary=all' +
+  '&format=json' +
+  '&formatversion=2';
 
-const fetchOptions = {method: 'GET', mode: 'cors'};
+const fetchOptions = { method: 'GET', mode: 'cors' };
 const langOrder = ['en', 'es', 'de', 'zh', 'ar', 'kr', 'ja'];
 
 function createFirstURL(lang, title) {
@@ -85,11 +98,12 @@ function createFirstURL(lang, title) {
 }
 
 function createURLByLang(lang) {
-  return `https://${lang.lang}.wikipedia.org/w/${query2}&titles=${encodeURI(lang.title)}`;
+  return `https://${lang.lang}.wikipedia.org/w/${query2}&titles=${encodeURI(
+    lang.title
+  )}`;
 }
 
 export function fetchSummary(input) {
-
   return dispatch => {
     if (input === '') return;
 
@@ -109,17 +123,16 @@ export function fetchSummary(input) {
         } else if (summary.hasOwnProperty('coordinates')) {
           dispatch(receiveSummary(summary, post.name));
         } else if (summary.hasOwnProperty('langlinks')) {
-
           const langs = summary.langlinks
-                          .filter(obj => langOrder.indexOf(obj.lang) >= 0)
-                          .sort((a, b) => langOrder.indexOf(a.lang) - langOrder.indexOf(b.lang));
+            .filter(obj => langOrder.indexOf(obj.lang) >= 0)
+            .sort(
+              (a, b) => langOrder.indexOf(a.lang) - langOrder.indexOf(b.lang)
+            );
 
           function fetchAnotherBites(lang, summary) {
             return () => {
               return new Promise((resolve, reject) => {
-                console.log(lang.lang);
                 if (!summary.hasOwnProperty('coordinates')) {
-                  console.log(`${lang.lang} fetching!`);
                   fetch(createURLByLang(lang), fetchOptions)
                     .then(response => response.json())
                     .then(data => {
@@ -133,22 +146,32 @@ export function fetchSummary(input) {
                       dispatch(receiveSummary(summary, post.name));
                       resolve();
                     })
-                    .catch(err => console.log(`There has been a problem with your fetch operation: ${err.message}`));
+                    .catch(err =>
+                      console.log(
+                        `There has been a problem with your fetch operation: ${
+                          err.message
+                        }`
+                      )
+                    );
                 } else {
                   resolve();
                 }
-              })
-            }
+              });
+            };
           }
 
-          langs.map(lang => fetchAnotherBites(lang, summary))
-              .reduce((prev, curr) => prev.then(curr), Promise.resolve());
+          langs
+            .map(lang => fetchAnotherBites(lang, summary))
+            .reduce((prev, curr) => prev.then(curr), Promise.resolve());
           dispatch(receiveSummary(summary, post.name));
-
         } else {
           dispatch(receiveSummary(summary, post.name));
         }
       })
-      .catch(err => console.log(`There has been a problem with your fetch operation: ${err.message}`));
-  }
+      .catch(err =>
+        console.log(
+          `There has been a problem with your fetch operation: ${err.message}`
+        )
+      );
+  };
 }
