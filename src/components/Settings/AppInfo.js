@@ -1,5 +1,4 @@
 import React from 'react';
-import Markdown from 'react-markdown';
 import Subheader from 'material-ui/Subheader';
 
 import Basic from '../Basic';
@@ -41,23 +40,23 @@ const Readme = () => (
     <p>
       このアプリケーションはWikimedia Foundationの定める<a
         href="https://wikimediafoundation.org/wiki/Terms_of_Use/ja"
-        target="_blank"
+        target="_blank" rel="noopener noreferrer"
       >
         利用規約
       </a>、<a
         href="https://ja.wikipedia.org/wiki/Wikipedia:%E3%82%A6%E3%82%A3%E3%82%AD%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2%E3%82%92%E4%BA%8C%E6%AC%A1%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B"
-        target="_blank"
+        target="_blank" rel="noopener noreferrer"
       >
         ウィキペディアを二次利用する
       </a>、及び<a
         href="http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html"
-        target="_blank"
+        target="_blank" rel="noopener noreferrer"
       >
         国土地理院コンテンツ利用規約
       </a>に基づき作成されています。<br />
       Wikipediaを情報源としている部分においては、<a
         href="http://creativecommons.org/licenses/by-sa/3.0/"
-        target="_blank"
+        target="_blank" rel="noopener noreferrer"
       >
         クリエイティブ・コモンズ 表示-継承 3.0 非移植(CC-BY-SA 3.0) ライセンス
       </a>に基づきWikipediaが出典であることを明示して、誰でも自由に利用可能です。
@@ -75,29 +74,29 @@ const Readme = () => (
     <p>
       また、以上の5つの地図を二次利用する場合は別途<a
         href="http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html"
-        target="_blank"
+        target="_blank" rel="noopener noreferrer"
       >
         国土地理院コンテンツ利用規約
       </a>を参照してください。
     </p>
     <p>WikiLayersの表記については任意とします。</p>
     <ul>
-      <li>{'Version: 1.0 (2018/01/28)'}</li>
+      <li>{'Version: 1.0 (2018/01/29)'}</li>
       <li>
         作成者:{' '}
-        <a href="https://twitter.com/cieloazul310" target="_blank">
+        <a href="https://twitter.com/cieloazul310" target="_blank" rel="noopener noreferrer">
           @cieloazul310
         </a>
       </li>
       <li>
       GitHub:{' '}
-        <a href="https://github.com/cieloazul310/wikilayers/" target="_blank">
+        <a href="https://github.com/cieloazul310/wikilayers/" target="_blank" rel="noopener noreferrer">
           {'https://github.com/cieloazul310/wikilayers/'}
         </a>
       </li>
       <li>
         水戸地図{' '}
-        <a href="https://cieloazul310.github.io" target="_blank">
+        <a href="https://cieloazul310.github.io" target="_blank" rel="noopener noreferrer">
           {'https://cieloazul310.github.io'}
         </a>
       </li>

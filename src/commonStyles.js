@@ -106,8 +106,8 @@ export const form = {
   boxSizing: 'border-box'
 };
 export const adBelowForm = {
-  height: 60,
-  maxHeight: 60
+  height: 90,
+  maxHeight: 90
 };
 const resultCardHeight = {
   header: 76,

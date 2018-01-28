@@ -14,7 +14,6 @@ class AdBox extends Component {
           {
             padding: '.5em',
             boxSizing: 'border-box',
-            backgroundColor: '#dde'
           },
           this.props.containerStyle
         )}

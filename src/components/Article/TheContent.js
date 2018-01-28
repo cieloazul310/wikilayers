@@ -44,6 +44,7 @@ class TheContent extends Component {
       <a
         href={summary.url_raw}
         target="_blank"
+        rel="noopener noreferrer"
         style={{
           color: '#777',
           textDecolation: 'none',
