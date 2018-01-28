@@ -17,10 +17,10 @@ class TheContent extends Component {
 
   componentDidUpdate() {
     const { status, reserved, last } = this.props.textCache;
-    const article = (status === 'none' && reserved.length) ? last :
+    const summary = (status === 'none' && reserved.length) ? last :
                   reserved;
     if (status === 'Received') {
-      this.props.showText(article);
+      this.props.showText(summary);
     }
   }
 
@@ -31,29 +31,28 @@ class TheContent extends Component {
     const { status, reserved, last, pages } = this.props.textCache;
     const isInitial = (status === 'none' && !reserved.length);
     const isExist = pages[reserved.lang] &&  pages[reserved.lang].hasOwnProperty(reserved.pageid);
-    const article = (status === 'none' && reserved.length) ? last :
+    const summary = (status === 'none' && reserved.length) ? last :
                   reserved;
-    const baseurl = `https://${article.lang}.wikipedia.org/wiki/`;
-    function createMarkup(pages, article) {
-      return {__html: pages[article.lang][article.pageid.toString()].extract};
+
+    function createMarkup(pages, summary) {
+      return {__html: pages[summary.lang][summary.pageid.toString()].extract};
     }
+
+    const LinkToWiki = (
+      <a href={summary.url_raw} target="_blank" style={{
+        color: '#777',
+        textDecolation: 'none',
+        fontSize: '80%'
+      }}>
+        {summary.url}
+      </a>
+    );
 
     return (
       <article>
         <PageHeader
-          title={isInitial ? '記事' : article.title}
-          subElement={isInitial ? null :
-            <a
-              href={`${baseurl}${encodeURI(article.title)}`}
-              target="_blank"
-              style={{
-                color: '#777',
-                textDecolation: 'none',
-              }}
-            >
-              {`${baseurl}${article.title}`}
-            </a>
-          }
+          title={isInitial ? '記事' : summary.title}
+          subElement={isInitial ? null : LinkToWiki }
           subElementStyle={{
             textAlign: 'right',
             marginRight: '1em'
@@ -63,15 +62,15 @@ class TheContent extends Component {
           <div className="article">
             {
               isInitial ? (<p>{'選択したアイテムの記事はこのページで読むことができます。'}</p>) :
-              isExist ? (<div dangerouslySetInnerHTML={createMarkup(pages, article)} />)
-              : (<p>{article.extract}</p>)
+              isExist ? (<div dangerouslySetInnerHTML={createMarkup(pages, summary)} />)
+              : (<p>{summary.extract}</p>)
             }
             <Loader
               style={{
                 maxHeight: 180,
                 height: 180
               }}
-              hidden={this.props.textCache.status !== 'Fetching'}
+              hidden={status !== 'Fetching'}
             />
           </div>
         )} />

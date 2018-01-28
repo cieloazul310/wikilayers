@@ -195,8 +195,8 @@
 .ol-attribution.ol-uncollapsible {
   bottom: 0;
   right: 0;
-  border-radius: 4px 0 0;
-  height: 1.1em;
+  border-radius: 4px 0 0;/*
+  height: 1.1em;*/
   line-height: 1em;
 }
 .ol-attribution.ol-uncollapsible img {

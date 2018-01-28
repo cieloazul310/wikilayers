@@ -14,7 +14,7 @@ const SearcherComponent = () => <PageContainer component={(
     <WikiIntro />
     <WikiForms />
     <WikiResult />
-    <AdBox type="top" />
+    <AdBox type="article" style={{maxHeight: '50vw'}}/>
     <WikiFeatureList />
   </div>
 )} />;

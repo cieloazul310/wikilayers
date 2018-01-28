@@ -9,13 +9,22 @@ class AdBox extends Component {
   render() {
     return (
      <div style={{
-       marginBottom: '.5em'
+       padding: '.5em',
+       boxSizing: 'border-box',
      }}>
        <ins className="adsbygoogle"
-            style={{display: 'block'}}
+            style={Object.assign({
+              display: 'block',
+              textAlign: this.props.type === 'article' ?
+                        'center' : 'inherited'
+            }, this.props.style)}
+            data-ad-layout={this.props.type === 'article' ? 'in-article' : null}
             data-ad-client="ca-pub-7323207940463794"
-            data-ad-slot={this.props.type === 'top' ? "9840296819" : "4497165326"}
-            data-ad-format="auto"></ins>
+            data-ad-slot={this.props.type === 'top' ? '9840296819' :
+                          this.props.type === 'article' ? '8047900665' :
+                          '4497165326'}
+            data-ad-format={this.props.type === 'article' ? 'fluid' :
+                          'auto'}></ins>
      </div>
    );
   }
@@ -23,7 +32,8 @@ class AdBox extends Component {
 }
 
 AdBox.propTypes = {
-  type: PropTypes.string
+  type: PropTypes.string,
+  style: PropTypes.object
 };
 
 export default AdBox;

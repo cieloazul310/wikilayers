@@ -15,11 +15,20 @@ export function createFeature(featureCard) {
     },
     properties: {
       name: name || summary.title,
-      summary,
+      summary: summaryCreateURL(summary),
       visibility: true,
       selected: false,
     }
   };
+}
+
+function summaryCreateURL(summary) {
+  const { lang, title } = summary;
+  return {
+    ...summary,
+    url: `https://${lang}.wikipedia.org/wiki/${title}`,
+    url_raw: `https://${lang}.wikipedia.org/wiki/${encodeURI(title)}`
+  }
 }
 
 export function createOlFeature(feature) {

@@ -13,7 +13,7 @@
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#0091EA">
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -29,18 +29,25 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon128.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="%PUBLIC_URL%/icons/icon256.png">
+    <link rel="apple-touch-startup-image" href="%PUBLIC_URL%/icons/icon256.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#0091EA">
+
     <meta property="og:title" content="WikiLayers" />
     <meta property="og:description" content="Wikipediaを地図で見るWikiLayers" />
-    <meta property="og:image" content="https://cieloazul310.github.io/wikilayers/img/ogp.png"/>
+    <meta property="og:image" content="%PUBLIC_URL%/img/ogp.png"/>
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://cieloazul310.github.io/wikilayers" />
+    <meta property="og:url" content="%PUBLIC_URL%/" />
     <meta itemprop="name" content="水戸地図">
     <meta itemprop="description" content="地図とデータビジュアライゼーションの実験室">
 
     <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:image:src" content="https://cieloazul310.github.io/wikilayers/img/ogp.png"/>
+    <meta name="twitter:image:src" content="%PUBLIC_URL%/img/ogp.png"/>
     <meta name="twitter:title" content="WikiLayers"/>
     <meta name="twitter:description" content="Wikipediaを地図で見るWikiLayers"/>
+    <meta name="fb:app_id" content="2023005561276800" />
     <title>WikiLayers</title>
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
