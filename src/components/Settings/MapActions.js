@@ -78,7 +78,7 @@ class MapActions extends Component {
         onClick={this.handleClose}
       />,
       <FlatButton
-        label="実行"
+        label={this.state.type === 'export' ? 'ダウンロード' : '実行'}
         primary={true}
         onClick={() => {
           this.state.action();

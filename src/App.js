@@ -8,6 +8,7 @@ import Map from './components/Map';
 import Search from './components/Search';
 import Article from './components/Article';
 import Settings from './components/Settings';
+import About from './components/About';
 
 import { history } from './configureStore';
 //import './App.css';
@@ -28,6 +29,7 @@ class App extends Component {
           <Route exact path="/" component={Search} />
           <Route path="/article" component={Article} />
           <Route path="/settings" component={Settings} />
+          <Route path="/about" component={About} />
           <nav style={bottomNav}>
             <CustomHeader />
           </nav>

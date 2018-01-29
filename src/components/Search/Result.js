@@ -46,7 +46,7 @@ class Result extends Component {
           }}
           hidden={status !== 'fetching'}
         />
-        {status === 'none' ? (
+        {status === 'none' || status === 'fetching' ? (
           null
         ) : (
           <Card style={resultCard.card} zDepth={3}>

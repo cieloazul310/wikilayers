@@ -23,6 +23,14 @@ export const pallete = {
   clockCircleColor: fade(darkBlack, 0.07),
   shadowColor: fullBlack,*/
 };
+const fontSizes = {
+  appTitle: '300%',
+  appSubTitle: '80%',
+  pageTitle: '125%',
+  pageSubTitle: '80%',
+  mainText: '100%',
+  subText: '80%',
+};
 
 export const bottomNav = {
   height: 56,
@@ -31,7 +39,9 @@ export const bottomNav = {
   width: '100%',
   left: 0,
   bottom: 0,
-  zIndex: 10
+  zIndex: 10,
+  margin: 0,
+  padding: 0
 };
 const pageContainerMargins = {
   top: 6,
@@ -41,7 +51,8 @@ export const appField = {
   backgroundColor: pallete.primary3Color,
   overflowY: 'scroll',
   maxHeight: '100vh',
-  paddingBottom: bottomNav.height
+  paddingBottom: bottomNav.height,
+  margin: 0,
 };
 export const pageContainer = {
   marginTop: pageContainerMargins.top,
@@ -58,8 +69,23 @@ export const pageContainer = {
 export const mapWrapper = {
   width: '100%',
   height: `calc(100vh - ${bottomNav.height + 1}px)`,
-  minHeight: `calc(100vh - ${bottomNav.height + 1}px)`
+  minHeight: `calc(100vh - ${bottomNav.height + 1}px)`,
+  margin: 0,
+  padding: 0
 };
+export const mapContainer = {
+  width: '100%',
+  height: '100%',
+  margin: 0,
+  padding: 0
+};
+export const mapApp = {
+  width: '100%',
+  height: '100%',
+  margin: 0,
+  padding: 0,
+  backgroundColor: '#fff',
+}
 export const mapInfo = {
   width: 320,
   maxWidth: '75%',
@@ -74,27 +100,41 @@ export const pageHeader = {
     transition: 'height 0.2s linear'
   },
   appTitle: {
-    fontSize: 48,
+    fontSize: fontSizes.appTitle,
     fontWeight: 100,
     margin: 'auto',
     padding: '.2em'
   },
   appSubTitle: {
     color: '#777',
-    fontSize: 14,
+    fontSize: fontSizes.appSubTitle,
     fontWeight: 300,
     margin: 'auto'
   },
   pageTitle: {
-    fontSize: 24,
+    fontSize: fontSizes.pageTitle,
     fontWeight: 400,
     margin: 'auto'
   },
   pageSubTitle: {
     color: '#777',
-    fontSize: 14,
+    fontSize: fontSizes.pageSubTitle,
     fontWeight: 300,
     margin: 'auto'
+  }
+};
+export const howTo = {
+  container: {
+    width: '100%',
+    maxWidth: 480,
+    margin: 'auto',
+    padding: '2em .5em 3em .5em'
+  },
+  label: {
+    fontSize: fontSizes.mainText
+  },
+  text: {
+    fontSize: fontSizes.subText
   }
 };
 export const form = {

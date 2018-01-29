@@ -48,6 +48,61 @@ export const seamless = new Tile({
   summary: '国土地理院が配信している航空写真および衛星写真'
 });
 
+export const photo70s = new Group({
+  layers: [
+    new Tile({
+      source: new XYZ({
+        url: '//cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png',
+        attributions: [gsiAttribution],
+        maxZoom: 14,
+        minZoom: 6,
+      }),
+      extent: JapanExtent,
+      minResolution: 152.88
+    }),
+    new Tile({
+      source: new XYZ({
+        url: '//cyberjapandata.gsi.go.jp/xyz/gazo1/{z}/{x}/{y}.jpg',
+        attributions: [gsiAttribution],
+        maxZoom: 17,
+        minZoom: 10,
+      }),
+      extent: JapanExtent,
+      maxResolution: 152.88,
+    })
+  ],
+  title: "写真(70's)",
+  subtitle: "GSI 70's Photo Maps",
+  summary: '1974～1978年に撮影された国土画像情報'
+});
+
+export const photo70sPlain = new Tile({
+  source: new XYZ({
+    url: '//cyberjapandata.gsi.go.jp/xyz/gazo1/{z}/{x}/{y}.jpg',
+    attributions: [gsiAttribution],
+    maxZoom: 17,
+    minZoom: 10,
+  }),
+  title: "写真(70's)",
+  extent: JapanExtent,
+  maxResolution: 152.88,
+  subtitle: "GSI 70's Photo Maps",
+  summary: '1974～1978年に撮影された国土画像情報'
+});
+
+export const blank = new Tile({
+  source: new XYZ({
+    url: '//cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png',
+    attributions: [gsiAttribution],
+    maxZoom: 14,
+    minZoom: 6,
+  }),
+  title: "白地図",
+  extent: JapanExtent,
+  subtitle: "GSI Blank Map",
+  summary: '行政区界だけで書かれた白地図'
+});
+
 export const relief = new Tile({
   source: new XYZ({
     url: '//cyberjapandata.gsi.go.jp/xyz/relief/{z}/{x}/{y}.png',
