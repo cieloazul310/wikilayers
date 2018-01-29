@@ -166,7 +166,7 @@ export const resultCard = {
     boxSizing: 'border-box',
     padding: '20px .5em 20px .5em',
     transition:
-      'background .3s linear, background-image .3s linear, height .3s linear',
+      'background .3s linear, background-image .3s linear, height .3s linear, padding .3s linear',
     '&::before': {
       content: '""',
       background: 'inherit',
