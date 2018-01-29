@@ -19,6 +19,29 @@ const Readme = () => (
       <li>記事の座標を取得したら「地図に追加」を押す</li>
       <li>「地図」を見る</li>
     </ol>
+    <h4>検索例</h4>
+    <ul>
+      <dt><b>{'都市・地名'}</b></dt>
+      <dd>{'水戸市、小名浜、ラスベガス、ポンペイ など'}</dd>
+      <dt><b>{'史跡・名所'}</b></dt>
+      <dd>{'水戸城、偕楽園、法隆寺、コロッセウム など'}</dd>
+      <dt><b>{'建築・土木'}</b></dt>
+      <dd>{'東京タワー、トキワ荘、猿橋、サヴォア邸 など'}</dd>
+      <dt><b>{'山岳・地形'}</b></dt>
+      <dd>{'富士山、室戸岬、ヌル島、カイバル峠 など'}</dd>
+      <dt><b>{'スタジアム'}</b></dt>
+      <dd>
+        {
+          'ケーズデンキスタジアム水戸、日立柏サッカー場、アザディ・スタジアム など'
+        }
+      </dd>
+      <dt><b>{'歴史上の事件'}</b></dt>
+      <dd>
+        {
+          '本能寺の変、池田屋事件、ワールシュタットの戦い、ウッドストック・フェスティバル など'
+        }
+      </dd>
+    </ul>
     <h4>その他諸機能</h4>
     <ul>
       <li>URLによる検索では多国語に対応しています。</li>
@@ -39,23 +62,27 @@ const Readme = () => (
     <p>
       このアプリケーションはWikimedia Foundationの定める<a
         href="https://wikimediafoundation.org/wiki/Terms_of_Use/ja"
-        target="_blank" rel="noopener noreferrer"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         利用規約
       </a>、<a
         href="https://ja.wikipedia.org/wiki/Wikipedia:%E3%82%A6%E3%82%A3%E3%82%AD%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2%E3%82%92%E4%BA%8C%E6%AC%A1%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B"
-        target="_blank" rel="noopener noreferrer"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         ウィキペディアを二次利用する
       </a>、及び<a
         href="http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html"
-        target="_blank" rel="noopener noreferrer"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         国土地理院コンテンツ利用規約
       </a>に基づき作成されています。<br />
       Wikipediaを情報源としている部分においては、<a
         href="http://creativecommons.org/licenses/by-sa/3.0/"
-        target="_blank" rel="noopener noreferrer"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         クリエイティブ・コモンズ 表示-継承 3.0 非移植(CC-BY-SA 3.0) ライセンス
       </a>に基づきWikipediaが出典であることを明示して、誰でも自由に利用可能です。
@@ -73,7 +100,8 @@ const Readme = () => (
     <p>
       また、以上の5つの地図を二次利用する場合は別途<a
         href="http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html"
-        target="_blank" rel="noopener noreferrer"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         国土地理院コンテンツ利用規約
       </a>を参照してください。
@@ -83,19 +111,31 @@ const Readme = () => (
       <li>{'Version: 1.0 (2018/01/29)'}</li>
       <li>
         作成者:{' '}
-        <a href="https://twitter.com/cieloazul310" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://twitter.com/cieloazul310"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           @cieloazul310
         </a>
       </li>
       <li>
-      GitHub:{' '}
-        <a href="https://github.com/cieloazul310/wikilayers/" target="_blank" rel="noopener noreferrer">
+        GitHub:{' '}
+        <a
+          href="https://github.com/cieloazul310/wikilayers/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {'https://github.com/cieloazul310/wikilayers/'}
         </a>
       </li>
       <li>
         水戸地図{' '}
-        <a href="https://cieloazul310.github.io" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://cieloazul310.github.io"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {'https://cieloazul310.github.io'}
         </a>
       </li>

@@ -12,8 +12,9 @@ import Settings from './components/Settings';
 import About from './components/About';
 
 import { history } from './configureStore';
-import { bottomNav } from './commonStyles';
+import ScrollToTop from './ScrollToTop';
 import withTracker from './withTracker';
+import { bottomNav } from './commonStyles';
 
 injectTapEventPlugin();
 ReactGA.initialize('UA-74683419-4');
@@ -23,16 +24,14 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <div style={{
-          width: '100%',
-          height: '100%',
-          minHeight: '100vh',
-        }}>
-          <Route path="/map" component={withTracker(Map)} />
-          <Route exact path="/" component={withTracker(Search)} />
-          <Route path="/article" component={withTracker(Article)} />
-          <Route path="/settings" component={withTracker(Settings)} />
-          <Route path="/about" component={withTracker(About)} />
+        <div>
+          <ScrollToTop>
+            <Route path="/map" component={withTracker(Map)} />
+            <Route exact path="/" component={withTracker(Search)} />
+            <Route path="/article" component={withTracker(Article)} />
+            <Route path="/settings" component={withTracker(Settings)} />
+            <Route path="/about" component={withTracker(About)} />
+          </ScrollToTop>
           <nav style={bottomNav}>
             <CustomHeader />
           </nav>

@@ -49,8 +49,6 @@ const pageContainerMargins = {
 };
 export const appField = {
   backgroundColor: pallete.primary3Color,
-  overflowY: 'scroll',
-  maxHeight: '100vh',
   paddingBottom: bottomNav.height,
   margin: 0,
 };

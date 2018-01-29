@@ -8,7 +8,7 @@
 **WikiLayers** is the Map App which displays Wikipedia Geo Data.  
 This App is build by React, Redux, Material-UI, and OpenLayers.
 
-https://cieloazul310.github.io/wikilayers/
+URL: https://cieloazul310.github.io/wikilayers/
 
 ### 遊び方
 
@@ -23,6 +23,17 @@ https://cieloazul310.github.io/wikilayers/
   - I'm sorry, the Title Search is usable only in Japanese.
 2. Click the Add to the Map(**地図に追加**) Button.
 3. View the Map(**地図**)
+
+#### 検索例
+
+Wikipediaの記事に座標がついているものであれば取得可能です。
+
+- **都市・地名**: 水戸市、小名浜、ラスベガス、ポンペイ など
+- **史跡・名所**: 水戸城、偕楽園、法隆寺、コロッセウム など
+- **建築・土木**: 東京タワー、トキワ荘、猿橋、サヴォア邸 など
+- **山岳・地形**: 富士山、室戸岬、ヌル島、カイバル峠 など
+- **スタジアム**: ケーズデンキスタジアム水戸、日立柏サッカー場、アザディ・スタジアム など
+- **歴史上の事件**: 本能寺の変、池田屋事件、ワールシュタットの戦い、ウッドストック・フェスティバル など
 
 #### その他機能
 

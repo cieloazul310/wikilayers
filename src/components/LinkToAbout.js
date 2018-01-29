@@ -13,7 +13,7 @@ const LinkToAbout = () => (
     <Link
       to={'/about'}
       style={{
-        color: 'black',
+        color: '#12578e',
         textDecoration: 'none'
       }}
     >
