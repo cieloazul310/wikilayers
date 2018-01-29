@@ -24,7 +24,7 @@ function mapView(state = initialView, action) {
     case ZOOM_TO_FEATURE:
       return {
         center: action.feature.geometry.coordinates,
-        zoom: 12
+        zoom: 14
       };
     case INITIALIZE:
       if (action.target === 'mapView' || action.target === 'ALL') {

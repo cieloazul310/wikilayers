@@ -10,6 +10,11 @@ import Geolocation from 'ol/geolocation';
 import Attribution from 'ol/attribution';
 import '../../map/ol.css';
 
+import {
+  mapContainer as containerStyle,
+  mapApp as appStyle
+} from '../../commonStyles';
+
 import { initialBaseLayers } from '../../map/initialBaseLayers';
 import { vectorStyle, allLabelStyle } from '../../map/vectorStyle';
 import customControl from '../../map/customControl';
@@ -27,12 +32,13 @@ class MapApp extends Component {
     this.createMap();
   }
 
-  componentDidUpdate() {/*
+  componentDidUpdate() {
+    /*
     this.createMap();*/
     // TODO: this.updateMap();
     this.vector.getSource().forEachFeature(olFeature => {
       olFeature.setProperties({
-        selected: (olFeature.getId() === this.props.selectedFeature.id)
+        selected: olFeature.getId() === this.props.selectedFeature.id
       });
     });
   }
@@ -43,7 +49,9 @@ class MapApp extends Component {
 
       this.props.saveGeolocation({
         tracking: this.geolocation.getTracking(),
-        cachedPosition: this.geolocation.getPosition() || this.geolocation.get('cachedPosition')
+        cachedPosition:
+          this.geolocation.getPosition() ||
+          this.geolocation.get('cachedPosition')
       });
     }
   }
@@ -53,14 +61,16 @@ class MapApp extends Component {
 
     this.vector = new VectorLayer({
       source: new VectorSource({
-        features: this.props.features.map(feature => createOlFeature (feature)),
-        attributions: [new Attribution({
-          html: '<a href="https://ja.wikipedia.org" target="_blank">Wikipedia</a>'
-        })]
+        features: this.props.features.map(feature => createOlFeature(feature)),
+        attributions: [
+          new Attribution({
+            html:
+              '<a href="https://ja.wikipedia.org" target="_blank">Wikipedia</a>'
+          })
+        ]
       }),
-      style: this.props.mapConfigure.showLabels ?
-        allLabelStyle : vectorStyle,
-      title: 'features',
+      style: this.props.mapConfigure.showLabels ? allLabelStyle : vectorStyle,
+      title: 'features'
     });
 
     const baseLayers = initialBaseLayers();
@@ -79,7 +89,7 @@ class MapApp extends Component {
       controls: customControl,
       target: 'map'
     });
-/*
+    /*
     this.map.on('moveend', () => {
       this.props.updateMapView(this.map.getView().getProperties());
     });
@@ -101,38 +111,23 @@ class MapApp extends Component {
     if (this.props.mapConfigure.geolocation.tracking) {
       setGeolocation(this.map, this.geolocation);
     }
-
   }
 
   render() {
     return (
       <div
         className="map-container"
-        ref={node => this.node = node}
-        style={{
-          width: '100%',
-          height: '100%'
-        }}
+        ref={node => (this.node = node)}
+        style={containerStyle}
       >
-        <div
-          className="map"
-          id="map"
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: '#fff',
-          }}
-        >
-        </div>
+        <div className="map" id="map" style={appStyle} />
       </div>
     );
   }
 }
 
 MapApp.propTypes = {
-  features: PropTypes.arrayOf(
-    PropTypes.object
-  ).isRequired,
+  features: PropTypes.arrayOf(PropTypes.object).isRequired,
   visibleBaseLayer: PropTypes.string.isRequired,
   mapConfigure: PropTypes.shape({
     geolocation: PropTypes.object,

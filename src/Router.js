@@ -3,6 +3,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Route } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'react-router-redux';
 import ReactGA from 'react-ga';
+import withTracker from './withTracker';
 
 import CustomHeader from './containers/CustomHeader';
 import Map from './components/Map';
@@ -12,11 +13,11 @@ import Settings from './components/Settings';
 import About from './components/About';
 
 import { history } from './configureStore';
+//import './App.css';
 import { bottomNav } from './commonStyles';
-import withTracker from './withTracker';
 
 injectTapEventPlugin();
-ReactGA.initialize('UA-74683419-4');
+ReactGA.initialize('UA-74683419-4', {debug: true});
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 class App extends Component {

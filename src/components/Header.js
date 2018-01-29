@@ -12,8 +12,9 @@ export default class Header extends React.Component {
       <BottomNavigation
         selectedIndex={
           this.props.router.location.pathname === '/map' ? 0 :
+          this.props.router.location.pathname === '/' ? 1 :
           this.props.router.location.pathname === '/article' ? 2 :
-          this.props.router.location.pathname === '/settings' ? 3 : 1
+          this.props.router.location.pathname === '/settings' ? 3 : null
         }
       >
         <BottomNavigationItem
