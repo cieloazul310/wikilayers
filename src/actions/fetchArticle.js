@@ -62,9 +62,20 @@ function titleParser(input) {
     return {
       origin: 'https://ja.wikipedia.org',
       name: input,
-      lang: 'ja'
+      lang: getLang()
     };
   }
+}
+
+function getLang() {
+  // attributed to https://qiita.com/shogo82148/items/548a6c9904eb19269f8c
+  const lang =
+    (window.navigator.languages && window.navigator.languages[0]) ||
+    window.navigator.language ||
+    window.navigator.userLanguage ||
+    window.navigator.browserLanguage;
+  const primary = lang.split('-')[0];
+  return primary;
 }
 
 /*

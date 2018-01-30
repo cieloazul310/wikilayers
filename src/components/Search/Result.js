@@ -46,9 +46,7 @@ class Result extends Component {
           }}
           hidden={status !== 'fetching'}
         />
-        {status === 'none' || status === 'fetching' ? (
-          null
-        ) : (
+        {status === 'none' || status === 'fetching' ? null : (
           <Card style={resultCard.card} zDepth={3}>
             <CardHeader
               title={
@@ -69,10 +67,8 @@ class Result extends Component {
               style={resultCard.resultHeader}
               textStyle={resultCard.resultHeaderText}
             />
-            {status === 'failure' ? (
-              null
-            ) : (
-              <CardActions style={resultCard.actions}>
+            <CardActions style={resultCard.actions}>
+              {status === 'failure' ? null : (
                 <RaisedButton
                   label="地図に追加"
                   disabled={
@@ -85,12 +81,12 @@ class Result extends Component {
                     this.props.addFeature(createFeature(featureCard));
                   }}
                 />
-                <FlatButton
-                  label="閉じる"
-                  onClick={() => this.props.clearFeatureCard()}
-                />
-              </CardActions>
-            )}
+              )}
+              <FlatButton
+                label="閉じる"
+                onClick={() => this.props.clearFeatureCard()}
+              />
+            </CardActions>
             <CardText style={resultCard.resultText}>
               {status === 'failure' ? (
                 <div>
