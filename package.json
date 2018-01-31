@@ -22,7 +22,8 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.5.0",
     "redux-router": "^2.1.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "viewport-units-buggyfill": "^0.6.2"
   },
   "scripts": {
     "start": "react-scripts start",
