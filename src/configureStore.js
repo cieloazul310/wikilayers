@@ -12,8 +12,10 @@ export const history = createHistory({
 
 let middleware = [thunkMiddleware, routerMiddleware(history)];
 if (process.env.NODE_ENV !== 'production') {
+
   const createLogger = require('redux-logger').createLogger;
   const loggerMiddleware = createLogger();
+
   middleware = [...middleware, loggerMiddleware];
 }
 
