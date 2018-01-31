@@ -22,6 +22,8 @@ export function featuresToGeoJSON(features) {
   };
 }
 
-/*
-JSON.stringify(featuresToGeoJSON(features), null, '\t');
-*/
+export function exportFile(geojson) {
+  const blob = new Blob([geojson], {type : 'application/json'});
+  const url = URL.createObjectURL(blob);
+  return url;
+}

@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   mapView,
   featureCard,
   mapConfigure,
-  textCache,
+  textCache
 });
 
 export default rootReducer;

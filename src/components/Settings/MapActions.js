@@ -8,17 +8,11 @@ import LayersClear from 'material-ui/svg-icons/maps/layers-clear';
 import FileDownload from 'material-ui/svg-icons/file/file-download';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-
-import { featuresToGeoJSON } from '../../map/exportGeoJSON';
-
+/*
+import { featuresToGeoJSON, exportFile } from '../../map/exportGeoJSON';
+*/
 function handleFocus(event) {
   event.target.select();
-}
-
-function exportFile(geojson) {
-  const blob = new Blob([geojson], {type : 'application/json'});
-  const url = URL.createObjectURL(blob);
-  return url;
 }
 
 const GeoJSONArea = ({ value }) => (
@@ -48,6 +42,7 @@ class MapActions extends Component {
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.setDialog = this.setDialog.bind(this);
+    this.onExportClick = this.onExportClick.bind(this);
   }
   handleOpen = () => {
     this.setState({open: true});
@@ -65,10 +60,24 @@ class MapActions extends Component {
     });
   };
 
-  componentDidMount() {
-    this.setState({
-      textValue: JSON.stringify(featuresToGeoJSON(this.props.features), null, 2)
-    });
+  onExportClick() {
+    import('../../map/exportGeoJSON')
+      .then(({ featuresToGeoJSON, exportFile }) => {
+        const geojson = JSON.stringify(featuresToGeoJSON(this.props.features), null, 2);
+
+        this.setState({
+          textValue: geojson,
+          href: exportFile(geojson)
+        });
+
+        this.setDialog({
+          type: 'export',
+          dialog: 'GeoJSONファイル'
+        }, () => {});
+
+        this.handleOpen();
+
+      });
   }
 
   render() {
@@ -96,6 +105,7 @@ class MapActions extends Component {
           <Subheader>機能</Subheader>
           <ListItem
             onClick={() => {
+              /*
               this.setState({
                 href: exportFile(this.state.textValue)
               });
@@ -103,7 +113,8 @@ class MapActions extends Component {
                 type: 'export',
                 dialog: 'GeoJSONファイル'
               }, () => {});
-              this.handleOpen();
+              this.handleOpen();*/
+              this.onExportClick();
             }}
             leftIcon={
               <FileDownload />
