@@ -13,6 +13,6 @@ const MapComponent = () => (
   </div>
 );
 
-const Map = () => <PageWrapper component={<MapComponent />} />;
+const Map = () => <PageWrapper type="map" component={<MapComponent />} />;
 
 export default Map;
