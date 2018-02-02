@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Translate } from 'react-redux-i18n';
+
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SearchIcon from 'material-ui/svg-icons/action/search';
@@ -30,7 +32,7 @@ class Forms extends Component {
     return (
       <div style={formStyle}>
         <TextField
-          hintText="https://ja.wikipedia.org/wiki/偕楽園 or 偕楽園"
+          hintText={<Translate value="form.hint" />}
           value={this.state.name}
           onChange={this.handleChange}
           hintStyle={{
@@ -53,7 +55,7 @@ class Forms extends Component {
           primary={true}
           icon={<SearchIcon />}
           onClick={() => {
-            this.props.fetchSummary(this.state.name);
+            this.props.fetchSummary(this.state.name, this.props.searchLang);
           }}
           style={{
             minWidth: 40,
