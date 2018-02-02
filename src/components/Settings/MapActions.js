@@ -8,6 +8,8 @@ import LayersClear from 'material-ui/svg-icons/maps/layers-clear';
 import FileDownload from 'material-ui/svg-icons/file/file-download';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+
+import { Translate } from 'react-redux-i18n';
 /*
 import { featuresToGeoJSON, exportFile } from '../../map/exportGeoJSON';
 */
@@ -21,12 +23,11 @@ const GeoJSONArea = ({ value }) => (
     rows={20}
     onChange={() => {}}
     style={{
-      width: '100%',
+      width: '100%'
     }}
     onFocus={handleFocus}
   />
 );
-
 
 class MapActions extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class MapActions extends Component {
       dialog: 'Dialog',
       action: () => {},
       textValue: 'GeoJSON',
-      href: '',
+      href: ''
     };
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -45,14 +46,14 @@ class MapActions extends Component {
     this.onExportClick = this.onExportClick.bind(this);
   }
   handleOpen = () => {
-    this.setState({open: true});
+    this.setState({ open: true });
   };
 
   handleClose = () => {
-    this.setState({open: false});
+    this.setState({ open: false });
   };
 
-  setDialog = ({type, dialog}, action) => {
+  setDialog = ({ type, dialog }, action) => {
     this.setState({
       type,
       dialog,
@@ -61,33 +62,46 @@ class MapActions extends Component {
   };
 
   onExportClick() {
-    import('../../map/exportGeoJSON')
-      .then(({ featuresToGeoJSON, exportFile }) => {
-        const geojson = JSON.stringify(featuresToGeoJSON(this.props.features), null, 2);
+    import('../../map/exportGeoJSON').then(
+      ({ featuresToGeoJSON, exportFile }) => {
+        const geojson = JSON.stringify(
+          featuresToGeoJSON(this.props.features),
+          null,
+          2
+        );
 
         this.setState({
           textValue: geojson,
           href: exportFile(geojson)
         });
 
-        this.setDialog({
-          type: 'export',
-          dialog: 'GeoJSONファイル'
-        }, () => {});
+        this.setDialog(
+          {
+            type: 'export',
+            dialog: 'GeoJSON'
+          },
+          () => {}
+        );
 
         this.handleOpen();
-
-      });
+      }
+    );
   }
 
   render() {
     const actions = [
       <FlatButton
-        label="キャンセル"
+        label={<Translate value="settings.cancel" />}
         onClick={this.handleClose}
       />,
       <FlatButton
-        label={this.state.type === 'export' ? 'ダウンロード' : '実行'}
+        label={
+          this.state.type === 'export' ? (
+            <Translate value="settings.download" />
+          ) : (
+            <Translate value="settings.ok" />
+          )
+        }
         primary={true}
         onClick={() => {
           this.state.action();
@@ -96,63 +110,55 @@ class MapActions extends Component {
         href={this.state.type === 'export' ? this.state.href : ''}
         target={this.state.type === 'export' ? '_blank' : null}
         download={this.state.type === 'export'}
-      />,
+      />
     ];
-
     return (
       <div>
         <List>
-          <Subheader>機能</Subheader>
+          <Subheader>
+            <Translate value="settings.mapAction" />
+          </Subheader>
           <ListItem
             onClick={() => {
-              /*
-              this.setState({
-                href: exportFile(this.state.textValue)
-              });
-              this.setDialog({
-                type: 'export',
-                dialog: 'GeoJSONファイル'
-              }, () => {});
-              this.handleOpen();*/
               this.onExportClick();
             }}
-            leftIcon={
-              <FileDownload />
-            }
+            leftIcon={<FileDownload />}
           >
-            アイテムをGeoJSONで出力
+            {<Translate value="settings.exportGeoJSON" />}
           </ListItem>
           <ListItem
             onClick={() => {
-              this.setDialog({
-                type: 'default',
-                dialog: '全てのアイテムを消去しますか？'
-              }, () => {
-                 this.props.initialize('features');
-               });
+              this.setDialog(
+                {
+                  type: 'default',
+                  dialog: <Translate value="settings.removeDialog" />
+                },
+                () => {
+                  this.props.initialize('features');
+                }
+              );
               this.handleOpen();
             }}
-            leftIcon={
-              <LayersClear />
-            }
+            leftIcon={<LayersClear />}
           >
-            全てのアイテムを削除
+            {<Translate value="settings.removeItems" />}
           </ListItem>
           <ListItem
             onClick={() => {
-              this.setDialog({
-                type: 'default',
-                dialog: '設定を初期化しますか？'
-              }, () => {
-                 this.props.initialize('ALL');
-               });
+              this.setDialog(
+                {
+                  type: 'default',
+                  dialog: <Translate value="settings.initializeDialog" />
+                },
+                () => {
+                  this.props.initialize('ALL');
+                }
+              );
               this.handleOpen();
             }}
-            leftIcon={
-              <Restore />
-            }
+            leftIcon={<Restore />}
           >
-            設定を初期化する
+            <Translate value="settings.initialize" />
           </ListItem>
         </List>
         <div>
@@ -162,13 +168,11 @@ class MapActions extends Component {
             open={this.state.open}
             onRequestClose={this.handleClose}
           >
-            {
-              (this.state.type === 'export') ? (
-                <GeoJSONArea
-                  value={this.state.textValue}
-                />
-              ) : this.state.dialog
-            }
+            {this.state.type === 'export' ? (
+              <GeoJSONArea value={this.state.textValue} />
+            ) : (
+              this.state.dialog
+            )}
           </Dialog>
         </div>
       </div>
@@ -178,9 +182,7 @@ class MapActions extends Component {
 
 MapActions.propTypes = {
   initialize: PropTypes.func.isRequired,
-  features: PropTypes.arrayOf(
-    PropTypes.object
-  ).isRequired
+  features: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default MapActions;

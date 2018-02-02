@@ -31,7 +31,7 @@ function receiveSummary(summary, name) {
  *
  * return Object {...url, title}
  */
-function titleParser(input) {
+function titleParser(input, searchLang) {
   // parse URL ex. https://ja.wikipedia.org/wiki/%E9%81%8A%E5%AD%90%E6%B0%B4%E8%8D%B7%E6%B5%A6%E3%81%AE%E6%AE%B5%E7%95%91
   const splitBySlash = input.split('/');
   if (
@@ -62,20 +62,9 @@ function titleParser(input) {
     return {
       origin: 'https://ja.wikipedia.org',
       name: input,
-      lang: getLang()
+      lang: searchLang.code
     };
   }
-}
-
-function getLang() {
-  // attributed to https://qiita.com/shogo82148/items/548a6c9904eb19269f8c
-  const lang =
-    (window.navigator.languages && window.navigator.languages[0]) ||
-    window.navigator.language ||
-    window.navigator.userLanguage ||
-    window.navigator.browserLanguage;
-  const primary = lang.split('-')[0];
-  return primary;
 }
 
 /*
@@ -114,11 +103,11 @@ function createURLByLang(lang) {
   )}`;
 }
 
-export function fetchSummary(input) {
+export function fetchSummary(input, searchLang) {
   return dispatch => {
     if (input === '') return;
 
-    const post = titleParser(input);
+    const post = titleParser(input, searchLang);
     const firstURL = createFirstURL(post.lang, post.name);
 
     dispatch(requestName(post.name));

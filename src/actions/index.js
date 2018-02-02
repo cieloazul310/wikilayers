@@ -12,3 +12,13 @@ export function initialize(target) {
     target
   };
 }
+
+export const SET_SEARCH_LANG = 'SET_SEARCH_LANG';
+
+export function setSearchLang(lang) {
+  return {
+    type: SET_SEARCH_LANG,
+    code: lang.Wiki,
+    langType: lang.type
+  };
+}

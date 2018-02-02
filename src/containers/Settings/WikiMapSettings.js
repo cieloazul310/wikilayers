@@ -7,9 +7,9 @@ import {
 
 import MapSettings from '../../components/Settings/MapSettings';
 
-const mapStateToProps = ({ mapConfigure, }) => {
+const mapStateToProps = ({ mapConfigure }) => {
   return {
-    mapConfigure,
+    mapConfigure
   };
 };
 

@@ -7,6 +7,7 @@ import Place from '../img/place.svg';
 import selectedPlace from '../img/selectedPlace.svg';
 
 import commonStyles from '../commonStyles';
+import '../fonts.css';
 
 function vectorStyle(feature, resolution) {
   if (!feature.get('visibility')) return new Style();
@@ -26,7 +27,7 @@ function vectorStyle(feature, resolution) {
     zIndex: isSelected ? 10 : 1,
     text: new TextStyle({
       text: feature.get('name'),
-      font: `12px ${commonStyles.fontFamily}`,
+      font: `bold 12px ${commonStyles.fontFamily}`,
       offsetY: 8,
       fill: new Fill({
         color: 'white'
@@ -63,7 +64,7 @@ function allLabelStyle(feature) {
       zIndex: isSelected ? 10 : 1,
       text: new TextStyle({
         text: feature.get('name'),
-        font: `12px ${commonStyles.fontFamily}`,
+        font: `bold 12px ${commonStyles.fontFamily}`,
         offsetY: 8,
         fill: new Fill({
           color: 'white'

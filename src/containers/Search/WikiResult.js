@@ -5,7 +5,7 @@ import Result from '../../components/Search/Result';
 const mapStateToProps = ({ latestArticle, featureCard }) => {
   return {
     latestArticle,
-    featureCard,
+    featureCard
   };
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-redux-i18n';
 
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
@@ -33,7 +34,7 @@ const MapInfo = ({ selectedFeature, moveToArticle }) => {
         hidden={!isSelected}
       >
         <FlatButton
-          label="続きを読む"
+          label={<Translate value="card.readMore" />}
           primary={true}
           onClick={() => moveToArticle()}
         />

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import {
-  initialize,
- } from '../../actions';
+import { loadTranslations } from 'react-redux-i18n';
+import { initialize } from '../../actions';
+import translationsObject from '../../translationsObject';
 
 import MapActions from '../../components/Settings/MapActions';
 
@@ -11,15 +11,13 @@ const mapStateToProps = ({ features }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    initialize: (target) => {
+    initialize: target => {
       dispatch(initialize(target));
+      dispatch(loadTranslations(translationsObject));
     }
   };
-}
+};
 
-const WikiMapActions = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MapActions);
+const WikiMapActions = connect(mapStateToProps, mapDispatchToProps)(MapActions);
 
 export default WikiMapActions;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-redux-i18n';
 
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
@@ -51,7 +52,7 @@ class Result extends Component {
             <CardHeader
               title={
                 status === 'failure'
-                  ? '記事の取得に失敗しました。'
+                  ? /*'記事の取得に失敗しました。'*/<Translate value="card.failure" />
                   : featureCard.name
               }
               subtitle={
@@ -62,7 +63,7 @@ class Result extends Component {
                         summary.coordinates[0].lon,
                         summary.coordinates[0].lat
                       )
-                    : '座標がありません'
+                    : <Translate value="card.noCoords" />
               }
               style={resultCard.resultHeader}
               textStyle={resultCard.resultHeaderText}
@@ -70,7 +71,7 @@ class Result extends Component {
             <CardActions style={resultCard.actions}>
               {status === 'failure' ? null : (
                 <RaisedButton
-                  label="地図に追加"
+                  label={<Translate value="card.add" />}
                   disabled={
                     !featureCard.summary.hasOwnProperty('coordinates') ||
                     featureCard.status === 'existing'
@@ -83,7 +84,7 @@ class Result extends Component {
                 />
               )}
               <FlatButton
-                label="閉じる"
+                label={<Translate value="card.close" />}
                 onClick={() => this.props.clearFeatureCard()}
               />
             </CardActions>

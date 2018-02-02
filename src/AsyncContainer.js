@@ -25,7 +25,7 @@ export default (loader, collection) =>
         <Loader
           style={{
             width: '100%',
-            height: `calc(100vh - ${56}px)`,
+            height: `calc(100% - ${56}px)`,
             backgroundColor: '#eee'
           }}
           hidden={false}

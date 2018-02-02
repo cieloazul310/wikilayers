@@ -2,14 +2,16 @@ import { connect } from 'react-redux';
 import { fetchSummary } from '../../actions';
 import Forms from '../../components/Search/Forms';
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = ({ searchLang }) => {
+  return {
+    searchLang
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSummary: (name) => {
-      dispatch(fetchSummary(name));
+    fetchSummary: (name, searchLang) => {
+      dispatch(fetchSummary(name, searchLang));
     }
   }
 }

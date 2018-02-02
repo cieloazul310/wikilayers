@@ -16,7 +16,6 @@ const PageHeader = ({ title, subtitle, subElement, subElementStyle }) => (
 );
 
 PageHeader.propTypes = {
-  title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
   subElement: PropTypes.element,
   subElementStyle: PropTypes.object

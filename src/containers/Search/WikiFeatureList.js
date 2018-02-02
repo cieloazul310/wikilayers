@@ -13,7 +13,7 @@ import FeatureList from '../../components/Search/FeatureList';
 
 const mapStateToProps = ({ features }) => {
   return {
-    features,
+    features
   };
 };
 

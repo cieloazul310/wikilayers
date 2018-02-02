@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Translate } from 'react-redux-i18n';
+
 import PageHeader from '../PageHeader';
 import Loader from '../Loader';
 import Basic from '../Basic';
@@ -58,7 +60,7 @@ class TheContent extends Component {
     return (
       <article>
         <PageHeader
-          title={isInitial ? '記事' : summary.title}
+          title={isInitial ? <Translate value="routes.read" /> : summary.title}
           subElement={isInitial ? null : LinkToWiki}
           subElementStyle={{
             textAlign: 'right',
@@ -70,7 +72,7 @@ class TheContent extends Component {
             <div className="article">
               {isInitial ? (
                 <p>
-                  {'選択したアイテムの記事はこのページで読むことができます。'}
+                  <Translate value="read.lead" />
                 </p>
               ) : isExist ? (
                 <div dangerouslySetInnerHTML={createMarkup(pages, summary)} />
