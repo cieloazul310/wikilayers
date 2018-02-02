@@ -47,6 +47,12 @@ const pageContainerMargins = {
   top: 6,
   bottom: 6
 };
+export const mapField = {
+  backgroundColor: pallete.primary3Color,
+  paddingBottom: bottomNav.height,
+  margin: 0,
+  height: '100%'
+};
 export const appField = {
   backgroundColor: pallete.primary3Color,
   paddingBottom: bottomNav.height,
@@ -66,8 +72,7 @@ export const pageContainer = {
 };
 export const mapWrapper = {
   width: '100%',
-  height: `calc(100vh - ${bottomNav.height + 1}px)`,
-  minHeight: `calc(100vh - ${bottomNav.height + 1}px)`,
+  height: '100%',
   margin: 0,
   padding: 0
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { appField } from '../commonStyles';
+import { mapField, appField } from '../commonStyles';
 
-const PageWrapper = ({component}) => (
-  <div className="app-field" style={appField}>
+const PageWrapper = ({ component, type }) => (
+  <div className="app-field" style={type === 'map' ? mapField : appField}>
     {component}
   </div>
 );

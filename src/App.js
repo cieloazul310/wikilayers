@@ -5,11 +5,11 @@ import { ConnectedRouter as Router } from 'react-router-redux';
 import ReactGA from 'react-ga';
 
 import CustomHeader from './containers/CustomHeader'; /*
+import About from './components/About';*/ /*
 import Map from './components/Map';
 import Search from './components/Search';
 import Article from './components/Article';
-import Settings from './components/Settings';*/ /*
-import About from './components/About';*/
+import Settings from './components/Settings';*/
 import AsyncContainer from './AsyncContainer';
 
 import { history } from './configureStore';
@@ -46,7 +46,7 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <div>
+        <div style={{ width: '100%', height: '100%', position: 'relative' }}>
           <ScrollToTop>
             <Route path="/map" component={withTracker(Map)} />
             <Route exact path="/" component={withTracker(Search)} />
