@@ -1,0 +1,2 @@
+webpackJsonp([5],{1079:function(e,t,r){"use strict";function o(e){return{type:"FeatureCollection",features:e.map(function(e){var t=e.geometry,r=e.properties,o=r.name,n=r.summary;return{type:"Feature",geometry:{type:"Point",coordinates:a.a.toLonLat(t.coordinates)},properties:{name:o,summary:n}}})}}function n(e){var t=new Blob([e],{type:"application/json"});return URL.createObjectURL(t)}Object.defineProperty(t,"__esModule",{value:!0}),t.featuresToGeoJSON=o,t.exportFile=n;var a=r(272)}});
+//# sourceMappingURL=5.835b0df5.chunk.js.map
