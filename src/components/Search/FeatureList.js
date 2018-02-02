@@ -13,6 +13,8 @@ import { grey500, grey300 } from 'material-ui/styles/colors';
 
 import commonStyles from '../../commonStyles';
 
+import { Translate } from 'react-redux-i18n';
+
 const iconButtonElement = (
   <IconButton touch={true}>
     <MoreVertIcon color={grey500} />
@@ -25,14 +27,17 @@ const FeatureList = ({
   toggleFeature,
   onVisitClick,
   onRemoveClick,
-  moveToArticle
+  moveToArticle,
+  i18n
 }) => (
   <div>
     {features.length === 0 ? (
       <div />
     ) : (
       <List>
-        <Subheader>アイテム</Subheader>
+        <Subheader>
+          <Translate value="features.title" />
+        </Subheader>
         {features.sort((a, b) => b.id - a.id).map((feature, index) => (
           <ListItem
             key={index}
@@ -58,21 +63,25 @@ const FeatureList = ({
               >
                 <MenuItem
                   primaryText={
-                    feature.properties.visibility ? '表示中' : '非表示'
+                    feature.properties.visibility ? (
+                      <Translate value="features.visible" />
+                    ) : (
+                      <Translate value="features.invisible" />
+                    )
                   }
                   onClick={() => toggleFeature(feature)}
                 />
 
                 <MenuItem
-                  primaryText="地図で見る"
+                  primaryText={<Translate value="features.view" />}
                   onClick={() => onVisitClick(feature)}
                 />
                 <MenuItem
-                  primaryText="記事を読む"
+                  primaryText={<Translate value="features.read" />}
                   onClick={() => moveToArticle(feature)}
                 />
                 <MenuItem
-                  primaryText="削除"
+                  primaryText={<Translate value="features.remove" />}
                   onClick={() => onRemoveClick(feature)}
                 />
               </IconMenu>

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Translate } from 'react-redux-i18n';
 import { pageHeader } from '../../commonStyles';
 
-const Intro = ({ featureCard }) => (
+const Intro = ({ featureCard, i18n }) => (
   <header
     style={featureCard.status === 'none' ? pageHeader.wrapper : {
       height: 0,
@@ -16,7 +16,7 @@ const Intro = ({ featureCard }) => (
             WikiLayers
           </h1>
           <p style={pageHeader.appSubTitle}>
-          Wikipediaを検索して地図に表示しよう！
+            <Translate value="intro.leader"/>
           </p>
         </div>
       )
@@ -25,7 +25,8 @@ const Intro = ({ featureCard }) => (
 );
 
 Intro.propTypes = {
-  featureCard: PropTypes.object
+  featureCard: PropTypes.object,
+  i18n: PropTypes.object
 };
 
 export default Intro;

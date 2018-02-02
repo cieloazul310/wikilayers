@@ -11,9 +11,10 @@ import { push } from 'react-router-redux';
 
 import FeatureList from '../../components/Search/FeatureList';
 
-const mapStateToProps = ({ features }) => {
+const mapStateToProps = ({ features, i18n }) => {
   return {
     features,
+    i18n
   };
 };
 

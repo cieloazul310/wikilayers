@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import Intro from '../../components/Search/Intro';
 
-const mapStateToProps = ({ featureCard }) => {
+const mapStateToProps = ({ featureCard, i18n }) => {
   return {
-    featureCard
+    featureCard,
+    i18n
   };
 };
 

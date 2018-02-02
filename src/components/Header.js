@@ -5,6 +5,8 @@ import Settings from 'material-ui/svg-icons/action/settings';
 import Description from 'material-ui/svg-icons/action/description';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 
+import { Translate } from 'react-redux-i18n';
+
 export default class Header extends React.Component {
 
   render() {
@@ -18,22 +20,22 @@ export default class Header extends React.Component {
         }
       >
         <BottomNavigationItem
-          label="地図"
+          label={<Translate value="routes.map" />}
           icon={<Place />}
           onClick={() => this.props.onMenuClick('/map')}
         />
         <BottomNavigationItem
-          label="探す"
+          label={<Translate value="routes.search" />}
           icon={<Search />}
           onClick={() => this.props.onMenuClick('/')}
         />
         <BottomNavigationItem
-          label="記事"
+          label={<Translate value="routes.read" />}
           icon={<Description />}
           onClick={() => this.props.onMenuClick('/article')}
         />
         <BottomNavigationItem
-          label="設定"
+          label={<Translate value="routes.settings" />}
           icon={<Settings />}
           onClick={() => this.props.onMenuClick('/settings')}
         />

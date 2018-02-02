@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 import { addFeature, clearFeatureCard } from '../../actions';
 import Result from '../../components/Search/Result';
 
-const mapStateToProps = ({ latestArticle, featureCard }) => {
+const mapStateToProps = ({ latestArticle, featureCard, i18n }) => {
   return {
     latestArticle,
     featureCard,
+    i18n
   };
 };
 
