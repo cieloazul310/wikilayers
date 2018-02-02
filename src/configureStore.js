@@ -40,6 +40,7 @@ export default function configureStore(preloadedState) {
     applyMiddleware(...middleware)
   );
   let persistor = persistStore(store);
+
   const searchLang = store.getState().searchLang.code;
   syncTranslationWithStore(store);
   store.dispatch(loadTranslations(translationsObject));

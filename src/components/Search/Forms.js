@@ -39,14 +39,11 @@ class Forms extends Component {
             // @TODO: should remove isMobile
             fontSize: isMobile ? '70%' : '100%'
           }}
-          /** @FIXME: This is bad for iPhone
-            * Because text card height 100vh is fit for
-            * a window exclusing textfield
           onKeyPress={e => {
             if (e.key === 'Enter' && this.state.name !== '') {
-              this.props.fetchSummary(this.state.name);
+              this.props.fetchSummary(this.state.name, this.props.searchLang);
             }
-          }}*/
+          }}
           style={{
             width: '80%'
           }}
@@ -68,7 +65,11 @@ class Forms extends Component {
 }
 
 Forms.propTypes = {
-  fetchSummary: PropTypes.func.isRequired
+  fetchSummary: PropTypes.func.isRequired,
+  searchLang: PropTypes.shape({
+    code: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default Forms;
