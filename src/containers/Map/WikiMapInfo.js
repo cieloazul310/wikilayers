@@ -3,10 +3,9 @@ import { zoomToFeature } from '../../actions';
 import { push } from 'react-router-redux';
 import MapInfo from '../../components/Map/MapInfo';
 
-const mapStateToProps = ({ selectedFeature, i18n }) => {
+const mapStateToProps = ({ selectedFeature }) => {
   return {
-    selectedFeature,
-    i18n
+    selectedFeature
   };
 };
 

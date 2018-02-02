@@ -2,10 +2,9 @@ import { connect } from 'react-redux';
 import { toggleLayer } from '../../actions';
 import LayerList from '../../components/Settings/LayerList';
 
-const mapStateToProps = ({ visibleBaseLayer, i18n }) => {
+const mapStateToProps = ({ visibleBaseLayer }) => {
   return {
-    visibleBaseLayer,
-    i18n
+    visibleBaseLayer
   };
 };
 

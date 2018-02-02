@@ -13,7 +13,7 @@ import { layersConfig } from '../../map/initialBaseLayers';
 
 import { Translate } from 'react-redux-i18n';
 
-const LayerList = ({ toggleLayer, visibleBaseLayer, i18n }) => (
+const LayerList = ({ toggleLayer, visibleBaseLayer }) => (
   <div>
     <List>
       <Subheader>

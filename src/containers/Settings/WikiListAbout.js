@@ -3,10 +3,8 @@ import { push } from 'react-router-redux';
 
 import ListAbout from '../../components/Settings/ListAbout';
 
-const mapStateToProps = ({ i18n }) => {
-  return {
-    i18n
-  };
+const mapStateToProps = () => {
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Translate } from 'react-redux-i18n';
 
 import PageContainer from '../PageContainer';
 import PageWrapper from '../PageWrapper';
@@ -13,7 +14,7 @@ import AdBox from '../AdBox';
 
 const SettingsComponent = () => <PageContainer component={(
   <div>
-    <PageHeader title="設定" />
+    <PageHeader title={<Translate value="routes.settings" />} />
     <WikiMapSettings />
     <WikiLayerList />
     <WikiMapActions />

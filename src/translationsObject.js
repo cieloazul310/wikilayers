@@ -1,15 +1,18 @@
 const translationsObject = {
   en: {
-    intro: {
-      title: 'Awesome app with i18n!',
-      leader: "Let's Search Wikipedia and View on Map!"
-    },
     routes: {
       map: 'Map',
       search: 'Search',
       read: 'Read',
       settings: 'Settings',
       about: 'About WikiLayers'
+    },
+    intro: {
+      title: 'Awesome app with i18n!',
+      leader: "Let's Search Wikipedia and View on Map!"
+    },
+    form: {
+      hint: 'Type the title or URL of Wikipedia articles'
     },
     card: {
       add: 'Add',
@@ -30,11 +33,14 @@ const translationsObject = {
     howTo: {
       title: 'How to Play',
       firstTitle: 'Search',
-      firstText: 'Type a word you want to search or the title or the URL of Article.',
+      firstText: 'Type the words you want to search or the title or the URL of Article.',
       secondTitle: 'Add to the Map',
       secondText: "You'll get the result, then press 'Add' button.",
       thirdTitle: 'View on the Map',
       thirdText: 'View the Map via Bottom Navigation.'
+    },
+    read: {
+      lead: 'You can read articles of the selected items.'
     },
     settings: {
       title: 'Settings',
@@ -54,27 +60,22 @@ const translationsObject = {
       langTitle: 'Language',
       uiLang: 'User Language',
       searchLang: 'Language for Search'
-    },
-    date: {
-      long: 'MMMM Do, YYYY'
-    },
-    export: 'Export %{count} items',
-    export_0: 'Nothing to export',
-    export_1: 'Export %{count} item',
-    two_lines: 'Line 1<br />Line 2',
-    literal_two_lines: 'Line 1\n Line 2'
+    }
   },
   ja: {
-    intro: {
-      title: 'WikiLayers',
-      leader: 'Wikipediaを検索して地図に表示しよう！'
-    },
     routes: {
       map: '地図',
       search: '探す',
       read: '読む',
       settings: '設定',
       about: 'WikiLayersについて'
+    },
+    intro: {
+      title: 'WikiLayers',
+      leader: 'Wikipediaを検索して地図に表示しよう！'
+    },
+    form: {
+      hint: 'https://ja.wikipedia.org/wiki/偕楽園 or 偕楽園'
     },
     card: {
       add: '地図に加える',
@@ -101,6 +102,9 @@ const translationsObject = {
       thirdTitle: '地図を見る',
       thirdText: '下メニューの「地図」で地図が表示されます'
     },
+    read: {
+      lead: '選択したアイテムの記事はこのページで読むことができます。'
+    },
     settings: {
       title: '設定',
       mapSettings: '設定',
@@ -119,15 +123,7 @@ const translationsObject = {
       langTitle: '言語の設定',
       uiLang: '言語',
       searchLang: '検索で使う言語'
-    },
-    date: {
-      long: 'D MMMM YYYY'
-    },
-    export: 'Exporteer %{count} dingen',
-    export_0: 'Niks te exporteren',
-    export_1: 'Exporteer %{count} ding',
-    two_lines: 'Regel 1<br />Regel 2',
-    literal_two_lines: 'Regel 1\n Regel 2'
+    }
   }
 };
 

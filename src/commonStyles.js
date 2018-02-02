@@ -94,7 +94,6 @@ export const mapInfo = {
 export const pageHeader = {
   wrapper: {
     textAlign: 'center',
-    paddingTop: '2em',
     transition: 'height 0.2s linear'
   },
   appTitle: {
@@ -111,6 +110,7 @@ export const pageHeader = {
   },
   pageTitle: {
     fontSize: fontSizes.pageTitle,
+    paddingTop: '2em',
     fontWeight: 400,
     margin: 'auto'
   },

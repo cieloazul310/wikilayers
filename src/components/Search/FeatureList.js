@@ -27,8 +27,7 @@ const FeatureList = ({
   toggleFeature,
   onVisitClick,
   onRemoveClick,
-  moveToArticle,
-  i18n
+  moveToArticle
 }) => (
   <div>
     {features.length === 0 ? (

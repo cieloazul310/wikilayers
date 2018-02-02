@@ -3,34 +3,24 @@ import PropTypes from 'prop-types';
 
 import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
 import LangIcon from 'material-ui/svg-icons/action/language';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import CheckCircle from 'material-ui/svg-icons/action/check-circle';
 import Remove from 'material-ui/svg-icons/content/remove';
-import { grey500, greenA700 } from 'material-ui/styles/colors';
+import { greenA700 } from 'material-ui/styles/colors';
 
 import { Translate } from 'react-redux-i18n';
+import langs from '../../data/languages.json';
 
 const uiLangs = [
   { code: 'ja', title: '日本語' },
   { code: 'en', title: 'English' }
 ];
-const searchLangs = [
-  { type: 'auto', code: '', title: `Auto (${getLang()})` },
-  { type: 'manually', code: 'en', title: 'English' },
-  { type: 'manually', code: 'es', title: 'Español' },
-  { type: 'manually', code: 'pt', title: 'Português' },
-  { type: 'manually', code: 'de', title: 'Deutsch' },
-  { type: 'manually', code: 'ar', title: 'العربية' },
-  { type: 'manually', code: 'hi', title: 'हिन्दी' },
-  { type: 'manually', code: 'ja', title: '日本語' },
-  { type: 'manually', code: 'zh', title: '中文' },
-  { type: 'manually', code: 'kr', title: '한국어' }
-];
 
-['en', 'es', 'de', 'zh', 'ar', 'kr', 'ja']
+const searchLangs = [
+  { type: 'auto', Wiki: getLang(), lang_name: `Auto` },
+  ...langs
+];
 
 function getLang() {
   // attributed to https://qiita.com/shogo82148/items/548a6c9904eb19269f8c
@@ -43,7 +33,7 @@ function getLang() {
   return primary;
 }
 
-const Languages = ({ i18n, setLocale }) => (
+const Languages = ({ locale, setLocale, searchLang, setSearchLang }) => (
   <div>
     <List>
       <Subheader>
@@ -58,7 +48,7 @@ const Languages = ({ i18n, setLocale }) => (
             key={index}
             primaryText={lang.title}
             leftIcon={
-              i18n.locale === lang.code ? (
+              locale === lang.code ? (
                 <CheckCircle color={greenA700} />
               ) : (
                 <Remove />
@@ -77,17 +67,17 @@ const Languages = ({ i18n, setLocale }) => (
         nestedItems={searchLangs.map((lang, index) => (
           <ListItem
             key={index}
-            primaryText={`${lang.title} (${lang.code})`}
+            primaryText={`${lang.lang_name} (${lang.Wiki})`}
             leftIcon={
-              i18n.locale === lang.code ? (
+              searchLang.type === lang.type &&
+              searchLang.code === lang.Wiki ? (
                 <CheckCircle color={greenA700} />
               ) : (
                 <Remove />
               )
             }
-            onClick={() => {/*
-              setLocale(lang.code);*/
-              console.log(lang.title);
+            onClick={() => {
+              setSearchLang(lang);
             }}
           />
         ))}
@@ -98,7 +88,7 @@ const Languages = ({ i18n, setLocale }) => (
 
 Languages.propTypes = {
   setLocale: PropTypes.func.isRequired,
-  i18n: PropTypes.object.isRequired
+  locale: PropTypes.string.isRequired
 };
 
 export default Languages;

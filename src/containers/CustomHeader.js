@@ -2,10 +2,9 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux'
 import Header from '../components/Header';
 
-const mapStateToProps = ({ router, i18n }) => {
+const mapStateToProps = ({ router }) => {
   return {
-    router,
-    i18n
+    router
   };
 };
 

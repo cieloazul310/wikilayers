@@ -5,24 +5,13 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import createHistory from 'history/createBrowserHistory';
 import rootReducer from './reducers';
-
+import { toggleLayer } from './actions';
 import {
   loadTranslations,
   setLocale,
   syncTranslationWithStore
 } from 'react-redux-i18n';
 import translationsObject from './translationsObject';
-
-function getLang() {
-  // attributed to https://qiita.com/shogo82148/items/548a6c9904eb19269f8c
-  const lang =
-    (window.navigator.languages && window.navigator.languages[0]) ||
-    window.navigator.language ||
-    window.navigator.userLanguage ||
-    window.navigator.browserLanguage;
-  const primary = lang.split('-')[0];
-  return primary;
-}
 
 export const history = createHistory({
   basename: '/wikilayers'
@@ -51,9 +40,13 @@ export default function configureStore(preloadedState) {
     applyMiddleware(...middleware)
   );
   let persistor = persistStore(store);
+  const searchLang = store.getState().searchLang.code;
   syncTranslationWithStore(store);
   store.dispatch(loadTranslations(translationsObject));
-  store.dispatch(setLocale(getLang() !== 'ja' ? 'en' : 'ja'));
+  store.dispatch(setLocale(searchLang !== 'ja' ? 'en' : 'ja'));
+  if (searchLang !== 'ja') {
+    store.dispatch(toggleLayer('World Terrain'));
+  }
 
   return {
     store,

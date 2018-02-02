@@ -6,7 +6,7 @@ import { List, ListItem } from 'material-ui/List';
 import InfoOutline from 'material-ui/svg-icons/action/info-outline';
 import { Translate } from 'react-redux-i18n';
 
-const ListAbout = ({ onClick, i18n }) => (
+const ListAbout = ({ onClick }) => (
   <div>
     <List>
       <Subheader>About WikiLayers</Subheader>

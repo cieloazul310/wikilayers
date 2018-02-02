@@ -4,7 +4,7 @@ import { Translate } from 'react-redux-i18n';
 import LinkToAbout from '../LinkToAbout';
 import { howTo as howToStyle } from '../../commonStyles';
 
-const HowTo = ({ i18n }) => (
+const HowTo = () => (
   <div style={howToStyle.container}>
     <h5 style={{ margin: 'auto', paddingLeft: '1em' }}>
       <Translate value="howTo.title" />

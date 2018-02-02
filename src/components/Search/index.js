@@ -7,7 +7,7 @@ import WikiIntro from '../../containers/Search/WikiIntro';
 import WikiForms from '../../containers/Search/WikiForms';
 import WikiResult from '../../containers/Search/WikiResult';
 import WikiFeatureList from '../../containers/Search/WikiFeatureList';
-import WikiHowTo from '../../containers/Search/WikiHowTo';
+import HowTo from './HowTo';
 import CopyRight from '../CopyRight';
 import AdBox from '../AdBox';
 
@@ -22,7 +22,7 @@ const SearcherComponent = () => (
         <AdBox type="top" style={adBelowForm} />
         <WikiResult />
         <WikiFeatureList />
-        <WikiHowTo />
+        <HowTo />
         <AdBox />
         <CopyRight />
       </div>

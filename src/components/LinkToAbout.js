@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Translate } from 'react-redux-i18n';
 
 import Icon from '../img/icon48.png';
 
@@ -26,7 +27,7 @@ const LinkToAbout = () => (
           marginRight: '.5em'
         }}
       />
-      WikiLayersについて
+      <Translate value="routes.about" />
     </Link>
   </div>
 );

@@ -12,8 +12,7 @@ import { Translate } from 'react-redux-i18n';
 const MapSettings = ({
   mapConfigure,
   toggleGeolocation,
-  toggleShowLabels,
-  i18n
+  toggleShowLabels
 }) => (
   <div>
     <List>
