@@ -12,15 +12,14 @@ URL: https://cieloazul310.github.io/wikilayers/
 
 ### 遊び方
 
-1. 検索フォームに表示したい記事の**タイトル**、または**URL**を入れて検索（「水戸城」「https://ja.wikipedia.org/wiki/偕楽園」など）
+1. 検索フォームに表示したい記事の**タイトル**、または**URL**を入れて検索（「水戸城」「 https://ja.wikipedia.org/wiki/偕楽園 」など）
 2. 記事の座標を取得したら「**地図に追加**」を押す 
 3. 「**地図**」を見る
 
 #### How To Play
 
 1. Search a Title or URL you want to get.
-  - ex. 'https://en.wikipedia.org/wiki/Wembley_Stadium'
-  - I'm sorry, the Title Search is usable only in Japanese.
+  - ex. 'Wembley Stadium', 'https://en.wikipedia.org/wiki/Wembley_Stadium'
 2. Click the Add to the Map(**地図に追加**) Button.
 3. View the Map(**地図**)
 
@@ -67,11 +66,16 @@ WikiLayersの表記については任意とします。
 - 「出典: Wikipedia, 地図: 地理院地図(標準地図) (WikiLayersで表示　URL: https://cieloazul310.github.io/wikilayers/)」
 - 「地理院地図, Wikipediaを元に作成」
 
+### アップデート
+
+- 2018/02/02 v1.1 英語版など
+- 2018/01/29 v1.0 公開
+
 ### 付記
 
-- **Version**: 1.0 (2018/01/29)
+- **Version**: 1.1 (2018/02/02)
 - **作成者**: [@cieloazul310]
-- **GitHub Repository**: https://github.com/cieloazul310/wikilayers/
+- **GitHub**: https://github.com/cieloazul310/wikilayers/
 - **水戸地図**: https://cieloazul310.github.io
 
 Copyright © 2018 cieloazul310 All right reserved.
