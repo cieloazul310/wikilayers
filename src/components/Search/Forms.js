@@ -33,7 +33,7 @@ class Forms extends Component {
       <div style={formStyle}>
         <TextField
           hintText={<Translate value="form.hint" />}
-          value={this.state.name}
+          defaultValue={this.state.name}
           onChange={this.handleChange}
           hintStyle={{
             // @TODO: should remove isMobile
