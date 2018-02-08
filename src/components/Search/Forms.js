@@ -23,8 +23,10 @@ class Forms extends Component {
     this.setState({
       name: e.target.value
     });
+    console.log(e.target.value);
   }
 
+  // @FIXME: TextField loses Focus
   render() {
     // @TODO: should remove window.innerWidth
     const width = window.innerWidth;
@@ -32,8 +34,8 @@ class Forms extends Component {
     return (
       <div style={formStyle}>
         <TextField
-          hintText={<Translate value="form.hint" />}
-          defaultValue={this.state.name}
+          hintText={<Translate value="form.hint" />}/*
+          defaultValue={this.state.name}*/
           onChange={this.handleChange}
           hintStyle={{
             // @TODO: should remove isMobile
