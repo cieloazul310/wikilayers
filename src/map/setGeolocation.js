@@ -1,11 +1,11 @@
-import Feature from 'ol/feature';
-import Style from 'ol/style/style';
-import Fill from 'ol/style/fill';
-import Stroke from 'ol/style/stroke';
-import IconStyle from 'ol/style/icon';
-import VectorLayer from 'ol/layer/vector';
-import VectorSource from 'ol/source/vector';
-import GeomPoint from 'ol/geom/point';
+import Feature from 'ol/Feature';
+import Style from 'ol/style/Style';
+import Fill from 'ol/style/Fill';
+import Stroke from 'ol/style/Stroke';
+import IconStyle from 'ol/style/Icon';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import GeomPoint from 'ol/geom/Point';
 
 import Icon from '../img/geolocation.svg';
 

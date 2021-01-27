@@ -2,43 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Translate } from 'react-redux-i18n';
 
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import FlatButton from '@material-ui/core/Button';
 
 import { mapInfo as mapInfoStyle } from '../../commonStyles';
 
 const MapInfo = ({ selectedFeature, moveToArticle }) => {
   const isSelected = Object.keys(selectedFeature).length > 0;
   return (
-    <Card style={mapInfoStyle}
-          zDepth={3}
-          hidden={!isSelected}>
+    <Card hidden={!isSelected}>
       <CardHeader
         title={isSelected ? selectedFeature.properties.name : '選択なし'}
         actAsExpander={isSelected}
         showExpandableButton={isSelected}
-        textStyle={{paddingRight: '1em'}}
+        textStyle={{ paddingRight: '1em' }}
       />
-      <CardText
+      {/*<CardContent
         expandable={true}
         hidden={!isSelected}
         style={{
           maxHeight: 100,
-          overflowY: 'scroll'
+          overflowY: 'scroll',
         }}
       >
         {isSelected ? `${selectedFeature.properties.summary.extract}` : ''}
-      </CardText>
-      <CardActions
-        expandable={true}
-        hidden={!isSelected}
-      >
-        <FlatButton
-          label={<Translate value="card.readMore" />}
-          primary={true}
-          onClick={() => moveToArticle()}
-        />
-      </CardActions>
+      </CardContent>
+      <CardActions expandable={true} hidden={!isSelected}>
+        <FlatButton label={<Translate value="card.readMore" />} primary={true} onClick={() => moveToArticle()} />
+      </CardActions>*/}
     </Card>
   );
 }

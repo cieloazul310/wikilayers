@@ -33,7 +33,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export default function configureStore(preloadedState) {
+export default function configureStore(preloadedState?: any) {
   let store = createStore(
     persistedReducer,
     preloadedState,

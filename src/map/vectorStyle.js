@@ -1,8 +1,8 @@
-import Style from 'ol/style/style';
-import IconStyle from 'ol/style/icon';
-import TextStyle from 'ol/style/text';
-import Fill from 'ol/style/fill';
-import Stroke from 'ol/style/stroke';
+import Style from 'ol/style/Style';
+import IconStyle from 'ol/style/Icon';
+import TextStyle from 'ol/style/Text';
+import Fill from 'ol/style/Fill';
+import Stroke from 'ol/style/Stroke';
 import Place from '../img/place.svg';
 import selectedPlace from '../img/selectedPlace.svg';
 

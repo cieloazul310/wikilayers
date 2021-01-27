@@ -1,8 +1,6 @@
-import Control from 'ol/control';
-import Attribution from 'ol/control/attribution';
-import ScaleLine from 'ol/control/scaleline';
+import { Attribution, ScaleLine, defaults as defaultControl } from "ol/control";
 
-const customControl = Control.defaults({
+const customControl = defaultControl({
   attribution: false
 }).extend([
   new Attribution({
