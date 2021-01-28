@@ -1,17 +1,20 @@
 import * as React from 'react';
-import Button from '@material-ui/core/Button';
-import { useToggleDarkMode } from '../utils/DispatchContext';
+import DrawerSearch from './DrawerSearch';
+import FeaturesList from '../components/FeaturesList';
+import AppStateHandler from '../components/AppStateHandler';
+import ThemeStateHandler from '../components/ThemeStateHandler';
 
 interface Props {
   toggleDrawer: () => void;
 }
 
 function AppDrawer({ toggleDrawer }: Props) {
-  const _toggleDarkMode = useToggleDarkMode();
   return (
     <div>
-      <Button onClick={toggleDrawer}>Hide Drawer</Button>
-      <Button onClick={_toggleDarkMode}>Dark</Button>
+      <DrawerSearch />
+      <FeaturesList />
+      <AppStateHandler />
+      <ThemeStateHandler />
     </div>
   );
 }

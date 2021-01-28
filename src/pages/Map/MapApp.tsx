@@ -7,6 +7,7 @@ import VectorSource from 'ol/source/Vector';
 import Group from 'ol/layer/Group';
 import Geolocation from 'ol/Geolocation';
 import { fromLonLat } from 'ol/proj';
+import { Attribution, ScaleLine, defaults as defaultControl } from 'ol/control';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import '../../map/ol.css';
@@ -14,10 +15,12 @@ import '../../map/ol.css';
 import { specialRelief } from '../../layers/gsi';
 //import { initialBaseLayers } from '../../map/initialBaseLayers';
 import { vectorStyle, allLabelStyle } from '../../map/vectorStyle';
-import customControl from '../../map/customControl';
+//import customControl from '../../map/customControl';
 import { createOlFeature } from '../../map/createFeature';
 import createVectorEvent from '../../map/createVectorEvent';
 import setGeolocation from '../../map/setGeolocation';
+
+import { useAppState, useDispatch } from '../../utils/AppStateContext';
 
 /*
   features: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -58,10 +61,24 @@ const map = new OlMap({
     center: fromLonLat([140.4, 36.4]),
   }),
   layers: [specialRelief, vectorLayer],
+  controls: defaultControl({
+    attribution: false,
+  }).extend([
+    new Attribution({
+      collapsible: false,
+    }),
+    new ScaleLine(),
+  ]),
 });
 
+const geolocation = new Geolocation({
+  tracking: false,
+  projection: map.getView().getProjection(),
+});
+
+setGeolocation(map, geolocation);
+
 interface Props {
-  features: [];
   visibleBaseLayer: string;
   mapConfigure: any;
   mapView: ViewOptions;
@@ -72,12 +89,20 @@ interface Props {
 
 function MapApp(props?: Partial<Props>) {
   const classes = useStyles();
+  const appState = useAppState();
   const mapRef = React.useRef(null);
   
   React.useEffect(() => {
     map.setTarget('map');
     return () => map.setTarget(undefined);
   });
+
+  React.useEffect(() => {
+    //vectorLayer.getSource().addFeatures(appState.features);
+  }, [appState.features]);
+  React.useEffect(() => {
+    geolocation.setTracking(appState.geolocation);
+  }, [appState.geolocation]);
   /*
   componentDidUpdate() {
     this.createMap();

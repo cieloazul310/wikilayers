@@ -1,3 +1,4 @@
+import OlMap from 'ol/Map';
 import Feature from 'ol/Feature';
 import Style from 'ol/style/Style';
 import Fill from 'ol/style/Fill';
@@ -6,11 +7,11 @@ import IconStyle from 'ol/style/Icon';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeomPoint from 'ol/geom/Point';
+import Geolocation from 'ol/Geolocation';
 
 import Icon from '../img/geolocation.svg';
 
-function setGeolocation(map, geolocation) {
-
+function setGeolocation(map: OlMap, geolocation: Geolocation) {
   const positionFeature = new Feature({
     geometry: geolocation.get('cachedPosition') ? new GeomPoint(geolocation.get('cachedPosition')) : null
   });
@@ -44,12 +45,15 @@ function setGeolocation(map, geolocation) {
     );
   });
 
-  new VectorLayer({
+  const geoLocationLayer = new VectorLayer({
     map: map,
-    title: 'geolocation layer',
     source: new VectorSource({
       features: [accuracyFeature, positionFeature]
     })
+  });
+  
+  geolocation.on('change:tracking', () => {
+    geoLocationLayer.setVisible(geolocation.getTracking());
   });
 }
 
