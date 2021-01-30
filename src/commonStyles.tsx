@@ -1,3 +1,5 @@
+import { lightBlue, grey, cyan } from '@material-ui/core/colors';
+/*
 import {
   grey50,
   cyan100,
@@ -6,13 +8,14 @@ import {
   lightBlueA700
 } from 'material-ui/styles/colors';
 import './fonts.css';
+*/
 
 export const pallete = {
-  primary1Color: lightBlueA700,
-  primary2Color: lightBlue300,
-  primary3Color: grey50,
-  accent1Color: cyan300,
-  accent2Color: cyan100 /*
+  primary1Color: lightBlue['A700'],
+  primary2Color: lightBlue[300],
+  primary3Color: grey[50],
+  accent1Color: cyan[300],
+  accent2Color: cyan[100], /*
   accent3Color: grey500,
   textColor: darkBlack,
   alternateTextColor: white,

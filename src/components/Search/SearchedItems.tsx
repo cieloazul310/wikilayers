@@ -6,15 +6,19 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 //import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { useAppState, useDispatch } from '../../utils/AppStateContext';
-//import { Search } from '../../types';
+import { fetchPages } from '../../utils/fetchPages';
+import { Search } from '../../types';
 
 function SearchedItems() {
   const { searchedItems } = useAppState();
   const dispatch = useDispatch();
+  const _onClick = (searchItem: Search) => () => {
+    fetchPages(searchItem.title, dispatch);
+  };
   return searchedItems.length ? (
     <List subheader={<ListSubheader>検索結果</ListSubheader>}>
       {searchedItems.map((item, index) => (
-        <ListItem key={index} button dense>
+        <ListItem key={index} button dense onClick={_onClick(item)}>
           <ListItemText primary={item.title} />
         </ListItem>
       ))}

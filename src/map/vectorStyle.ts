@@ -3,13 +3,12 @@ import IconStyle from 'ol/style/Icon';
 import TextStyle from 'ol/style/Text';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
+import Feature from 'ol/Feature';
 import Place from '../img/place.svg';
 import selectedPlace from '../img/selectedPlace.svg';
+import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 
-import commonStyles from '../commonStyles';
-import '../fonts.css';
-
-function vectorStyle(feature, resolution) {
+export function vectorStyle(feature: Feature, resolution: number) {
   if (!feature.get('visibility')) return new Style();
   const isSelected = feature.get('selected');
   const styleArr = [
@@ -17,17 +16,17 @@ function vectorStyle(feature, resolution) {
       zIndex: isSelected ? 10 : 1,
       image: new IconStyle({
         anchor: [0.5, 24],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'pixels',
-        src: isSelected ? selectedPlace : Place
-      })
-    })
+        anchorXUnits: IconAnchorUnits['FRACTION'],
+        anchorYUnits: IconAnchorUnits['PIXELS'],
+        src: isSelected ? selectedPlace : Place,
+      }),
+    }),
   ];
   const label = new Style({
     zIndex: isSelected ? 10 : 1,
     text: new TextStyle({
-      text: feature.get('name'),
-      font: `bold 12px ${commonStyles.fontFamily}`,
+      text: feature.get('title'),
+      font: `bold 12px sans-serif`,
       offsetY: 8,
       fill: new Fill({
         color: 'white'
@@ -47,7 +46,7 @@ function vectorStyle(feature, resolution) {
   return styleArr;
 };
 
-function allLabelStyle(feature) {
+export function allLabelStyle(feature: Feature) {
   if (!feature.get('visibility')) return new Style();
   const isSelected = feature.get('selected');
   return [
@@ -55,27 +54,25 @@ function allLabelStyle(feature) {
       zIndex: isSelected ? 10 : 1,
       image: new IconStyle({
         anchor: [0.5, 24],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'pixels',
-        src: isSelected ? selectedPlace : Place
-      })
+        anchorXUnits: IconAnchorUnits['FRACTION'],
+        anchorYUnits: IconAnchorUnits['PIXELS'],
+        src: isSelected ? selectedPlace : Place,
+      }),
     }),
     new Style({
       zIndex: isSelected ? 10 : 1,
       text: new TextStyle({
-        text: feature.get('name'),
-        font: `bold 12px ${commonStyles.fontFamily}`,
+        text: feature.get('title'),
+        font: `bold 12px sans-serif`,
         offsetY: 8,
         fill: new Fill({
-          color: 'white'
+          color: 'white',
         }),
         stroke: new Stroke({
-          color: isSelected ? commonStyles.pallete.primary1Color : '#333',
-          width: 3
-        })
-      })
-    })
+          color: isSelected ? 'blue' : '#333',
+          width: 3,
+        }),
+      }),
+    }),
   ];
 };
-
-export { vectorStyle, allLabelStyle };

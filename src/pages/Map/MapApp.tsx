@@ -6,34 +6,25 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Group from 'ol/layer/Group';
 import Geolocation from 'ol/Geolocation';
+import Feature from 'ol/Feature';
 import { fromLonLat } from 'ol/proj';
 import { Attribution, ScaleLine, defaults as defaultControl } from 'ol/control';
 
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
 import '../../map/ol.css';
 
-import { specialRelief } from '../../layers/gsi';
+//import { specialRelief } from '../../layers/gsi';
+import { vtLayer } from '../../layers/vt';
+import { vtStyle } from '../../layers/vtStyle';
 //import { initialBaseLayers } from '../../map/initialBaseLayers';
 import { vectorStyle, allLabelStyle } from '../../map/vectorStyle';
 //import customControl from '../../map/customControl';
-import { createOlFeature } from '../../map/createFeature';
+//import { createOlFeature } from '../../map/createFeature';
 import createVectorEvent from '../../map/createVectorEvent';
 import setGeolocation from '../../map/setGeolocation';
 
 import { useAppState, useDispatch } from '../../utils/AppStateContext';
-
-/*
-  features: PropTypes.arrayOf(PropTypes.object).isRequired,
-  visibleBaseLayer: PropTypes.string.isRequired,
-  mapConfigure: PropTypes.shape({
-    geolocation: PropTypes.object,
-    showLabels: PropTypes.bool,
-  }),
-  mapView: PropTypes.object.isRequired,
-  updateMapView: PropTypes.func.isRequired,
-  selectFeature: PropTypes.func.isRequired,
-  clearSelectedFeature: PropTypes.func.isRequired,
- */
+import { pageToFeature } from '../../utils/pageToFeature';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -60,14 +51,13 @@ const map = new OlMap({
     zoom: 10,
     center: fromLonLat([140.4, 36.4]),
   }),
-  layers: [specialRelief, vectorLayer],
+  layers: [vtLayer, vectorLayer],
   controls: defaultControl({
     attribution: false,
   }).extend([
     new Attribution({
       collapsible: false,
     }),
-    new ScaleLine(),
   ]),
 });
 
@@ -78,31 +68,39 @@ const geolocation = new Geolocation({
 
 setGeolocation(map, geolocation);
 
-interface Props {
-  visibleBaseLayer: string;
-  mapConfigure: any;
-  mapView: ViewOptions;
-  updateMapView: any;
-  selectFeature: any;
-  clearSelectedFeature: any;
-}
-
-function MapApp(props?: Partial<Props>) {
+function MapApp() {
   const classes = useStyles();
   const appState = useAppState();
+  const { palette } = useTheme();
   const mapRef = React.useRef(null);
   
   React.useEffect(() => {
+    vtLayer.setStyle(vtStyle(palette.type));
     map.setTarget('map');
     return () => map.setTarget(undefined);
   });
 
   React.useEffect(() => {
-    //vectorLayer.getSource().addFeatures(appState.features);
+    vectorLayer.getSource().forEachFeature((feature) => {
+      console.log(feature.get('title'));
+      feature.setProperties({
+        selected: feature.get('title') === appState.page?.title,
+      });
+    });
+  }, [appState.page]);
+
+  React.useEffect(() => {
+    vectorLayer.getSource().clear();
+    vectorLayer.getSource().addFeatures(appState.features.map((feature) => pageToFeature(feature)));  
   }, [appState.features]);
+
   React.useEffect(() => {
     geolocation.setTracking(appState.geolocation);
   }, [appState.geolocation]);
+
+  React.useEffect(() => {
+    vtLayer.setStyle(vtStyle(palette.type));
+  }, [palette.type]);
   /*
   componentDidUpdate() {
     this.createMap();

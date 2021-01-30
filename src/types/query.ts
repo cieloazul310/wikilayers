@@ -42,6 +42,8 @@ export interface FirstQueryPages extends Pages {
   pageimage?: string;
   coordinates?: WikiCoordinates[];
   langlinks?: LangLink[];
+  description: string;
+  descriptionsource: string;
 }
 
 export interface FirstQuery {

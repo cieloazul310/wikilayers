@@ -4,7 +4,7 @@ import { FirstQueryPages, Search, PageFeature } from '../types';
 type FetchStatus = 'fetching' | 'success' | 'failure' | 'yet';
 
 export interface AppState {
-  features: PageFeature[];
+  features: FirstQueryPages[];
   geolocation: boolean;
   fetchStatus: FetchStatus;
   searchedItems: Search[];
@@ -17,7 +17,9 @@ export type Action =
   | { type: 'CLEAR_SEARCHEDITEMS' }
   | { type: 'SET_SEARCHEDITEMS'; items: Search[] }
   | { type: 'SET_PAGE'; page: FirstQueryPages }
-  | { type: 'ADD_FEATURE'; feature: PageFeature };
+  | { type: 'ADD_FEATURE'; feature: FirstQueryPages }
+  | { type: 'DELETE_FEATURE'; feature: FirstQueryPages }
+  | { type: 'CLEAR_FEATURES' };
 
 export const initialAppState: AppState = {
   features: [],
@@ -72,6 +74,16 @@ export const reducer = (state: AppState, action: Action) => {
       return {
         ...state,
         features: [...state.features, action.feature],
+      };
+    case 'DELETE_FEATURE':
+      return {
+        ...state,
+        features: state.features.filter((feature) => feature.title !== action.feature.title),
+      };
+    case 'CLEAR_FEATURES':
+      return {
+        ...state,
+        features: [],
       };
     default:
       throw new Error();
