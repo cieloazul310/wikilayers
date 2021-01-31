@@ -13,7 +13,7 @@ export function vectorStyle(feature: Feature, resolution: number) {
   const isSelected = feature.get('selected');
   const styleArr = [
     new Style({
-      zIndex: isSelected ? 10 : 1,
+      zIndex: isSelected ? 110 : 101,
       image: new IconStyle({
         anchor: [0.5, 24],
         anchorXUnits: IconAnchorUnits['FRACTION'],
@@ -23,7 +23,7 @@ export function vectorStyle(feature: Feature, resolution: number) {
     }),
   ];
   const label = new Style({
-    zIndex: isSelected ? 10 : 1,
+    zIndex: isSelected ? 110 : 101,
     text: new TextStyle({
       text: feature.get('title'),
       font: `bold 12px sans-serif`,
@@ -51,7 +51,7 @@ export function allLabelStyle(feature: Feature) {
   const isSelected = feature.get('selected');
   return [
     new Style({
-      zIndex: isSelected ? 10 : 1,
+      zIndex: isSelected ? 110 : 101,
       image: new IconStyle({
         anchor: [0.5, 24],
         anchorXUnits: IconAnchorUnits['FRACTION'],
@@ -60,7 +60,7 @@ export function allLabelStyle(feature: Feature) {
       }),
     }),
     new Style({
-      zIndex: isSelected ? 10 : 1,
+      zIndex: isSelected ? 110 : 101,
       text: new TextStyle({
         text: feature.get('title'),
         font: `bold 12px sans-serif`,

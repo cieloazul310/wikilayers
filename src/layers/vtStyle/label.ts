@@ -9,7 +9,7 @@ import { PaletteType } from '@material-ui/core';
 const chimei = [110, 130, 140, 210, 220];
 function chimeiTextStyle(feature: RenderFeature, resolution: number, paletteType: PaletteType = 'light'): TextOptions {
   const { annoCtg } = feature.getProperties();
-  const fontSize = annoCtg === 110 || annoCtg === 130 || annoCtg === 140 ? 'large' : 'small';
+  const fontSize = annoCtg === 110 || annoCtg === 130 || annoCtg === 140 ? 'large' : 'x-small';
   return {
     ...defaultTextStyle(paletteType),
     font: `${fontSize} sans-serif`,
@@ -31,7 +31,8 @@ function mountainTextStyle(feature: RenderFeature, resolution: number, paletteTy
 // 321, 1321, 2321: 湖、沼、池、浦等, 322, 1322, 2322: 河川、用水等
 // 344, 1344, 2344: 海、灘, 湾、淵、浦、瀬、海峡、瀬戸等: 345, 1345, 2345
 // 346: 半島, 347: 海岸、浜、洲、干潟, 343: 岬、鼻、崎、磯、敷等
-const water = [321, 1321, 2321, 322, 1322, 2322, 344, 1344, 2344, 345, 1345, 2345, 346, 347, 343];
+// 351: 群島, 352: 島 431: 港湾 432: 港湾施設 521: ダム
+const water = [321, 1321, 2321, 322, 1322, 2322, 344, 1344, 2344, 345, 1345, 2345, 346, 347, 343, 351, 1351, 2351, 352, 1352, 2352, 431, 1431, 2431, 432, 521];
 function waterTextStyle(feature: RenderFeature, resolution: number, paletteType: PaletteType = 'light'): TextOptions {
   const { annoCtg } = feature.getProperties();
   const fontSize = annoCtg === 321 || annoCtg === 344 ? 'small' : 'x-small';
@@ -45,10 +46,19 @@ function waterTextStyle(feature: RenderFeature, resolution: number, paletteType:
   };
 }
 
+// 422: 鉄道駅名
+const station = [422];
+function stationTextStyle(feature: RenderFeature, resolution: number, paletteType: PaletteType = 'light'): TextOptions {
+  return {
+    ...defaultTextStyle(paletteType),
+    font: `${paletteType === 'light' ? 'bold' : 'normal'} x-small sans-serif`,
+  };
+};
+
 export function labelStyle(feature: RenderFeature, resolution: number, paletteType: PaletteType = 'light') {
   const properties = feature.getProperties();
 
-  if (![...chimei, ...mountain, ...water, 422, 681].includes(properties?.annoCtg))
+  if (![...chimei, ...mountain, ...water, ...station, 681].includes(properties?.annoCtg))
     return new Style();
   const { annoCtg } = properties;
 
@@ -58,6 +68,8 @@ export function labelStyle(feature: RenderFeature, resolution: number, paletteTy
     ? mountainTextStyle(feature, resolution, paletteType)
     : water.includes(annoCtg)
     ? waterTextStyle(feature, resolution, paletteType)
+    : station.includes(annoCtg)
+    ? stationTextStyle(feature, resolution, paletteType)
     : defaultTextStyle(paletteType);
   const pos = textPos(properties);
   return new Style({

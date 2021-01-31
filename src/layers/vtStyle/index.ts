@@ -6,6 +6,8 @@ import { PaletteType } from '@material-ui/core';
 import { labelStyle } from './label';
 import { roadStyle } from './road';
 import { railwayStyle } from './railway';
+import { boundaryStyle } from './boundary';
+import { transpStyle } from './transp';
 import { layerNames } from '../vt';
 
 export function vtStyle(paletteType: PaletteType) {
@@ -31,6 +33,8 @@ export function vtStyle(paletteType: PaletteType) {
     if (layer === 'road') return roadStyle(feature, resolution, paletteType);
     if (layer === 'railway') return railwayStyle(feature, resolution, paletteType);
     if (layer === 'label') return labelStyle(feature, resolution, paletteType);
+    if (layer === 'boundary') return boundaryStyle(feature, resolution, paletteType);
+    if (layer === 'transp') return transpStyle(feature, resolution, paletteType);
     if (layer === 'contour')
       return new Style({
         stroke: new Stroke({

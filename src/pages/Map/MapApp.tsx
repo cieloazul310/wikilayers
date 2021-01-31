@@ -77,7 +77,7 @@ function MapApp() {
   React.useEffect(() => {
     vtLayer.setStyle(vtStyle(palette.type));
     map.setTarget('map');
-    return () => map.setTarget(undefined);
+    return () => map.setTarget(null);
   });
 
   React.useEffect(() => {

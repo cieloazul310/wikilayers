@@ -33,6 +33,7 @@ const useStyles = makeStyles<Theme, StylesProps>((theme) =>
     },
     content: {
       display: 'flex',
+      flexDirection: 'column',
       flexGrow: 1,
       paddingBottom: 56,
       transition: theme.transitions.create('width'),
