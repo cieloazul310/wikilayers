@@ -2,6 +2,7 @@ import * as React from 'react';
 import DrawerSearch from './DrawerSearch';
 import FeaturesList from '../components/FeaturesList';
 import AppStateHandler from '../components/AppStateHandler';
+import MapStateHandler from '../components/MapStateHandler';
 import ThemeStateHandler from '../components/ThemeStateHandler';
 
 interface Props {
@@ -13,6 +14,7 @@ function AppDrawer({ toggleDrawer }: Props) {
     <div>
       <DrawerSearch />
       <FeaturesList />
+      <MapStateHandler />
       <AppStateHandler />
       <ThemeStateHandler />
     </div>

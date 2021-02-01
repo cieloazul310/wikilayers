@@ -45,7 +45,7 @@ export function vtStyle(paletteType: PaletteType) {
     if (layer === 'building')
       return new Style({
         fill: new Fill({
-          color: paletteType === 'light' ? '#ddd' : '#444',
+          color: paletteType === 'light' ? '#ddc' : '#444',
         }),
         zIndex: 4,
       });

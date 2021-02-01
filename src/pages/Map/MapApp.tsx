@@ -1,19 +1,18 @@
 import * as React from 'react';
 
 import OlMap from 'ol/Map';
-import View, { ViewOptions } from 'ol/View';
+import View from 'ol/View';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import Group from 'ol/layer/Group';
 import Geolocation from 'ol/Geolocation';
-import Feature from 'ol/Feature';
 import { fromLonLat } from 'ol/proj';
-import { Attribution, ScaleLine, defaults as defaultControl } from 'ol/control';
+import { Attribution, defaults as defaultControl } from 'ol/control';
 
 import { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
 import '../../map/ol.css';
+import './blend.css';
 
-//import { specialRelief } from '../../layers/gsi';
+import { baseLayerGroup, setVisibleBaseLayer } from '../../layers/baseLayers';
 import { vtLayer } from '../../layers/vt';
 import { vtStyle } from '../../layers/vtStyle';
 //import { initialBaseLayers } from '../../map/initialBaseLayers';
@@ -36,62 +35,74 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       flexGrow: 1,
     },
+    multiply: {
+      mixBlendMode: 'multiply',
+    },
   })
 );
-
-const vectorLayer = new VectorLayer({
-  source: new VectorSource({
-    attributions: ['<a href="https://ja.wikipedia.org" target="_blank">Wikipedia</a>'],
-  }),
-  style: vectorStyle,
-});
-
-const map = new OlMap({
-  view: new View({
-    zoom: 10,
-    center: fromLonLat([140.4, 36.4]),
-  }),
-  layers: [vtLayer, vectorLayer],
-  controls: defaultControl({
-    attribution: false,
-  }).extend([
-    new Attribution({
-      collapsible: false,
-    }),
-  ]),
-});
-
-const geolocation = new Geolocation({
-  tracking: false,
-  projection: map.getView().getProjection(),
-});
-
-setGeolocation(map, geolocation);
 
 function MapApp() {
   const classes = useStyles();
   const appState = useAppState();
   const { palette } = useTheme();
   const mapRef = React.useRef(null);
-  
+
+  const vectorLayer = new VectorLayer({
+    source: new VectorSource({
+      attributions: ['<a href="https://ja.wikipedia.org" target="_blank">Wikipedia</a>'],
+    }),
+    style: vectorStyle,
+  });
+
+  const map = new OlMap({
+    layers: [baseLayerGroup, vectorLayer],
+    controls: defaultControl({
+      attribution: false,
+    }).extend([
+      new Attribution({
+        collapsible: false,
+      }),
+    ]),
+  });
+
+  const geolocation = new Geolocation({
+    tracking: false,
+    projection: map.getView().getProjection(),
+  });
+
+  setGeolocation(map, geolocation);
+
   React.useEffect(() => {
+    const view = JSON.parse(window.localStorage.getItem('wikilayers:view'));
+    
+    map.setView(
+      new View({
+        zoom: view?.zoom ?? 6,
+        center: view?.center ?? fromLonLat([140.4, 36.4]),
+      })
+    );
+    
+    vectorLayer.getSource().addFeatures(appState.features.map((feature) => pageToFeature(feature)));
+
     vtLayer.setStyle(vtStyle(palette.type));
+    setVisibleBaseLayer(appState.baseLayer);
+    
     map.setTarget('map');
+    
     return () => map.setTarget(null);
   });
 
   React.useEffect(() => {
     vectorLayer.getSource().forEachFeature((feature) => {
-      console.log(feature.get('title'));
       feature.setProperties({
-        selected: feature.get('title') === appState.page?.title,
+        selected: feature.get('pageTitle') === appState.page?.title,
       });
     });
   }, [appState.page]);
 
   React.useEffect(() => {
     vectorLayer.getSource().clear();
-    vectorLayer.getSource().addFeatures(appState.features.map((feature) => pageToFeature(feature)));  
+    vectorLayer.getSource().addFeatures(appState.features.map((feature) => pageToFeature(feature)));
   }, [appState.features]);
 
   React.useEffect(() => {
@@ -101,6 +112,15 @@ function MapApp() {
   React.useEffect(() => {
     vtLayer.setStyle(vtStyle(palette.type));
   }, [palette.type]);
+
+  React.useEffect(() => {
+    setVisibleBaseLayer(appState.baseLayer);
+  }, [appState.baseLayer]);
+
+  map.on('moveend', (event) => {
+    const view = event.map.getView();
+    window.localStorage.setItem('wikilayers:view', JSON.stringify({ zoom: view.getZoom(), center: view.getCenter() }));
+  });
   /*
   componentDidUpdate() {
     this.createMap();
@@ -182,7 +202,7 @@ function MapApp() {
   }
 */
   return (
-    <div className={classes.mapContainer} ref={mapRef} >
+    <div className={classes.mapContainer} ref={mapRef}>
       <div className={classes.map} id="map" />
     </div>
   );

@@ -30,7 +30,7 @@ function roadColor(feature: RenderFeature, resolution: number, paletteType: Pale
       : '#575'
     : rdCtg === 0 || ftCode === 52701 || ftCode === 52702
     ? paletteType === 'light'
-      ? '#fa7'
+      ? '#fb9'
       : '#753'
     : rdCtg === 1
     ? paletteType === 'light'
@@ -41,7 +41,7 @@ function roadColor(feature: RenderFeature, resolution: number, paletteType: Pale
       ? '#ccc'
       : '#555'
     : paletteType === 'light'
-    ? '#eee'
+    ? '#ddd'
     : '#444';
 }
 

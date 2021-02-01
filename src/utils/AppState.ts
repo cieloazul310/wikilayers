@@ -1,32 +1,38 @@
 import * as React from 'react';
+import { BaseLayer } from '../layers/baseLayers';
 import { FirstQueryPages, Search, PageFeature } from '../types';
 
 type FetchStatus = 'fetching' | 'success' | 'failure' | 'yet';
 
 export interface AppState {
-  features: FirstQueryPages[];
+  features: PageFeature[];
   geolocation: boolean;
   fetchStatus: FetchStatus;
+  fetchTitle: string | null;
   searchedItems: Search[];
   page: FirstQueryPages | null;
+  baseLayer: BaseLayer;
 }
 
 export type Action =
   | { type: 'TOGGLE_GEOLOCATION' }
-  | { type: 'FETCH'; fetchStatus: FetchStatus }
+  | { type: 'FETCH'; fetchStatus: FetchStatus; fetchTitle?: string }
   | { type: 'CLEAR_SEARCHEDITEMS' }
   | { type: 'SET_SEARCHEDITEMS'; items: Search[] }
   | { type: 'SET_PAGE'; page: FirstQueryPages }
-  | { type: 'ADD_FEATURE'; feature: FirstQueryPages }
-  | { type: 'DELETE_FEATURE'; feature: FirstQueryPages }
-  | { type: 'CLEAR_FEATURES' };
+  | { type: 'ADD_FEATURE'; feature: PageFeature }
+  | { type: 'DELETE_FEATURE'; feature: PageFeature }
+  | { type: 'CLEAR_FEATURES' }
+  | { type: 'SET_BASELAYER'; layer: BaseLayer };
 
 export const initialAppState: AppState = {
   features: [],
   geolocation: false,
   fetchStatus: 'yet',
+  fetchTitle: null,
   page: null,
   searchedItems: [],
+  baseLayer: 'vector',
 };
 
 export function useInitialAppState() {
@@ -54,6 +60,7 @@ export const reducer = (state: AppState, action: Action) => {
       return {
         ...state,
         fetchStatus: action.fetchStatus,
+        fetchTitle: action.fetchTitle ?? state.fetchTitle,
       };
     case 'SET_PAGE':
       return {
@@ -78,12 +85,17 @@ export const reducer = (state: AppState, action: Action) => {
     case 'DELETE_FEATURE':
       return {
         ...state,
-        features: state.features.filter((feature) => feature.title !== action.feature.title),
+        features: state.features.filter((feature) => feature.page.title !== action.feature.page.title),
       };
     case 'CLEAR_FEATURES':
       return {
         ...state,
         features: [],
+      };
+    case 'SET_BASELAYER':
+      return {
+        ...state,
+        baseLayer: action.layer,
       };
     default:
       throw new Error();

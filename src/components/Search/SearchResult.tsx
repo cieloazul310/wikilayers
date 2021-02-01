@@ -16,15 +16,21 @@ const useStyles = makeStyles((theme) =>
 
 function SearchResult() {
   const classes = useStyles();
-  const { page, features } = useAppState();
+  const { page, features, fetchTitle } = useAppState();
   const dispatch = useDispatch();
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
-  const isExist = new Set(features.map((feature) => feature.pageid)).has(page?.pageid ?? 0);
+  const isExist = new Set(features.map((feature) => feature.page.pageid)).has(page?.pageid ?? 0);
 
   const _onAddButtonClick = () => {
     if (isExist) return;
-    dispatch({ type: 'ADD_FEATURE', feature: page });
+    dispatch({
+      type: 'ADD_FEATURE',
+      feature: {
+        page,
+        title: fetchTitle,
+      },
+    });
     setSnackbarOpen(true);
   };
   const _onClose = () => {

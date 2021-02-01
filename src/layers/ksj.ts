@@ -1,32 +1,27 @@
-import VectorLayer from "ol/layer/Vector";
-import VectorSource from "ol/source/Vector";
-import TopoFormat from "ol/format/TopoJSON";
+import VectorTileLayer from "ol/layer/VectorTile";
+import VectorTileSource from "ol/source/VectorTile";
+import MVTFormat from "ol/format/MVT";
 import Style from "ol/style/Style";
 import Fill from "ol/style/Fill";
 import { transformExtent } from "ol/proj";
-const Lakes = require("../data/lakes.topojson");
-
-const ksjAttribution = (title) =>
-  `<a href="http://nlftp.mlit.go.jp/ksj/" target="_blank">国土数値情報(${title})</a>`;
-
 const JapanExtent = transformExtent(
   [120, 20, 154, 46],
   "EPSG:4326",
   "EPSG:3857"
 );
 
-export const lakes = new VectorLayer({
-  source: new VectorSource({
-    url: Lakes,
-    format: new TopoFormat(),
-    attributions: [ksjAttribution("湖沼")],
+export const waterarea = new VectorTileLayer({
+  source: new VectorTileSource({
+    format: new MVTFormat({
+      layers: ['waterarea'],
+    }),
+    url: 'https://cyberjapandata.gsi.go.jp/xyz/experimental_bvmap/{z}/{x}/{y}.pbf',
+    attributions:
+      '<a href="https://github.com/gsi-cyberjapan/gsimaps-vector-experiment" target="_blank" rel=”noopener noreferrer”>国土地理院</a>',
   }),
   style: new Style({
-    fill: new Fill({
-      color: "rgba(171, 214, 218, 0.8)",
-    }),
-    stroke: undefined,
+    fill: new Fill({ color: '#adf' }),
   }),
-  maxResolution: 2446,
   extent: JapanExtent,
+  minResolution: 4.77,
 });

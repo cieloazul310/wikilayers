@@ -17,7 +17,7 @@ const query = [
 
 export async function fetchPages(title: string, dispatch: React.Dispatch<Action>) {
   if (title === '') return;
-  dispatch({ type: 'FETCH', fetchStatus: 'fetching' });
+  dispatch({ type: 'FETCH', fetchStatus: 'fetching', fetchTitle: title });
   dispatch({ type: 'CLEAR_SEARCHEDITEMS' });
 
   try {
@@ -33,7 +33,6 @@ export async function fetchPages(title: string, dispatch: React.Dispatch<Action>
       dispatch({ type: 'SET_PAGE', page });
       if (!page.coordinates) {
         const coordinates = await fetchLangLinksCoordinates(page.langlinks);
-        console.log(coordinates);
         dispatch({ type: 'FETCH', fetchStatus: 'success' });
         if (coordinates) {
           dispatch({ type: 'SET_PAGE', page: { ...page, coordinates } });

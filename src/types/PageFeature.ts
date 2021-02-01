@@ -1,9 +1,6 @@
-import { Feature, Point } from 'geojson';
+import { FirstQueryPages } from './query';
 
-export interface PageProperties {
+export interface PageFeature {
   title: string;
-  pageid: number;
-  extract: string;
+  page: FirstQueryPages;
 }
-
-export type PageFeature = Feature<Point, PageProperties>;

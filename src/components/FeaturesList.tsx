@@ -15,12 +15,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Snackbar from './Snackbar';
 import Modal from './Modal';
 import { useAppState, useDispatch } from '../utils/AppStateContext';
-import { FirstQueryPages } from '../types';
+import { PageFeature } from '../types';
 import { MapIcon } from '../icons';
 
 function FeaturesList() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [selectedFeature, setSelectedFeature] = React.useState<null | FirstQueryPages>(null);
+  const [selectedFeature, setSelectedFeature] = React.useState<null | PageFeature>(null);
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState('');
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -28,7 +28,7 @@ function FeaturesList() {
   const { features, page } = useAppState();
   const dispatch = useDispatch();
 
-  const _handleClick = (feature: FirstQueryPages) => (event: React.MouseEvent<HTMLElement>) => {
+  const _handleClick = (feature: PageFeature) => (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
     setSelectedFeature(feature);
   };
@@ -39,8 +39,8 @@ function FeaturesList() {
   const _handleModalOpen = (open: boolean) => () => {
     setModalOpen(open);
   };
-  const _onClick = (feature: FirstQueryPages) => () => {
-    dispatch({ type: 'SET_PAGE', page: feature });
+  const _onClick = (feature: PageFeature) => () => {
+    dispatch({ type: 'SET_PAGE', page: feature.page });
   };
   const _deleteFeature = () => {
     dispatch({ type: 'DELETE_FEATURE', feature: selectedFeature });
@@ -61,13 +61,15 @@ function FeaturesList() {
 
   return (
     <List subheader={<ListSubheader>アイテム</ListSubheader>}>
-      <ListItem button dense onClick={_handleModalOpen(true)}>
-        <ListItemText primary="全て消去" />
-      </ListItem>
+      {features.length ? (
+        <ListItem button dense onClick={_handleModalOpen(true)}>
+          <ListItemText primary="全て消去" />
+        </ListItem>
+      ) : null}
       {features.map((feature, index) => (
         <ListItem key={index} button onClick={_onClick(feature)}>
           <ListItemIcon>
-            <MapIcon color={feature.title === page?.title ? 'error' : 'primary'} />
+            <MapIcon color={feature.page.title === page?.title ? 'error' : 'primary'} />
           </ListItemIcon>
           <ListItemText primary={feature.title} />
           <ListItemSecondaryAction>

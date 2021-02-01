@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 import Modal, { ModalProps } from '@material-ui/core/Modal';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
@@ -18,6 +17,10 @@ const useStyles = makeStyles((theme) =>
     inner: {
       padding: theme.spacing(2),
     },
+    buttons: {
+      padding: theme.spacing(2),
+      textAlign: 'right',
+    },
   })
 );
 
@@ -32,7 +35,7 @@ function MyModal({ actionButton, modalHandler, children, ...props }: Props) {
     <Modal {...props}>
       <Paper className={classes.paper}>
         <div className={classes.inner}>{children}</div>
-        <div className={classes.inner}>
+        <div className={classes.buttons}>
           {actionButton}
           {' '}
           <Button variant="contained" onClick={modalHandler(false)} disableElevation>
