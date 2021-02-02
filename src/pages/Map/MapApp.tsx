@@ -19,8 +19,8 @@ import { vtStyle } from '../../layers/vtStyle';
 import { vectorStyle, allLabelStyle } from '../../map/vectorStyle';
 //import customControl from '../../map/customControl';
 //import { createOlFeature } from '../../map/createFeature';
-import createVectorEvent from '../../map/createVectorEvent';
 import setGeolocation from '../../map/setGeolocation';
+import { createVectorEvent } from '../../map/createVectorEvent';
 
 import { useAppState, useDispatch } from '../../utils/AppStateContext';
 import { pageToFeature } from '../../utils/pageToFeature';
@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) =>
 function MapApp() {
   const classes = useStyles();
   const appState = useAppState();
+  const dispatch = useDispatch();
   const { palette } = useTheme();
   const mapRef = React.useRef(null);
 
@@ -70,25 +71,27 @@ function MapApp() {
     projection: map.getView().getProjection(),
   });
 
-  setGeolocation(map, geolocation);
-
   React.useEffect(() => {
     const view = JSON.parse(window.localStorage.getItem('wikilayers:view'));
-    
+
     map.setView(
       new View({
         zoom: view?.zoom ?? 6,
         center: view?.center ?? fromLonLat([140.4, 36.4]),
+        constrainRotation: 4,
       })
     );
-    
+
+    setGeolocation(map, geolocation);
+    createVectorEvent(map, appState, dispatch);
+
     vectorLayer.getSource().addFeatures(appState.features.map((feature) => pageToFeature(feature)));
 
     vtLayer.setStyle(vtStyle(palette.type));
     setVisibleBaseLayer(appState.baseLayer);
-    
-    map.setTarget('map');
-    
+
+    map.setTarget(document.getElementById('map'));
+
     return () => map.setTarget(null);
   });
 

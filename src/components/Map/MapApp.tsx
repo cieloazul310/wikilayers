@@ -14,7 +14,7 @@ import { initialBaseLayers } from '../../map/initialBaseLayers';
 import { vectorStyle, allLabelStyle } from '../../map/vectorStyle';
 import customControl from '../../map/customControl';
 import { createOlFeature } from '../../map/createFeature';
-import createVectorEvent from '../../map/createVectorEvent';
+//import createVectorEvent from '../../map/createVectorEvent';
 import setGeolocation from '../../map/setGeolocation';
 
 /*

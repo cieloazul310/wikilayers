@@ -1,7 +1,10 @@
 import * as React from 'react';
+import Drawer from '@material-ui/core/Drawer';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Hidden from '@material-ui/core/Hidden';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Drawer from './Drawer';
+import DrawerInner from './Drawer';
 import BottomNav from './BottomNav';
 import { useAppState } from '../utils/AppStateContext';
 
@@ -22,13 +25,14 @@ const useStyles = makeStyles<Theme, StylesProps>((theme) =>
       width: '100%',
     },
     drawer: {
-      width: ({ drawer }) => (drawer ? 280 : 0),
-      maxHeight: '100vh',
-      overflow: 'auto',
-      WebkitOverflowScrolling: 'touch',
-      background: theme.palette.background.paper,
-      transition: theme.transitions.create('width'),
-      boxShadow: theme.shadows[2],
+      [theme.breakpoints.up('sm')]: {
+        width: 280,
+        flexShrink: 0,
+        //paddingBottom: 56,
+      },
+    },
+    drawerPaper: {
+      width: 280,
       paddingBottom: 56,
     },
     content: {
@@ -41,10 +45,13 @@ const useStyles = makeStyles<Theme, StylesProps>((theme) =>
     bottomNav: {
       position: 'fixed',
       bottom: 0,
-      left: 0,
+      right: 0,
       width: '100%',
       boxShadow: theme.shadows[2],
       zIndex: theme.zIndex.appBar,
+      [theme.breakpoints.up('sm')]: {
+        width: `calc(100% - ${280}px)`,
+      },
     },
   })
 );
@@ -55,21 +62,36 @@ interface Props {
 
 function Layout({ children }: Props) {
   const { fetchStatus } = useAppState();
-  const [drawer, setDrawer] = React.useState(true);
+  const [drawer, setDrawer] = React.useState(false);
   const classes = useStyles({ drawer });
   const _toggleDrawer = () => {
     setDrawer(!drawer);
   };
+  const _handleDrawer = (open: boolean) => () => {
+    setDrawer(open);
+  };
   return (
     <div className={classes.root}>
-      <div className={classes.drawer}>
-        <Drawer toggleDrawer={_toggleDrawer} />
+      <Hidden xsDown implementation="css">
+        <nav className={classes.drawer}>
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            <DrawerInner toggleDrawer={_toggleDrawer} />
+          </Drawer>
+        </nav>
+      </Hidden>
+      <div className={classes.content}>
+        {children}
+        <div className={classes.bottomNav}>
+          <BottomNav />
+        </div>
       </div>
-      <div className={classes.content}>{children}</div>
       <div className={classes.progress}>{fetchStatus === 'fetching' ? <LinearProgress color="secondary" /> : null}</div>
-      <div className={classes.bottomNav}>
-        <BottomNav />
-      </div>
     </div>
   );
 }

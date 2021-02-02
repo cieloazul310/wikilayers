@@ -1,19 +1,28 @@
-import { reverseOlFeature } from './createFeature';
+import * as React from 'react';
+import OlMap from 'ol/Map';
+import VectorLayer from 'ol/layer/Vector';
+import { AppState, Action } from '../utils/AppState';
 
-function createVectorEvent(map, obj) {
-  map.on('singleclick', function(evt) {
-    const olFeature = map.forEachFeatureAtPixel(evt.pixel,
-      olFeature => olFeature,
-      {
-        layerFilter: (layer) => layer.get('title') === 'features',
-        hitTolerance: 5
-      });
-    if (olFeature) {
-      obj.selectFeature(reverseOlFeature(olFeature));
+export function createVectorEvent(map: OlMap, { features, page }: AppState, dispatch: React.Dispatch<Action>) {
+  map.on('singleclick', (event) => {
+    const feature = map.forEachFeatureAtPixel(event.pixel, (feature) => feature, {
+      hitTolerance: 10,
+      layerFilter: (layer) => layer instanceof VectorLayer,
+    });
+    if (feature) {
+      const pageid: number = feature.get('pageid');
+      const item = features[features.map(({ page }) => page.pageid).indexOf(pageid)];
+
+      if (item) dispatch({ type: 'SET_PAGE', page: item.page });
     } else {
-      obj.clearSelectedFeature();
+      dispatch({ type: 'SET_PAGE', page: null });
     }
   });
-}
 
-export default createVectorEvent;
+  map.on('pointermove', (event) => {
+    const pixel = map.getEventPixel(event.originalEvent);
+    const hit = map.hasFeatureAtPixel(pixel, { layerFilter: (layer) => layer instanceof VectorLayer, hitTolerance: 10 });
+    const target = map.getTarget();
+    if (typeof target !== 'string') target.style.cursor = hit ? 'pointer' : '';
+  });
+}

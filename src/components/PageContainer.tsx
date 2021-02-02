@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      paddingTop: theme.spacing(2),
     },
   })
 );

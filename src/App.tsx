@@ -8,6 +8,7 @@ import Layout from './layout';
 //import About from './components/About';
 import Map from './pages/Map';
 import Search from './pages/Search';
+import Article from './pages/Article';
 import Settings from './pages/Settings';
 //import Search from './components/Search';
 //import Article from './components/Article';
@@ -44,6 +45,7 @@ function App() {
         <Switch>
           <Route path="/search" component={Search} />
           <Route path="/settings" component={Settings} />
+          <Route path="/article" component={Article} />
           <Route path="/" component={Map} />
           {/*<Route path="/map" component={withTracker(Map)} />
           <Route exact path="/" component={withTracker(Search)} />
