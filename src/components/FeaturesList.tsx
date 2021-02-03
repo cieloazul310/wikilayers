@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -11,12 +12,15 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import PinDropIcon from '@material-ui/icons/PinDrop';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { fromLonLat } from 'ol/proj';
 import Snackbar from './Snackbar';
 import Modal from './Modal';
 import { useAppState, useDispatch } from '../utils/AppStateContext';
+import { useMap } from '../utils/MapContext';
 import { PageFeature } from '../types';
-import { MapIcon } from '../icons';
+import { MapIcon, ReadIcon } from '../icons';
 
 function FeaturesList() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -27,6 +31,9 @@ function FeaturesList() {
   const open = Boolean(anchorEl);
   const { features, page } = useAppState();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const history = useHistory();
+  const map = useMap();
 
   const _handleClick = (feature: PageFeature) => (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -41,6 +48,22 @@ function FeaturesList() {
   };
   const _onClick = (feature: PageFeature) => () => {
     dispatch({ type: 'SET_PAGE', page: feature.page });
+  };
+  const _focusFeature = () => {
+    const coord = selectedFeature?.page.coordinates[0];
+    if (coord) map.getView().animate({
+      center: fromLonLat([coord.lon, coord.lat]),
+      duration: 500,
+    });
+    _handleClose();
+    if (pathname !== '/') {
+      history.push('/');
+    }
+  };
+  const _readPage = () => {
+    dispatch({ type: 'SET_PAGE', page: selectedFeature.page });
+    _handleClose();
+    history.push('/article');
   };
   const _deleteFeature = () => {
     dispatch({ type: 'DELETE_FEATURE', feature: selectedFeature });
@@ -80,6 +103,18 @@ function FeaturesList() {
         </ListItem>
       ))}
       <Menu anchorEl={anchorEl} open={open} onClose={_handleClose}>
+        <MenuItem onClick={_focusFeature}>
+          <ListItemIcon>
+            <PinDropIcon />
+          </ListItemIcon>
+          地図で見る
+        </MenuItem>
+        <MenuItem onClick={_readPage}>
+          <ListItemIcon>
+            <ReadIcon />
+          </ListItemIcon>
+          記事を読む
+        </MenuItem>
         <MenuItem onClick={_deleteFeature}>
           <ListItemIcon>
             <DeleteIcon />

@@ -8,6 +8,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { toStringXY } from 'ol/coordinate';
+import { useMap } from '../../utils/MapContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -23,11 +25,18 @@ interface Props {
 
 function MapInfo() {
   const classes = useStyles();
+  const map = useMap();
+  const view = map.getView();
+  const center = view.getCenter();
+  const zoom = view.getZoom();
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography color="textSecondary" gutterBottom>
-          Word of the Day
+          zoom: {zoom.toFixed(4)}
+        </Typography>
+        <Typography color="textSecondary" gutterBottom>
+          center: {toStringXY(center)}
         </Typography>
       </CardContent>
       {/*

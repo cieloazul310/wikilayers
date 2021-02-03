@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import App from './App';
 import AppStateProvider from './AppStateProvider';
+import MapProvider from './MapProvider';
 import { themeReducer, useInitialThemeState } from './utils/themeReducer';
 import { DispatchContext } from './utils/DispatchContext';
 import customMuiTheme from './customMuiTheme';
@@ -41,7 +42,9 @@ export default function Root() {
       <CssBaseline />
       <DispatchContext.Provider value={themeDispatch}>
         <AppStateProvider>
-          <App />
+          <MapProvider>
+            <App />
+          </MapProvider>
         </AppStateProvider>
       </DispatchContext.Provider>
     </ThemeProvider>

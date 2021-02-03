@@ -50,6 +50,7 @@ export function useInitialAppState() {
 }
 
 export const reducer = (state: AppState, action: Action) => {
+  console.log(action);
   switch (action.type) {
     case 'TOGGLE_GEOLOCATION':
       return {

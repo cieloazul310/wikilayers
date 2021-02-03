@@ -1,29 +1,6 @@
 import * as React from 'react';
-
-import OlMap from 'ol/Map';
-import View from 'ol/View';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import Geolocation from 'ol/Geolocation';
-import { fromLonLat } from 'ol/proj';
-import { Attribution, defaults as defaultControl } from 'ol/control';
-
-import { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
-import '../../map/ol.css';
-import './blend.css';
-
-import { baseLayerGroup, setVisibleBaseLayer } from '../../layers/baseLayers';
-import { vtLayer } from '../../layers/vt';
-import { vtStyle } from '../../layers/vtStyle';
-//import { initialBaseLayers } from '../../map/initialBaseLayers';
-import { vectorStyle, allLabelStyle } from '../../map/vectorStyle';
-//import customControl from '../../map/customControl';
-//import { createOlFeature } from '../../map/createFeature';
-import setGeolocation from '../../map/setGeolocation';
-import { createVectorEvent } from '../../map/createVectorEvent';
-
-import { useAppState, useDispatch } from '../../utils/AppStateContext';
-import { pageToFeature } from '../../utils/pageToFeature';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { useMap } from '../../utils/MapContext';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -43,6 +20,15 @@ const useStyles = makeStyles((theme) =>
 
 function MapApp() {
   const classes = useStyles();
+  const map = useMap();
+  const mapRef = React.useRef(null);
+
+  React.useEffect(() => {
+    map.setTarget(document.getElementById('map'));
+    return () => map.setTarget(null);
+  });
+
+  /*
   const appState = useAppState();
   const dispatch = useDispatch();
   const { palette } = useTheme();
@@ -124,6 +110,7 @@ function MapApp() {
     const view = event.map.getView();
     window.localStorage.setItem('wikilayers:view', JSON.stringify({ zoom: view.getZoom(), center: view.getCenter() }));
   });
+  */
   /*
   componentDidUpdate() {
     this.createMap();
