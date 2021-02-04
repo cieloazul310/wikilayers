@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) =>
       width: '100%',
     },
     drawer: {
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up('md')]: {
         width: 280,
         flexShrink: 0,
       },
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) =>
       width: '100%',
       boxShadow: theme.shadows[2],
       zIndex: theme.zIndex.appBar,
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up('md')]: {
         width: `calc(100% - ${280}px)`,
       },
     },
@@ -59,7 +59,7 @@ function Layout({ children }: Props): JSX.Element {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Hidden xsDown implementation="css">
+      <Hidden smDown implementation="css">
         <nav className={classes.drawer}>
           <Drawer
             classes={{

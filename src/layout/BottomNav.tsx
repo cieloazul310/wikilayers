@@ -2,8 +2,10 @@ import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { MapIcon, SearchIcon, ReadIcon, SettingsIcon } from '../icons';
-import { useIsMobile } from '../utils/useIsMobile';
+// import { useIsMobile } from '../utils/useIsMobile';
 
 function pathnameToValue(pathname: string) {
   if (pathname === '/') return 'map';
@@ -15,7 +17,9 @@ function pathnameToValue(pathname: string) {
 
 function BottomNav(): JSX.Element {
   const { pathname } = useLocation();
-  const isMobile = useIsMobile();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // const isMobile = useIsMobile();
 
   return (
     <BottomNavigation value={pathnameToValue(pathname)} showLabels>
