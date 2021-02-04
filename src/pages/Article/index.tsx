@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useLocation } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import PageContainer from '../../components/PageContainer';
@@ -6,6 +7,7 @@ import Loader from '../../components/Loader';
 import ArticleCache from '../../utils/ArticleCache';
 import { useArticle } from '../../utils/fetchArticle';
 import { useAppState } from '../../utils/AppStateContext';
+import useGaTrackPage from '../../utils/useGaTrackPage';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -28,6 +30,8 @@ function Article(): JSX.Element {
   const classes = useStyles();
   const { page } = useAppState();
   const article = useArticle(page, cache);
+  const { pathname } = useLocation();
+  useGaTrackPage(pathname);
 
   return (
     <PageContainer>
