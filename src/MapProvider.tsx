@@ -11,7 +11,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { baseLayerGroup, setVisibleBaseLayer } from './layers/baseLayers';
 import { vtLayer } from './layers/vt';
 import vtStyle from './layers/vtStyle';
-import { vectorStyle } from './map/vectorStyle';
+import { vectorStyle, allLabelStyle } from './map/vectorStyle';
 import setGeolocation from './map/setGeolocation';
 import createVectorEvent from './map/createVectorEvent';
 import { pageToFeature } from './utils/pageToFeature';
@@ -32,7 +32,6 @@ const vectorLayer = new VectorLayer({
   source: new VectorSource({
     attributions: ['<a href="https://ja.wikipedia.org" target="_blank">Wikipedia</a>'],
   }),
-  style: vectorStyle,
 });
 
 const map = new OlMap({
@@ -92,6 +91,9 @@ function MapProvider({ children }: Props): JSX.Element {
       });
     });
   }, [appState.page, appState.features]);
+  React.useEffect(() => {
+    vectorLayer.setStyle(appState.alwaysShowLabels ? allLabelStyle : vectorStyle);
+  }, [appState.alwaysShowLabels]);
 
   return <MapContext.Provider value={map}>{children}</MapContext.Provider>;
 }

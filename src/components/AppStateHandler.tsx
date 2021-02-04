@@ -7,13 +7,16 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Switch from '@material-ui/core/Switch';
 import { useAppState, useDispatch } from '../utils/AppStateContext';
-import { GeolocationOnIcon, GeolocationOffIcon } from '../icons';
+import { GeolocationOnIcon, GeolocationOffIcon, ShowLabelsIcon } from '../icons';
 
 function AppStateHandler(): JSX.Element {
-  const { geolocation } = useAppState();
+  const { geolocation, alwaysShowLabels } = useAppState();
   const dispatch = useDispatch();
   const toggleGeoLocation = () => {
     dispatch({ type: 'TOGGLE_GEOLOCATION' });
+  };
+  const toggleAlwaysShowLabels = () => {
+    dispatch({ type: 'TOGGLE_ALWAYSSHOWLABELS' });
   };
   return (
     <List subheader={<ListSubheader>App State</ListSubheader>}>
@@ -22,6 +25,15 @@ function AppStateHandler(): JSX.Element {
         <ListItemText primary="現在地を表示" />
         <ListItemSecondaryAction>
           <Switch edge="end" checked={geolocation} onChange={toggleGeoLocation} />
+        </ListItemSecondaryAction>
+      </ListItem>
+      <ListItem>
+        <ListItemIcon>
+          <ShowLabelsIcon />
+        </ListItemIcon>
+        <ListItemText primary="ラベルを常に表示" />
+        <ListItemSecondaryAction>
+          <Switch edge="end" checked={alwaysShowLabels} onChange={toggleAlwaysShowLabels} />
         </ListItemSecondaryAction>
       </ListItem>
     </List>
