@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Container from '@material-ui/core/Container';
+import Container, { ContainerProps } from '@material-ui/core/Container';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) =>
@@ -12,10 +12,10 @@ const useStyles = makeStyles((theme) =>
 );
 
 interface Props {
-  children: React.ReactNode;
+  children: ContainerProps['children'];
 }
 
-function PageContainer({ children }: Props) {
+function PageContainer({ children }: Props): JSX.Element {
   const classes = useStyles();
   return (
     <div className={classes.root}>

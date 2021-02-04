@@ -8,7 +8,7 @@ interface Props {
   onClose: (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => void;
 }
 
-function MySnackbar({ message, open, onClose }: Props) {
+function MySnackbar({ message, open, onClose }: Props): JSX.Element {
   return (
     <Snackbar
       anchorOrigin={{

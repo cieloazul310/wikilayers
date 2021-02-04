@@ -4,7 +4,7 @@ import AppStateHandler from '../../components/AppStateHandler';
 import MapStateHandler from '../../components/MapStateHandler';
 import ThemeStateHandler from '../../components/ThemeStateHandler';
 
-function Settings() {
+function Settings(): JSX.Element {
   return (
     <PageContainer>
       <MapStateHandler />

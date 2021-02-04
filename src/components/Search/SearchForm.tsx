@@ -5,10 +5,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useDispatch } from '../../utils/AppStateContext';
-import { fetchPages } from '../../utils/fetchPages';
+import fetchPages from '../../utils/fetchPages';
 import { SearchIcon } from '../../icons';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex',
@@ -23,23 +23,23 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-function SearchForm() {
+function SearchForm(): JSX.Element {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [title, setTitle] = React.useState('');
 
-  const _onChangeForm = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeForm = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setTitle(event.currentTarget.value);
-  }
-  const _onSubmit = () => {
+  };
+  const onSubmit = () => {
     fetchPages(title, dispatch);
   };
-  const _onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && title !== '') {
-      _onSubmit();
+      onSubmit();
     }
-  }
+  };
 
   return (
     <Paper className={classes.root}>
@@ -48,11 +48,11 @@ function SearchForm() {
         placeholder="Search Wikipedia"
         inputProps={{ 'aria-label': 'search wikipedia' }}
         value={title}
-        onChange={_onChangeForm}
-        onKeyPress={_onKeyPress}
+        onChange={onChangeForm}
+        onKeyPress={onKeyPress}
       />
       <Tooltip title="検索">
-        <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={_onSubmit}>
+        <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={onSubmit}>
           <SearchIcon />
         </IconButton>
       </Tooltip>

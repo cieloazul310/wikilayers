@@ -12,12 +12,12 @@ export const AppStateContext = React.createContext<{
   },
 });
 
-export function useAppState() {
+export function useAppState(): AppState {
   const { state } = React.useContext(AppStateContext);
   return state;
 }
 
-export function useDispatch() {
+export function useDispatch(): React.Dispatch<Action> {
   const { dispatch } = React.useContext(AppStateContext);
   return dispatch;
 }

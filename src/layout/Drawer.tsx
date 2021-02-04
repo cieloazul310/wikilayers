@@ -5,11 +5,7 @@ import AppStateHandler from '../components/AppStateHandler';
 import MapStateHandler from '../components/MapStateHandler';
 import ThemeStateHandler from '../components/ThemeStateHandler';
 
-interface Props {
-  toggleDrawer: () => void;
-}
-
-function AppDrawer({ toggleDrawer }: Props) {
+function AppDrawer(): JSX.Element {
   return (
     <div>
       <DrawerSearch />

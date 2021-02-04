@@ -1,7 +1,7 @@
 import Base from 'ol/layer/Base';
 import LayerGroup from 'ol/layer/Group';
 import { cjstd, seamless, specialRelief } from './gsi';
-import { osm } from './osm';
+import osm from './osm';
 import { vtLayer } from './vt';
 
 export type BaseLayer = 'cjstd' | 'osm' | 'specialRelief' | 'vector' | 'seamless';
@@ -21,10 +21,10 @@ export const baseLayers: BaseLayerItem[] = [
 ];
 
 export const baseLayerGroup = new LayerGroup({
-  layers: baseLayers.map(({ layer }) => layer),  
+  layers: baseLayers.map(({ layer }) => layer),
 });
 
-export function setVisibleBaseLayer(baseLayer: BaseLayer) {
+export function setVisibleBaseLayer(baseLayer: BaseLayer): void {
   baseLayerGroup.getLayers().forEach((layer, index) => {
     layer.setVisible(baseLayers[index].id === baseLayer);
   });

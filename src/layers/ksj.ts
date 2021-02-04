@@ -1,16 +1,13 @@
-import VectorTileLayer from "ol/layer/VectorTile";
-import VectorTileSource from "ol/source/VectorTile";
-import MVTFormat from "ol/format/MVT";
-import Style from "ol/style/Style";
-import Fill from "ol/style/Fill";
-import { transformExtent } from "ol/proj";
-const JapanExtent = transformExtent(
-  [120, 20, 154, 46],
-  "EPSG:4326",
-  "EPSG:3857"
-);
+import VectorTileLayer from 'ol/layer/VectorTile';
+import VectorTileSource from 'ol/source/VectorTile';
+import MVTFormat from 'ol/format/MVT';
+import Style from 'ol/style/Style';
+import Fill from 'ol/style/Fill';
+import { transformExtent } from 'ol/proj';
 
-export const waterarea = new VectorTileLayer({
+const JapanExtent = transformExtent([120, 20, 154, 46], 'EPSG:4326', 'EPSG:3857');
+
+const waterarea = new VectorTileLayer({
   source: new VectorTileSource({
     format: new MVTFormat({
       layers: ['waterarea'],
@@ -25,3 +22,5 @@ export const waterarea = new VectorTileLayer({
   extent: JapanExtent,
   minResolution: 4.77,
 });
+
+export default waterarea;

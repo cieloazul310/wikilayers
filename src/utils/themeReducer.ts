@@ -10,24 +10,26 @@ export const initialThemeState: ThemeState = {
   darkMode: false,
 };
 
-export function useInitialThemeState() {
-  const stored: Partial<ThemeState> | null = JSON.parse(localStorage.getItem('wikilayers:ThemeState'));
+export function useInitialThemeState(): ThemeState {
+  const stored = localStorage.getItem('wikilayers:ThemeState');
+  const storedThemeState: Partial<ThemeState> | null = stored ? JSON.parse(stored) : null;
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
   return React.useMemo(() => {
     return stored
       ? {
           ...initialThemeState,
-          ...stored,
+          ...storedThemeState,
         }
       : {
           ...initialThemeState,
           darkMode: prefersDarkMode ?? initialThemeState.darkMode,
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 }
 
-export const themeReducer = (state: ThemeState, action: ThemeAction) => {
+export function themeReducer(state: ThemeState, action: ThemeAction): ThemeState {
   switch (action.type) {
     case 'TOGGLE_DARKMODE':
       return {
@@ -37,4 +39,4 @@ export const themeReducer = (state: ThemeState, action: ThemeAction) => {
     default:
       throw new Error();
   }
-};
+}

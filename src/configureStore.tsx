@@ -1,3 +1,4 @@
+/*
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
@@ -54,3 +55,5 @@ export default function configureStore(preloadedState?: any) {
     persistor
   };
 }
+*/
+export {};

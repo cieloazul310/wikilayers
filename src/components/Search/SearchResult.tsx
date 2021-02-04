@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-function SearchResult() {
+function SearchResult(): JSX.Element | null {
   const classes = useStyles();
   const { page, features, fetchTitle } = useAppState();
   const dispatch = useDispatch();
@@ -22,21 +22,23 @@ function SearchResult() {
 
   const isExist = new Set(features.map((feature) => feature.page.pageid)).has(page?.pageid ?? 0);
 
-  const _onAddButtonClick = () => {
+  const onAddButtonClick = () => {
     if (isExist) return;
-    dispatch({
-      type: 'ADD_FEATURE',
-      feature: {
-        page,
-        title: fetchTitle,
-      },
-    });
-    setSnackbarOpen(true);
+    if (page && fetchTitle) {
+      dispatch({
+        type: 'ADD_FEATURE',
+        feature: {
+          page,
+          title: fetchTitle,
+        },
+      });
+      setSnackbarOpen(true);
+    }
   };
-  const _onClose = () => {
+  const onClose = () => {
     dispatch({ type: 'SET_PAGE', page: null });
   };
-  const _handleSnackbarClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+  const handleSnackbarClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -57,15 +59,15 @@ function SearchResult() {
           color={!isExist && page.coordinates ? 'primary' : 'default'}
           disabled={!page.coordinates || isExist}
           startIcon={<AddToMapIcon />}
-          onClick={_onAddButtonClick}
+          onClick={onAddButtonClick}
         >
           地図に追加
         </Button>{' '}
-        <Button variant="contained" color="default" disableElevation onClick={_onClose}>
+        <Button variant="contained" color="default" disableElevation onClick={onClose}>
           閉じる
         </Button>
       </div>
-      <Snackbar message={`${page.title}を追加しました`} open={snackbarOpen} onClose={_handleSnackbarClose} />
+      <Snackbar message={`${page.title}を追加しました`} open={snackbarOpen} onClose={handleSnackbarClose} />
     </div>
   ) : null;
 }

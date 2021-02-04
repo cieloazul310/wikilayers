@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import MapApp from './MapApp';
 import WikiMapInfo from './MapInfo';
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-function MapPage() {
+function MapPage(): JSX.Element {
   const classes = useStyles();
   return (
     <div className={classes.root}>

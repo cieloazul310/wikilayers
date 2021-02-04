@@ -4,13 +4,15 @@ import SearchForm from '../components/Search/SearchForm';
 import SearchResult from '../components/Search/SearchResult';
 import SearchedItems from '../components/Search/SearchedItems';
 
-const useStyles = makeStyles((theme) => createStyles({
-  searchBox: {
-    padding: theme.spacing(2, 1),
-  },
-}))
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    searchBox: {
+      padding: theme.spacing(2, 1),
+    },
+  })
+);
 
-function DrawerSearch() {
+function DrawerSearch(): JSX.Element {
   const classes = useStyles();
   return (
     <div>

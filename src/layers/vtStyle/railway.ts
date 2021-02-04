@@ -1,50 +1,7 @@
+import { FeatureLike } from 'ol/Feature';
 import Style from 'ol/style/Style';
 import Stroke from 'ol/style/Stroke';
-import RenderFeature from 'ol/render/Feature';
 import { PaletteType } from '@material-ui/core';
-
-export function railwayStyle(feature: RenderFeature, resolution: number, paletteType: PaletteType = 'light') {
-  const { snglDbl, rtCode10, rtCode1 } = feature.getProperties();
-  if (snglDbl === 0) return new Style();
-  if (snglDbl === 4)
-    return new Style({
-      stroke: new Stroke({
-        color: '#c9c',
-        width: 5,
-      }),
-      zIndex: 10,
-    });
-  const width = railWayWidth(feature, resolution);
-  const code = rtCode1?.slice(0, 5);
-
-  if (code === '40203') new Style();
-  if (code === '40201' || code === '40216')
-    return [
-      new Style({
-        stroke: new Stroke({
-          color: rtCode10 === '1' ? '#77f' : paletteType === 'light' ? '#777' : '#555',
-          width: width + 1,
-        }),
-        zIndex: railwayZIndex(feature),
-      }),
-      new Style({
-        stroke: new Stroke({
-          color: paletteType === 'light' ? '#ddd' : '#777',
-          width: width,
-          lineDash: [4, 8],
-        }),
-        zIndex: railwayZIndex(feature),
-      }),
-    ];
-
-  return new Style({
-    stroke: new Stroke({
-      color: paletteType === 'light' ? '#777' : '#555',
-      width: width,
-    }),
-    zIndex: railwayZIndex(feature),
-  });
-}
 
 /** rtCode10: string
  * 0 新幹線及び地下鉄以外
@@ -59,9 +16,10 @@ export function railwayStyle(feature: RenderFeature, resolution: number, palette
  *  3 側線
  *  4 駅部分
  */
-function railWayWidth(feature: RenderFeature, resolution: number) {
+function railWayWidth(feature: FeatureLike, resolution: number) {
   const { snglDbl, rtCode10 } = feature.getProperties();
-  return rtCode10 === '1' ? 4 : snglDbl === 2 ? 2 : 1;
+  if (rtCode10 === '1') return 4;
+  return snglDbl === 2 ? 2 : 1;
 }
 
 /** railState
@@ -81,11 +39,56 @@ function railWayWidth(feature: RenderFeature, resolution: number) {
  * 6 その他
  * 7 不明
  */
-function railwayZIndex(feature: RenderFeature) {
+function railwayZIndex(feature: FeatureLike) {
   const { railState } = feature.getProperties();
-  return railState === 100 || railState === 200 || railState === 300 || railState === 2 || railState === 3 || railState === 4
-    ? 1
-    : railState === 1
-    ? 10
-    : 3;
+  if (railState === 100 || railState === 200 || railState === 300 || railState === 2 || railState === 3 || railState === 4) return 1;
+  return railState === 1 ? 10 : 3;
+}
+
+function ShinkansenColor(rtCode10: string, paletteType: PaletteType) {
+  if (rtCode10 === '1') return '#77f';
+  return paletteType === 'light' ? '#777' : '#555';
+}
+
+export default function railwayStyle(feature: FeatureLike, resolution: number, paletteType: PaletteType = 'light'): Style | Style[] {
+  const { snglDbl, rtCode10, rtCode1 } = feature.getProperties();
+  if (snglDbl === 0) return new Style();
+  if (snglDbl === 4)
+    return new Style({
+      stroke: new Stroke({
+        color: '#c9c',
+        width: 5,
+      }),
+      zIndex: 10,
+    });
+  const width = railWayWidth(feature, resolution);
+  const code = rtCode1?.slice(0, 5);
+
+  if (code === '40203') return new Style();
+  if (code === '40201' || code === '40216')
+    return [
+      new Style({
+        stroke: new Stroke({
+          color: ShinkansenColor(rtCode10, paletteType),
+          width: width + 1,
+        }),
+        zIndex: railwayZIndex(feature),
+      }),
+      new Style({
+        stroke: new Stroke({
+          width,
+          color: paletteType === 'light' ? '#ddd' : '#777',
+          lineDash: [4, 8],
+        }),
+        zIndex: railwayZIndex(feature),
+      }),
+    ];
+
+  return new Style({
+    stroke: new Stroke({
+      width,
+      color: paletteType === 'light' ? '#777' : '#555',
+    }),
+    zIndex: railwayZIndex(feature),
+  });
 }

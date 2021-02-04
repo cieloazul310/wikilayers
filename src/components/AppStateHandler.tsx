@@ -9,10 +9,10 @@ import Switch from '@material-ui/core/Switch';
 import { useAppState, useDispatch } from '../utils/AppStateContext';
 import { GeolocationOnIcon, GeolocationOffIcon } from '../icons';
 
-function AppStateHandler() {
+function AppStateHandler(): JSX.Element {
   const { geolocation } = useAppState();
   const dispatch = useDispatch();
-  const _toggleGeoLocation = () => {
+  const toggleGeoLocation = () => {
     dispatch({ type: 'TOGGLE_GEOLOCATION' });
   };
   return (
@@ -21,7 +21,7 @@ function AppStateHandler() {
         <ListItemIcon>{geolocation ? <GeolocationOnIcon /> : <GeolocationOffIcon />}</ListItemIcon>
         <ListItemText primary="現在地を表示" />
         <ListItemSecondaryAction>
-          <Switch edge="end" checked={geolocation} onChange={_toggleGeoLocation} />
+          <Switch edge="end" checked={geolocation} onChange={toggleGeoLocation} />
         </ListItemSecondaryAction>
       </ListItem>
     </List>

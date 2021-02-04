@@ -1,17 +1,17 @@
-import RenderFeature from 'ol/render/Feature';
+import { FeatureLike } from 'ol/Feature';
 import Style from 'ol/style/Style';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import { PaletteType } from '@material-ui/core';
-import { labelStyle } from './label';
-import { roadStyle } from './road';
-import { railwayStyle } from './railway';
-import { boundaryStyle } from './boundary';
-import { transpStyle } from './transp';
+import labelStyle from './label';
+import roadStyle from './road';
+import railwayStyle from './railway';
+import boundaryStyle from './boundary';
+import transpStyle from './transp';
 import { layerNames } from '../vt';
 
-export function vtStyle(paletteType: PaletteType) {
-  return (feature: RenderFeature, resolution: number) => {
+export default function vtStyle(paletteType: PaletteType) {
+  return (feature: FeatureLike, resolution: number): Style | Style[] => {
     const properties = feature.getProperties();
     const { layer } = properties;
     if (!layerNames.includes(layer)) return new Style();
@@ -49,5 +49,6 @@ export function vtStyle(paletteType: PaletteType) {
         }),
         zIndex: 4,
       });
+    return new Style();
   };
 }
