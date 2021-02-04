@@ -1,7 +1,7 @@
 {
   "name": "wikilayers",
   "version": "1.1.0",
-  "homepage": "https://cieloazul310.github.io/wikilayers",
+  "homepage": "https://wikilayers.netlify.com",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",

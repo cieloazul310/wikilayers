@@ -9,7 +9,7 @@ import Settings from './pages/Settings';
 
 function App(): JSX.Element {
   return (
-    <Router basename="/wikilayers">
+    <Router>
       <Layout>
         <Switch>
           <Route path="/search" component={Search} />
