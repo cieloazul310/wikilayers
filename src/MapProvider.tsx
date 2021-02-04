@@ -57,6 +57,9 @@ map.on('moveend', (event) => {
 
 const geolocation = new Geolocation({
   tracking: false,
+  trackingOptions: {
+    enableHighAccuracy: true,
+  },
   projection: map.getView().getProjection(),
 });
 
