@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Subheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import LocationOn from '@material-ui/icons/LocationOn';
-import LocationOff from '@material-ui/icons/LocationOff';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Subheader from 'material-ui/Subheader';
+import { List, ListItem } from 'material-ui/List';
+import LocationOn from 'material-ui/svg-icons/communication/location-on';
+import LocationOff from 'material-ui/svg-icons/communication/location-off';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
-import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import grey from '@material-ui/core/colors/grey';
+import IconButton from 'material-ui/IconButton';
+import MenuItem from 'material-ui/MenuItem';
+import { grey500, grey300 } from 'material-ui/styles/colors';
 
 import commonStyles from '../../commonStyles';
 
@@ -18,7 +17,7 @@ import { Translate } from 'react-redux-i18n';
 
 const iconButtonElement = (
   <IconButton touch={true}>
-    <MoreVertIcon color={grey[500]} />
+    <MoreVertIcon color={grey500} />
   </IconButton>
 );
 
@@ -52,7 +51,7 @@ const FeatureList = ({
                   }}
                 />
               ) : (
-                <LocationOff style={{ fill: grey[300] }} />
+                <LocationOff style={{ fill: grey300 }} />
               )
             }
             onClick={() => onFeatureClick(feature)}

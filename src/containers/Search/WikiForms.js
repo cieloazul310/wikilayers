@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchSummary } from '../../actions';
-import Forms from '../../components/Search/SearchForm';
+import Forms from '../../components/Search/Forms';
 
 const mapStateToProps = ({ searchLang }) => {
   return {
