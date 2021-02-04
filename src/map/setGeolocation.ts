@@ -6,15 +6,13 @@ import Stroke from 'ol/style/Stroke';
 import IconStyle from 'ol/style/Icon';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import GeomPoint from 'ol/geom/Point';
+import Point from 'ol/geom/Point';
 import Geolocation from 'ol/Geolocation';
 
 import Icon from '../img/geolocation.svg';
 
 function setGeolocation(map: OlMap, geolocation: Geolocation): void {
-  const positionFeature = new Feature({
-    geometry: geolocation.get('cachedPosition') ? new GeomPoint(geolocation.get('cachedPosition')) : null,
-  });
+  const positionFeature = new Feature();
   positionFeature.setStyle(
     new Style({
       image: new IconStyle({
@@ -42,16 +40,16 @@ function setGeolocation(map: OlMap, geolocation: Geolocation): void {
   geolocation.on('change:position', () => {
     const coordinates = geolocation.getPosition();
     if (coordinates) {
-      positionFeature.setGeometry(new GeomPoint(coordinates));
+      positionFeature.setGeometry(new Point(coordinates));
     }
   });
 
   const geoLocationLayer = new VectorLayer({
-    map,
     source: new VectorSource({
       features: [accuracyFeature, positionFeature],
     }),
   });
+  map.addLayer(geoLocationLayer);
 
   geolocation.on('change:tracking', () => {
     geoLocationLayer.setVisible(geolocation.getTracking());
