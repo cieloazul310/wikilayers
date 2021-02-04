@@ -1,34 +1,33 @@
 import Style from 'ol/style/Style';
-import RenderFeature from 'ol/render/Feature';
-import RegularShape from 'ol/style/RegularShape';
+import { FeatureLike } from 'ol/Feature';
 import Text from 'ol/style/Text';
 import Stroke from 'ol/style/Stroke';
 import Fill from 'ol/style/Fill';
 import { PaletteType } from '@material-ui/core';
 
-export function transpStyle(feature: RenderFeature, resolution: number, paletteType: PaletteType) {
-  const { ftCode, nRNo, name } = feature.getProperties();
+export default function transpStyle(feature: FeatureLike, resolution: number, paletteType: PaletteType): Style {
+  const { ftCode, name } = feature.getProperties();
   if (ftCode === 2904) return new Style();
   // declutter: true
   if (ftCode === 2901) return new Style();
-  //if (ftCode === 2941 || ftCode === 2942 || ftCode === 2945)
-    return new Style({
-      text: new Text({
-        text: name,
-        textBaseline: 'middle',
-        textAlign: 'center',
-        font: `${paletteType === 'light' ? 'bold' : 'normal'} x-small sans-serif`,
-        stroke: new Stroke({
-          color: '#575',
-          width: 2,
-        }),
-        fill: new Fill({
-          color: paletteType === 'light' ? '#fff' : '#eee',
-        }),
+  // if (ftCode === 2941 || ftCode === 2942 || ftCode === 2945)
+  return new Style({
+    text: new Text({
+      text: name,
+      textBaseline: 'middle',
+      textAlign: 'center',
+      font: `${paletteType === 'light' ? 'bold' : 'normal'} x-small sans-serif`,
+      stroke: new Stroke({
+        color: '#575',
+        width: 2,
       }),
-      zIndex: 11,
-    });
-/*
+      fill: new Fill({
+        color: paletteType === 'light' ? '#fff' : '#eee',
+      }),
+    }),
+    zIndex: 11,
+  });
+  /*
   if (nRNo === 0) return new Style();
   return [
     new Style({

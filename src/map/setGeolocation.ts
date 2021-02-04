@@ -11,26 +11,28 @@ import Geolocation from 'ol/Geolocation';
 
 import Icon from '../img/geolocation.svg';
 
-function setGeolocation(map: OlMap, geolocation: Geolocation) {
+function setGeolocation(map: OlMap, geolocation: Geolocation): void {
   const positionFeature = new Feature({
-    geometry: geolocation.get('cachedPosition') ? new GeomPoint(geolocation.get('cachedPosition')) : null
+    geometry: geolocation.get('cachedPosition') ? new GeomPoint(geolocation.get('cachedPosition')) : null,
   });
-  positionFeature.setStyle(new Style({
-    image: new IconStyle({
-      src: Icon
+  positionFeature.setStyle(
+    new Style({
+      image: new IconStyle({
+        src: Icon,
+      }),
     })
-  }));
+  );
 
   const accuracyFeature = new Feature();
   accuracyFeature.setStyle(
     new Style({
       fill: new Fill({
-        color: 'rgba(255, 255, 255, 0.2)'
+        color: 'rgba(255, 255, 255, 0.2)',
       }),
       stroke: new Stroke({
         color: 'rgba(2, 119, 189, 0.6)',
-        width: 2
-      })
+        width: 2,
+      }),
     })
   );
   geolocation.on('change:accuracyGeometry', () => {
@@ -39,19 +41,18 @@ function setGeolocation(map: OlMap, geolocation: Geolocation) {
 
   geolocation.on('change:position', () => {
     const coordinates = geolocation.getPosition();
-
-    positionFeature.setGeometry(coordinates ?
-      new GeomPoint(coordinates) : null
-    );
+    if (coordinates) {
+      positionFeature.setGeometry(new GeomPoint(coordinates));
+    }
   });
 
   const geoLocationLayer = new VectorLayer({
-    map: map,
+    map,
     source: new VectorSource({
-      features: [accuracyFeature, positionFeature]
-    })
+      features: [accuracyFeature, positionFeature],
+    }),
   });
-  
+
   geolocation.on('change:tracking', () => {
     geoLocationLayer.setVisible(geolocation.getTracking());
   });

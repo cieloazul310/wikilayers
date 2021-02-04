@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import PageContainer from '../../components/PageContainer';
 import Loader from '../../components/Loader';
-import { ArticleCache } from '../../utils/ArticleCache';
+import ArticleCache from '../../utils/ArticleCache';
 import { useArticle } from '../../utils/fetchArticle';
 import { useAppState } from '../../utils/AppStateContext';
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) =>
 
 const cache = new ArticleCache();
 
-function Article() {
+function Article(): JSX.Element {
   const classes = useStyles();
   const { page } = useAppState();
   const article = useArticle(page, cache);
@@ -38,6 +38,7 @@ function Article() {
               {page?.title}
             </Typography>
             {article ? (
+              // eslint-disable-next-line
               <div dangerouslySetInnerHTML={{ __html: article.extract }} />
             ) : (
               <>

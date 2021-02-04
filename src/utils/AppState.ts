@@ -19,7 +19,7 @@ export type Action =
   | { type: 'FETCH'; fetchStatus: FetchStatus; fetchTitle?: string }
   | { type: 'CLEAR_SEARCHEDITEMS' }
   | { type: 'SET_SEARCHEDITEMS'; items: Search[] }
-  | { type: 'SET_PAGE'; page: FirstQueryPages }
+  | { type: 'SET_PAGE'; page: FirstQueryPages | null }
   | { type: 'ADD_FEATURE'; feature: PageFeature }
   | { type: 'DELETE_FEATURE'; feature: PageFeature }
   | { type: 'CLEAR_FEATURES' }
@@ -35,22 +35,23 @@ export const initialAppState: AppState = {
   baseLayer: 'vector',
 };
 
-export function useInitialAppState() {
-  const stored: Partial<AppState> | null = JSON.parse(localStorage.getItem('wikilayers:AppState'));
+export function useInitialAppState(): AppState {
+  const stored = localStorage.getItem('wikilayers:AppState');
+  const storedAppState: Partial<AppState> | null = stored ? JSON.parse(stored) : null;
   return React.useMemo(
     () =>
       stored
         ? {
             ...initialAppState,
-            ...stored,
+            ...storedAppState,
           }
         : initialAppState,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 }
 
-export const reducer = (state: AppState, action: Action) => {
-  console.log(action);
+export function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case 'TOGGLE_GEOLOCATION':
       return {
@@ -101,4 +102,4 @@ export const reducer = (state: AppState, action: Action) => {
     default:
       throw new Error();
   }
-};
+}

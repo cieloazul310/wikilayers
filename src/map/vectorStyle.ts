@@ -3,12 +3,12 @@ import IconStyle from 'ol/style/Icon';
 import TextStyle from 'ol/style/Text';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
-import Feature from 'ol/Feature';
+import { FeatureLike } from 'ol/Feature';
+import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 import Place from '../img/place.svg';
 import selectedPlace from '../img/selectedPlace.svg';
-import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 
-export function vectorStyle(feature: Feature, resolution: number) {
+export function vectorStyle(feature: FeatureLike, resolution: number): Style | Style[] {
   if (!feature.get('visibility')) return new Style();
   const isSelected = feature.get('selected');
   const styleArr = [
@@ -16,8 +16,8 @@ export function vectorStyle(feature: Feature, resolution: number) {
       zIndex: isSelected ? 110 : 101,
       image: new IconStyle({
         anchor: [0.5, 24],
-        anchorXUnits: IconAnchorUnits['FRACTION'],
-        anchorYUnits: IconAnchorUnits['PIXELS'],
+        anchorXUnits: IconAnchorUnits.FRACTION,
+        anchorYUnits: IconAnchorUnits.PIXELS,
         src: isSelected ? selectedPlace : Place,
       }),
     }),
@@ -29,13 +29,13 @@ export function vectorStyle(feature: Feature, resolution: number) {
       font: `bold 12px sans-serif`,
       offsetY: 8,
       fill: new Fill({
-        color: 'white'
+        color: 'white',
       }),
       stroke: new Stroke({
         color: '#333',
-        width: 3
-      })
-    })
+        width: 3,
+      }),
+    }),
   });
 
   if (resolution < 610 && !isSelected) {
@@ -44,9 +44,9 @@ export function vectorStyle(feature: Feature, resolution: number) {
     styleArr.push(label);
   }
   return styleArr;
-};
+}
 
-export function allLabelStyle(feature: Feature) {
+export function allLabelStyle(feature: FeatureLike): Style | Style[] {
   if (!feature.get('visibility')) return new Style();
   const isSelected = feature.get('selected');
   return [
@@ -54,8 +54,8 @@ export function allLabelStyle(feature: Feature) {
       zIndex: isSelected ? 110 : 101,
       image: new IconStyle({
         anchor: [0.5, 24],
-        anchorXUnits: IconAnchorUnits['FRACTION'],
-        anchorYUnits: IconAnchorUnits['PIXELS'],
+        anchorXUnits: IconAnchorUnits.FRACTION,
+        anchorYUnits: IconAnchorUnits.PIXELS,
         src: isSelected ? selectedPlace : Place,
       }),
     }),
@@ -75,4 +75,4 @@ export function allLabelStyle(feature: Feature) {
       }),
     }),
   ];
-};
+}

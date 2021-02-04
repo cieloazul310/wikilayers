@@ -4,23 +4,21 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Switch from '@material-ui/core/Switch';
 import { useAppState, useDispatch } from '../utils/AppStateContext';
 import { baseLayers, BaseLayer } from '../layers/baseLayers';
 import { LayersIcon } from '../icons';
 
-function MapStateHandler() {
+function MapStateHandler(): JSX.Element {
   const { baseLayer } = useAppState();
   const dispatch = useDispatch();
-  const _onClick = (id: BaseLayer) => () => {
+  const onClick = (id: BaseLayer) => () => {
     dispatch({ type: 'SET_BASELAYER', layer: id });
   };
 
   return (
     <List subheader={<ListSubheader>背景地図</ListSubheader>}>
       {baseLayers.map(({ id, title }) => (
-        <ListItem key={id} button onClick={_onClick(id)}>
+        <ListItem key={id} button onClick={onClick(id)}>
           <ListItemIcon>
             <LayersIcon color={id === baseLayer ? 'primary' : 'disabled'} />
           </ListItemIcon>

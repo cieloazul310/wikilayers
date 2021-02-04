@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) =>
       transform: 'translate(-50%, -50%)',
       position: 'absolute',
       minWidth: 300,
-      padding: theme.spacing(2, 0)
+      padding: theme.spacing(2, 0),
     },
     inner: {
       padding: theme.spacing(2),
@@ -25,19 +25,18 @@ const useStyles = makeStyles((theme) =>
 );
 
 type Props = {
-  actionButton?: React.ReactNode;
+  actionButton: React.ReactNode;
   modalHandler: (open: boolean) => () => void;
 } & ModalProps;
 
-function MyModal({ actionButton, modalHandler, children, ...props }: Props) {
+function MyModal({ modalHandler, open, onClose, children, actionButton }: Props): JSX.Element {
   const classes = useStyles();
   return (
-    <Modal {...props}>
+    <Modal open={open} onClose={onClose}>
       <Paper className={classes.paper}>
         <div className={classes.inner}>{children}</div>
         <div className={classes.buttons}>
-          {actionButton}
-          {' '}
+          {actionButton}{' '}
           <Button variant="contained" onClick={modalHandler(false)} disableElevation>
             閉じる
           </Button>

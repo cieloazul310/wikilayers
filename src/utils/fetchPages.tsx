@@ -15,7 +15,28 @@ const query = [
   '&redirects',
 ].join('');
 
-export async function fetchPages(title: string, dispatch: React.Dispatch<Action>) {
+function createFirstURL(lang: string, title: string) {
+  return `https://${lang}.wikipedia.org/w/${query}&titles=${encodeURI(title)}&srsearch=${encodeURI(title)}`;
+}
+
+const langOrder = ['en', 'es', 'de', 'zh', 'ar', 'kr', 'ja'];
+
+async function fetchLangLinksCoordinates(langLinks?: LangLink[]) {
+  if (!langLinks || !langLinks.length) return null;
+  const tasks: Promise<FirstQueryResult>[] = langLinks
+    .filter(({ lang }) => langOrder.indexOf(lang) >= 0)
+    .sort((a, b) => langOrder.indexOf(a.lang) - langOrder.indexOf(b.lang))
+    .map(({ lang, title }) => fetch(createFirstURL(lang, title)).then((res) => res.json()));
+  /*
+  for await (const task of tasks) {
+    const result = await task;
+    if (result.query.pages[0].coordinates) return result.query.pages[0].coordinates;
+  }
+  */
+  return null;
+}
+
+async function fetchPages(title: string, dispatch: React.Dispatch<Action>): Promise<void> {
   if (title === '') return;
   dispatch({ type: 'FETCH', fetchStatus: 'fetching', fetchTitle: title });
   dispatch({ type: 'CLEAR_SEARCHEDITEMS' });
@@ -23,8 +44,7 @@ export async function fetchPages(title: string, dispatch: React.Dispatch<Action>
   try {
     const result: FirstQueryResult = await fetch(createFirstURL('ja', title)).then((res) => res.json());
     const page = result.query.pages[0];
-    const search = result.query.search;
-    console.log(page, search);
+    const { search } = result.query;
     if (page.missing || page.description === 'ウィキメディアの曖昧さ回避ページ' || page.description === '曖昧さ回避ページ') {
       dispatch({ type: 'SET_PAGE', page: null });
       dispatch({ type: 'SET_SEARCHEDITEMS', items: search });
@@ -46,22 +66,4 @@ export async function fetchPages(title: string, dispatch: React.Dispatch<Action>
   }
 }
 
-const langOrder = ['en', 'es', 'de', 'zh', 'ar', 'kr', 'ja'];
-
-async function fetchLangLinksCoordinates(langLinks?: LangLink[]) {
-  if (!langLinks || !langLinks.length) return null;
-  const tasks: Promise<FirstQueryResult>[] = langLinks
-    .filter(({ lang }) => langOrder.indexOf(lang) >= 0)
-    .sort((a, b) => langOrder.indexOf(a.lang) - langOrder.indexOf(b.lang))
-    .map(({ lang, title }) => fetch(createFirstURL(lang, title)).then((res) => res.json()));
-  
-  for await (const task of tasks) {
-    const result = await task;
-    if (result.query.pages[0].coordinates) return result.query.pages[0].coordinates;
-  }
-  return null;
-}
-
-function createFirstURL(lang: string, title: string) {
-  return `https://${lang}.wikipedia.org/w/${query}&titles=${encodeURI(title)}&srsearch=${encodeURI(title)}`;
-}
+export default fetchPages;

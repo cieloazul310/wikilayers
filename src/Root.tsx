@@ -9,7 +9,7 @@ import { themeReducer, useInitialThemeState } from './utils/themeReducer';
 import { DispatchContext } from './utils/DispatchContext';
 import customMuiTheme from './customMuiTheme';
 
-export default function Root() {
+export default function Root(): JSX.Element {
   const initialThemeState = useInitialThemeState();
   const [themeState, themeDispatch] = React.useReducer(themeReducer, initialThemeState);
   const { darkMode } = themeState;

@@ -4,12 +4,10 @@ import VectorLayer from 'ol/layer/Vector';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { AppState, Action } from '../utils/AppState';
 
-export function createVectorEvent(map: OlMap, { features, page }: AppState, dispatch: React.Dispatch<Action>) {
-  
+export default function createVectorEvent(map: OlMap, { features }: AppState, dispatch: React.Dispatch<Action>): void {
   function singleclick(event: MapBrowserEvent) {
-    console.log('singleclick');
     event.preventDefault();
-    const feature = map.forEachFeatureAtPixel(event.pixel, (feature) => feature, {
+    const feature = map.forEachFeatureAtPixel(event.pixel, (eventFeature) => eventFeature, {
       hitTolerance: 10,
       layerFilter: (layer) => layer instanceof VectorLayer,
     });
@@ -22,7 +20,7 @@ export function createVectorEvent(map: OlMap, { features, page }: AppState, disp
       dispatch({ type: 'SET_PAGE', page: null });
     }
   }
-  
+
   map.un('singleclick', singleclick);
   map.on('singleclick', singleclick);
 
@@ -31,7 +29,7 @@ export function createVectorEvent(map: OlMap, { features, page }: AppState, disp
     const pixel = map.getEventPixel(event.originalEvent);
     const hit = map.hasFeatureAtPixel(pixel, { layerFilter: (layer) => layer instanceof VectorLayer, hitTolerance: 10 });
     const target = map.getTarget();
-    if (typeof target !== 'string') target.style.cursor = hit ? 'pointer' : '';
+    if (target && typeof target !== 'string') target.style.cursor = hit ? 'pointer' : '';
   }
 
   map.un('pointermove', pointerMove);

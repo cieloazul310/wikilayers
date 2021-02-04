@@ -1,8 +1,8 @@
 import Tile from 'ol/layer/Tile';
 import Group from 'ol/layer/Group';
 import XYZ from 'ol/source/XYZ';
-import { waterarea } from './ksj';
 import { transformExtent } from 'ol/proj';
+import waterarea from './ksj';
 
 const gsiAttribution = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>';
 
@@ -29,7 +29,7 @@ export const relief = new Tile({
 
 export const seamless = new Tile({
   source: new XYZ({
-    url: "//cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg",
+    url: '//cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg',
     attributions: [gsiAttribution],
     maxZoom: 18,
     minZoom: 2,

@@ -9,4 +9,15 @@ import GeolocationOffIcon from '@material-ui/icons/GpsOff';
 import AddToMapIcon from '@material-ui/icons/AddLocation';
 import LayersIcon from '@material-ui/icons/Layers';
 
-export { MapIcon, SearchIcon, ReadIcon, SettingsIcon, LightModeIcon, DarkModeIcon, GeolocationOnIcon, GeolocationOffIcon, AddToMapIcon, LayersIcon };
+export {
+  MapIcon,
+  SearchIcon,
+  ReadIcon,
+  SettingsIcon,
+  LightModeIcon,
+  DarkModeIcon,
+  GeolocationOnIcon,
+  GeolocationOffIcon,
+  AddToMapIcon,
+  LayersIcon,
+};

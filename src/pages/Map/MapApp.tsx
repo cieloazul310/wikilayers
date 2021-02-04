@@ -2,7 +2,7 @@ import * as React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useMap } from '../../utils/MapContext';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     mapContainer: {
       display: 'flex',
@@ -18,14 +18,14 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-function MapApp() {
+function MapApp(): JSX.Element {
   const classes = useStyles();
   const map = useMap();
   const mapRef = React.useRef(null);
 
   React.useEffect(() => {
-    map.setTarget(document.getElementById('map'));
-    return () => map.setTarget(null);
+    map.setTarget(document.getElementById('map') ?? undefined);
+    return () => map.setTarget(undefined);
   });
 
   /*

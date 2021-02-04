@@ -10,10 +10,10 @@ import { useTheme } from '@material-ui/core/styles';
 
 import { baseLayerGroup, setVisibleBaseLayer } from './layers/baseLayers';
 import { vtLayer } from './layers/vt';
-import { vtStyle } from './layers/vtStyle';
-import { vectorStyle, allLabelStyle } from './map/vectorStyle';
+import vtStyle from './layers/vtStyle';
+import { vectorStyle } from './map/vectorStyle';
 import setGeolocation from './map/setGeolocation';
-import { createVectorEvent } from './map/createVectorEvent';
+import createVectorEvent from './map/createVectorEvent';
 import { pageToFeature } from './utils/pageToFeature';
 import { MapContext } from './utils/MapContext';
 import { useAppState, useDispatch } from './utils/AppStateContext';
@@ -25,7 +25,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-const view = JSON.parse(window.localStorage.getItem('wikilayers:view'));
+const storaged = window.localStorage.getItem('wikilayers:view');
+const initialView = storaged ? JSON.parse(storaged) : null;
 
 const vectorLayer = new VectorLayer({
   source: new VectorSource({
@@ -36,8 +37,8 @@ const vectorLayer = new VectorLayer({
 
 const map = new OlMap({
   view: new View({
-    zoom: view?.zoom ?? 6,
-    center: view?.center ?? fromLonLat([140.4, 36.4]),
+    zoom: initialView?.zoom ?? 6,
+    center: initialView?.center ?? fromLonLat([140.4, 36.4]),
     constrainRotation: 4,
   }),
   layers: [baseLayerGroup, vectorLayer],
@@ -62,7 +63,7 @@ const geolocation = new Geolocation({
 
 setGeolocation(map, geolocation);
 
-function MapProvider({ children }: Props) {
+function MapProvider({ children }: Props): JSX.Element {
   const appState = useAppState();
   const dispatch = useDispatch();
   const { palette } = useTheme();
@@ -70,10 +71,6 @@ function MapProvider({ children }: Props) {
   React.useEffect(() => {
     createVectorEvent(map, appState, dispatch);
   }, [appState, dispatch]);
-
-  React.useEffect(() => {
-    map.setProperties({ appState, dispatch });
-  }, [appState]);
 
   React.useEffect(() => {
     setVisibleBaseLayer(appState.baseLayer);
