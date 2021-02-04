@@ -1,7 +1,7 @@
 {
   "name": "wikilayers",
   "version": "1.1.0",
-  "homepage": "https://wikilayers.netlify.com",
+  "homepage": "https://wikilayers.netlify.app",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
