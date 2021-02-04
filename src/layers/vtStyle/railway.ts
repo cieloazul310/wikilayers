@@ -3,6 +3,9 @@ import Style from 'ol/style/Style';
 import Stroke from 'ol/style/Stroke';
 import { PaletteType } from '@material-ui/core';
 
+const res15 = 4.78;
+const res17 = 1.19;
+
 /** rtCode10: string
  * 0 新幹線及び地下鉄以外
  * 1 新幹線
@@ -16,10 +19,15 @@ import { PaletteType } from '@material-ui/core';
  *  3 側線
  *  4 駅部分
  */
-function railWayWidth(feature: FeatureLike, resolution: number) {
+function defaultRailwayWidth(feature: FeatureLike) {
   const { snglDbl, rtCode10 } = feature.getProperties();
   if (rtCode10 === '1') return 4;
   return snglDbl === 2 ? 2 : 1;
+}
+
+function railwayWidth(feature: FeatureLike, resolution: number): number {
+  const width = defaultRailwayWidth(feature);
+  return resolution > res17 ? width * Math.max(res15 / resolution, 1) : 2;
 }
 
 /** railState
@@ -61,7 +69,7 @@ export default function railwayStyle(feature: FeatureLike, resolution: number, p
       }),
       zIndex: 10,
     });
-  const width = railWayWidth(feature, resolution);
+  const width = railwayWidth(feature, resolution);
   const code = rtCode1?.slice(0, 5);
 
   if (code === '40203') return new Style();
