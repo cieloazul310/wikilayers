@@ -1,4 +1,4 @@
-import { FirstQueryResult, LangLink } from '../types';
+import { FirstQueryResult, FirstQueryPages, LangLink, WikiCoordinates } from '../types';
 import { Action } from './AppState';
 
 const query = [
@@ -25,15 +25,18 @@ async function fetchLangLinksCoordinates(langLinks?: LangLink[]) {
   if (!langLinks || !langLinks.length) return null;
   const tasks: Promise<FirstQueryResult>[] = langLinks
     .filter(({ lang }) => langOrder.indexOf(lang) >= 0)
-    .sort((a, b) => langOrder.indexOf(a.lang) - langOrder.indexOf(b.lang))
     .map(({ lang, title }) => fetch(createFirstURL(lang, title)).then((res) => res.json()));
-  /*
-  for await (const task of tasks) {
-    const result = await task;
-    if (result.query.pages[0].coordinates) return result.query.pages[0].coordinates;
+
+  interface HasCoordinates extends FirstQueryPages {
+    coordinates: WikiCoordinates[];
   }
-  */
-  return null;
+
+  const coord = await Promise.all(tasks).then((data) => {
+    const hasCoordinates = data.map((result) => result.query.pages[0]).filter((page): page is HasCoordinates => Boolean(page.coordinates));
+    if (hasCoordinates.length) return hasCoordinates[0].coordinates;
+    return null;
+  });
+  return coord;
 }
 
 async function fetchPages(title: string, dispatch: React.Dispatch<Action>): Promise<void> {
