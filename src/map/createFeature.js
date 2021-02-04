@@ -1,7 +1,7 @@
-import olFeature from 'ol/feature';
-import geomPoint from 'ol/geom/point';
+import olFeature from 'ol/Feature';
+import geomPoint from 'ol/geom/Point';
 
-import Proj from 'ol/proj';
+import { fromLonLat } from "ol/proj";
 
 export function createFeature(featureCard) {
   const { name, summary } = featureCard;
@@ -11,7 +11,7 @@ export function createFeature(featureCard) {
     id: summary.date,
     geometry: {
       type: "Point",
-      coordinates: Proj.fromLonLat([coord.lon, coord.lat])
+      coordinates: fromLonLat([coord.lon, coord.lat])
     },
     properties: {
       name: name || summary.title,
