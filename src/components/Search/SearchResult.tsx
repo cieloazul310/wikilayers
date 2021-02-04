@@ -51,7 +51,7 @@ function SearchResult(): JSX.Element | null {
         {page.title}
       </Typography>
       <Typography variant="body2" paragraph>
-        {page.extract.slice(0, 140)}
+        {page.extract.length > 140 ? `${page.extract.slice(0, 140)}...` : page.extract}
       </Typography>
       <div>
         <Button
