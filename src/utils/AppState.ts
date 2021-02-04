@@ -12,6 +12,7 @@ export interface AppState {
   searchedItems: Search[];
   page: FirstQueryPages | null;
   baseLayer: BaseLayer;
+  alwaysShowLabels: boolean;
 }
 
 export type Action =
@@ -23,7 +24,8 @@ export type Action =
   | { type: 'ADD_FEATURE'; feature: PageFeature }
   | { type: 'DELETE_FEATURE'; feature: PageFeature }
   | { type: 'CLEAR_FEATURES' }
-  | { type: 'SET_BASELAYER'; layer: BaseLayer };
+  | { type: 'SET_BASELAYER'; layer: BaseLayer }
+  | { type: 'TOGGLE_ALWAYSSHOWLABELS' };
 
 export const initialAppState: AppState = {
   features: [],
@@ -33,6 +35,7 @@ export const initialAppState: AppState = {
   page: null,
   searchedItems: [],
   baseLayer: 'vector',
+  alwaysShowLabels: false,
 };
 
 export function useInitialAppState(): AppState {
@@ -98,6 +101,11 @@ export function reducer(state: AppState, action: Action): AppState {
       return {
         ...state,
         baseLayer: action.layer,
+      };
+    case 'TOGGLE_ALWAYSSHOWLABELS':
+      return {
+        ...state,
+        alwaysShowLabels: !state.alwaysShowLabels,
       };
     default:
       throw new Error();

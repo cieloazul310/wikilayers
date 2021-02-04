@@ -8,6 +8,7 @@ import GeolocationOnIcon from '@material-ui/icons/GpsFixed';
 import GeolocationOffIcon from '@material-ui/icons/GpsOff';
 import AddToMapIcon from '@material-ui/icons/AddLocation';
 import LayersIcon from '@material-ui/icons/Layers';
+import ShowLabelsIcon from '@material-ui/icons/TextFormat';
 
 export {
   MapIcon,
@@ -20,4 +21,5 @@ export {
   GeolocationOffIcon,
   AddToMapIcon,
   LayersIcon,
+  ShowLabelsIcon,
 };
