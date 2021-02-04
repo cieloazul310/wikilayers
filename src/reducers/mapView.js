@@ -4,10 +4,10 @@ import {
   ZOOM_TO_FEATURE,
   INITIALIZE,
  } from '../actions';
-import { fromLonLat } from 'ol/proj';
+import Proj from 'ol/proj';
 
 const initialView = {
-  center: fromLonLat([137.834473, 35.799994]),
+  center: Proj.fromLonLat([137.834473, 35.799994]),
   zoom: 4.5,
   enableRotation: false
 };

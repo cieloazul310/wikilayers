@@ -1,4 +1,4 @@
-import { toLonLat } from 'ol/proj';
+import Proj from 'ol/proj';
 
 export function featuresToGeoJSON(features) {
   return {
@@ -11,7 +11,7 @@ export function featuresToGeoJSON(features) {
         type: "Feature",
         geometry: {
           type: "Point",
-          coordinates: toLonLat(geometry.coordinates)
+          coordinates: Proj.toLonLat(geometry.coordinates)
         },
         properties: {
           name,
