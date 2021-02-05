@@ -34,7 +34,7 @@ function Article(): JSX.Element {
   useGaTrackPage(pathname);
 
   return (
-    <PageContainer>
+    <PageContainer disableGutters={false}>
       <div className={classes.article}>
         {page ? (
           <article>
