@@ -25,7 +25,8 @@ export type Action =
   | { type: 'DELETE_FEATURE'; feature: PageFeature }
   | { type: 'CLEAR_FEATURES' }
   | { type: 'SET_BASELAYER'; layer: BaseLayer }
-  | { type: 'TOGGLE_ALWAYSSHOWLABELS' };
+  | { type: 'TOGGLE_ALWAYSSHOWLABELS' }
+  | { type: 'RESET' };
 
 export const initialAppState: AppState = {
   features: [],
@@ -107,6 +108,8 @@ export function reducer(state: AppState, action: Action): AppState {
         ...state,
         alwaysShowLabels: !state.alwaysShowLabels,
       };
+    case 'RESET':
+      return initialAppState;
     default:
       throw new Error();
   }
