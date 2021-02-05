@@ -1,6 +1,6 @@
-import { FirstQueryPages } from './query';
+import { QueryPageWithCoord } from './query';
 
 export interface PageFeature {
   title: string;
-  page: FirstQueryPages;
+  page: QueryPageWithCoord;
 }
