@@ -2,12 +2,12 @@ import * as React from 'react';
 import { ThemeProvider, createMuiTheme, responsiveFontSizes, lighten } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import App from './App';
-import AppStateProvider from './AppStateProvider';
-import MapProvider from './MapProvider';
+import StartScreen from './components/StartScreen';
 import { themeReducer, useInitialThemeState } from './utils/themeReducer';
 import { DispatchContext } from './utils/DispatchContext';
 import customMuiTheme from './customMuiTheme';
+
+const App = React.lazy(() => import('./App'));
 
 export default function Root(): JSX.Element {
   const initialThemeState = useInitialThemeState();
@@ -41,11 +41,9 @@ export default function Root(): JSX.Element {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <DispatchContext.Provider value={themeDispatch}>
-        <AppStateProvider>
-          <MapProvider>
-            <App />
-          </MapProvider>
-        </AppStateProvider>
+        <React.Suspense fallback={<StartScreen />}>
+          <App />
+        </React.Suspense>
       </DispatchContext.Provider>
     </ThemeProvider>
   );
