@@ -13,7 +13,8 @@ import { vtLayer } from './layers/vt';
 import vtStyle from './layers/vtStyle';
 import { vectorStyle, allLabelStyle } from './map/vectorStyle';
 import setGeolocation from './map/setGeolocation';
-import createVectorEvent from './map/createVectorEvent';
+import { singleclick, pointermove } from './map/createVectorEvent';
+import useMapEvent from './map/useMapEvent';
 import { pageToFeature } from './utils/pageToFeature';
 import { MapContext } from './utils/MapContext';
 import { useAppState, useDispatch } from './utils/AppStateContext';
@@ -54,6 +55,7 @@ map.on('moveend', (event) => {
   const view = event.map.getView();
   window.localStorage.setItem('wikilayers:view', JSON.stringify({ zoom: view.getZoom(), center: view.getCenter() }));
 });
+map.on('pointermove', pointermove);
 
 const geolocation = new Geolocation({
   tracking: false,
@@ -70,9 +72,7 @@ function MapProvider({ children }: Props): JSX.Element {
   const dispatch = useDispatch();
   const { palette } = useTheme();
 
-  React.useEffect(() => {
-    createVectorEvent(map, appState, dispatch);
-  }, [appState, dispatch]);
+  useMapEvent(map, 'singleclick', singleclick(appState, dispatch));
 
   React.useEffect(() => {
     setVisibleBaseLayer(appState.baseLayer);
