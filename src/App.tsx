@@ -14,7 +14,7 @@ function App(): JSX.Element {
   return (
     <AppStateProvider>
       <MapProvider>
-        <Router basename="/wikilayers">
+        <Router>
           <Layout>
             <Switch>
               <Route path="/search" component={Search} />
