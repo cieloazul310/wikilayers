@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Container, { ContainerProps } from '@material-ui/core/Container';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import useIsMobile from '../utils/useIsMobile';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -13,15 +14,23 @@ const useStyles = makeStyles((theme) =>
 
 interface Props {
   children: ContainerProps['children'];
+  disableGutters?: boolean;
 }
 
-function PageContainer({ children }: Props): JSX.Element {
+function PageContainer({ children, disableGutters }: Props): JSX.Element {
   const classes = useStyles();
+  const isMobile = useIsMobile();
   return (
     <div className={classes.root}>
-      <Container maxWidth="sm">{children}</Container>
+      <Container maxWidth="sm" disableGutters={disableGutters ?? isMobile}>
+        {children}
+      </Container>
     </div>
   );
 }
+
+PageContainer.defaultProps = {
+  disableGutters: undefined,
+};
 
 export default PageContainer;

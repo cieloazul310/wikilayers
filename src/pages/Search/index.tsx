@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
 import PageContainer from '../../components/PageContainer';
 import Title from '../../components/Search/Title';
 import SearchForm from '../../components/Search/SearchForm';
@@ -15,7 +16,9 @@ function SearchPage(): JSX.Element {
   return (
     <PageContainer>
       <Title />
-      <SearchForm />
+      <Container>
+        <SearchForm />
+      </Container>
       <SearchResult />
       <SearchedItems />
       <FeaturesList />

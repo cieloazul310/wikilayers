@@ -9,6 +9,7 @@ import Map from './pages/Map';
 import Search from './pages/Search';
 import Article from './pages/Article';
 import Settings from './pages/Settings';
+import About from './pages/About';
 
 function App(): JSX.Element {
   return (
@@ -18,8 +19,9 @@ function App(): JSX.Element {
           <Layout>
             <Switch>
               <Route path="/search" component={Search} />
-              <Route path="/settings" component={Settings} />
               <Route path="/article" component={Article} />
+              <Route path="/settings" component={Settings} />
+              <Route path="/about" component={About} />
               <Route path="/" component={Map} />
             </Switch>
           </Layout>
