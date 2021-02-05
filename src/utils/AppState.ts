@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BaseLayer } from '../layers/baseLayers';
-import { FirstQueryPages, Search, PageFeature } from '../types';
+import { QueryPage, Search, PageFeature } from '../types';
 
 type FetchStatus = 'fetching' | 'success' | 'failure' | 'yet';
 
@@ -10,7 +10,7 @@ export interface AppState {
   fetchStatus: FetchStatus;
   fetchTitle: string | null;
   searchedItems: Search[];
-  page: FirstQueryPages | null;
+  page: QueryPage | null;
   baseLayer: BaseLayer;
   alwaysShowLabels: boolean;
 }
@@ -20,7 +20,7 @@ export type Action =
   | { type: 'FETCH'; fetchStatus: FetchStatus; fetchTitle?: string }
   | { type: 'CLEAR_SEARCHEDITEMS' }
   | { type: 'SET_SEARCHEDITEMS'; items: Search[] }
-  | { type: 'SET_PAGE'; page: FirstQueryPages | null }
+  | { type: 'SET_PAGE'; page: QueryPage | null }
   | { type: 'ADD_FEATURE'; feature: PageFeature }
   | { type: 'DELETE_FEATURE'; feature: PageFeature }
   | { type: 'CLEAR_FEATURES' }

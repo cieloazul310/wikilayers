@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FirstQueryPages, Article } from '../types';
+import { QueryPage, Article } from '../types';
 import { Action } from './AppState';
 import ArticleCache from './ArticleCache';
 
@@ -11,7 +11,7 @@ function createArticleUrl(pageid: number, lang = 'ja') {
   return `https://${lang}.wikipedia.org/w/${query}&pageids=${pageid}`;
 }
 
-export function useArticle(page: FirstQueryPages | null, cache: ArticleCache): Article | null {
+export function useArticle(page: QueryPage | null, cache: ArticleCache): Article | null {
   const exists = cache.articleExists(page?.pageid ?? null);
   const [articleStatus, setArticleStatus] = React.useState<ArticleStatus>(exists ? 'exists' : 'yet');
 
@@ -39,11 +39,7 @@ export function useArticle(page: FirstQueryPages | null, cache: ArticleCache): A
   return null;
 }
 
-export async function fetchArticle(
-  { pageid }: FirstQueryPages,
-  cache: ArticleCache,
-  dispatch: React.Dispatch<Action>
-): Promise<Article | null> {
+export async function fetchArticle({ pageid }: QueryPage, cache: ArticleCache, dispatch: React.Dispatch<Action>): Promise<Article | null> {
   if (cache.articleExists(pageid)) return cache.getArticle(pageid);
 
   dispatch({ type: 'FETCH', fetchStatus: 'fetching' });
