@@ -11,7 +11,7 @@ export interface Result<T> {
   query: T;
 }
 
-export interface Pages {
+export interface Page {
   pageid: number;
   ns: number;
   title: string;
@@ -32,7 +32,7 @@ export interface SearchInfo {
   totalhits: number;
 }
 
-export interface FirstQueryPages extends Pages {
+export interface QueryPage extends Page {
   extract: string;
   thumbnail?: {
     source: string;
@@ -46,8 +46,10 @@ export interface FirstQueryPages extends Pages {
   descriptionsource: string;
 }
 
+export type QueryPageWithCoord = Exclude<QueryPage, 'coordinates'> & Required<Pick<QueryPage, 'coordinates'>>;
+
 export interface FirstQuery {
-  pages: FirstQueryPages[];
+  pages: QueryPage[];
   searchinfo: SearchInfo;
   search: Search[];
 }

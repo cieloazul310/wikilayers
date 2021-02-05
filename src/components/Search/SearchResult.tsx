@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Snackbar from '../Snackbar';
 import { useAppState, useDispatch } from '../../utils/AppStateContext';
+import { hasCoords } from '../../utils/helpers';
 import { AddToMapIcon } from '../../icons';
 
 const useStyles = makeStyles((theme) =>
@@ -24,7 +25,7 @@ function SearchResult(): JSX.Element | null {
 
   const onAddButtonClick = () => {
     if (isExist) return;
-    if (page && fetchTitle) {
+    if (page && fetchTitle && hasCoords(page)) {
       dispatch({
         type: 'ADD_FEATURE',
         feature: {

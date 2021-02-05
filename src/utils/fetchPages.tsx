@@ -1,4 +1,5 @@
-import { FirstQueryResult, FirstQueryPages, LangLink, WikiCoordinates } from '../types';
+import { hasCoords } from './helpers';
+import { FirstQueryResult, LangLink } from '../types';
 import { Action } from './AppState';
 
 const query = [
@@ -27,12 +28,8 @@ async function fetchLangLinksCoordinates(langLinks?: LangLink[]) {
     .filter(({ lang }) => langOrder.indexOf(lang) >= 0)
     .map(({ lang, title }) => fetch(createFirstURL(lang, title)).then((res) => res.json()));
 
-  interface HasCoordinates extends FirstQueryPages {
-    coordinates: WikiCoordinates[];
-  }
-
   const coord = await Promise.all(tasks).then((data) => {
-    const hasCoordinates = data.map((result) => result.query.pages[0]).filter((page): page is HasCoordinates => Boolean(page.coordinates));
+    const hasCoordinates = data.map((result) => result.query.pages[0]).filter(hasCoords);
     if (hasCoordinates.length) return hasCoordinates[0].coordinates;
     return null;
   });
