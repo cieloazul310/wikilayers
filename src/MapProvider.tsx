@@ -15,7 +15,7 @@ import { vectorStyle, allLabelStyle } from './map/vectorStyle';
 import setGeolocation from './map/setGeolocation';
 import { singleclick, pointermove } from './map/createVectorEvent';
 import useMapEvent from './map/useMapEvent';
-import { pageToFeature } from './utils/pageToFeature';
+import { pageToOlFeature } from './utils/helpers';
 import { MapContext } from './utils/MapContext';
 import { useAppState, useDispatch } from './utils/AppStateContext';
 
@@ -85,7 +85,7 @@ function MapProvider({ children }: Props): JSX.Element {
   }, [palette.type]);
   React.useEffect(() => {
     vectorLayer.getSource().clear();
-    vectorLayer.getSource().addFeatures(appState.features.map((feature) => pageToFeature(feature)));
+    vectorLayer.getSource().addFeatures(appState.features.map((feature) => pageToOlFeature(feature)));
   }, [appState.features]);
   React.useEffect(() => {
     vectorLayer.getSource().forEachFeature((feature) => {
