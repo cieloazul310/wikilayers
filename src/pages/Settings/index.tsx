@@ -4,6 +4,7 @@ import PageContainer from '../../components/PageContainer';
 import AppStateHandler from '../../components/AppStateHandler';
 import MapStateHandler from '../../components/MapStateHandler';
 import ThemeStateHandler from '../../components/ThemeStateHandler';
+import StateActions from '../../components/StateActions';
 import Credit from '../../components/Credit';
 import useGaTrackPage from '../../utils/useGaTrackPage';
 
@@ -15,6 +16,7 @@ function Settings(): JSX.Element {
       <MapStateHandler />
       <AppStateHandler />
       <ThemeStateHandler />
+      <StateActions />
       <Credit />
     </PageContainer>
   );

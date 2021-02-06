@@ -11,7 +11,11 @@ const useStyles = makeStyles((theme) =>
       left: '50%',
       transform: 'translate(-50%, -50%)',
       position: 'absolute',
+      maxWidth: '90vw',
+      width: '60%',
       minWidth: 300,
+      maxHeight: '90vh',
+      overflowY: 'auto',
       padding: theme.spacing(2, 0),
     },
     inner: {
