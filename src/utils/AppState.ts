@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { BaseLayer, isBaseLayer } from '../layers/baseLayers';
-import { isRecord, isQueryPage } from './helpers';
-import { pageFeatures, searched } from './AppStateHelpers';
-import { QueryPage, Search, PageFeature } from '../types';
-
-type FetchStatus = 'fetching' | 'success' | 'failure' | 'yet';
+import { isRecord, isQueryPage, definedProps } from './helpers';
+import { pageFeatures, searched, isFetchStatus } from './AppStateHelpers';
+import { QueryPage, Search, PageFeature, FetchStatus } from '../types';
 
 export interface AppState {
   features: PageFeature[];
@@ -42,30 +40,23 @@ export const initialAppState: AppState = {
 };
 
 function partialAppState(obj: any): Partial<AppState> {
-  console.log(obj);
   if (!isRecord(obj)) return {};
   const { features, geolocation, fetchStatus, fetchTitle, page, searchedItems, baseLayer, alwaysShowLabels } = obj;
-  return {
+  return definedProps({
     features: pageFeatures(features) ?? undefined,
     geolocation: typeof geolocation === 'boolean' ? geolocation : undefined,
-    fetchStatus:
-      fetchStatus === 'fetching' || fetchStatus === 'success' || fetchStatus === 'failure' || fetchStatus === 'yet'
-        ? fetchStatus
-        : undefined,
+    fetchStatus: isFetchStatus(fetchStatus) ? fetchStatus : undefined,
     fetchTitle: typeof fetchTitle === 'string' ? fetchTitle : undefined,
     page: isQueryPage(page) ? page : undefined,
     searchedItems: searched(searchedItems) ?? undefined,
     baseLayer: isBaseLayer(baseLayer) ? baseLayer : undefined,
     alwaysShowLabels: typeof alwaysShowLabels === 'boolean' ? alwaysShowLabels : undefined,
-  };
+  });
 }
 
 export function useInitialAppState(): AppState {
   const stored = localStorage.getItem('wikilayers:AppState');
-  console.log(stored);
-  console.log(stored ? JSON.parse(stored) : 'Nothing');
   const storedAppState = stored ? partialAppState(JSON.parse(stored)) : null;
-  console.log(storedAppState);
   return React.useMemo(
     () =>
       storedAppState

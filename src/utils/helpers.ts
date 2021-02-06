@@ -41,3 +41,10 @@ export function pageToOlFeature(feature: PageFeature): Feature {
     geometry: new Point(fromLonLat(getCoordinate(feature.page))),
   });
 }
+
+export function definedProps<T extends Record<string, unknown>>(obj: T | Partial<T>): Partial<T> {
+  function fromEntries(arr: [keyof T, unknown][]): T | Partial<T> {
+    return Object.assign({}, ...arr.map(([k, v]) => ({ [k]: v })));
+  }
+  return fromEntries(Object.entries(obj).filter(([k, v]) => v !== undefined));
+}

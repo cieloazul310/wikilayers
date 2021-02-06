@@ -1,5 +1,5 @@
 import { isRecord, isQueryPage, hasCoords } from './helpers';
-import { Search, PageFeature } from '../types';
+import { Search, PageFeature, FetchStatus } from '../types';
 
 export function isPageFeature(feature: any): feature is PageFeature {
   if (!isRecord(feature)) return false;
@@ -20,4 +20,9 @@ export function isSearchedItem(search: any): search is Search {
 export function searched(searchedItems: any): Search[] | null {
   if (!Array.isArray(searchedItems)) return null;
   return searchedItems.filter(isSearchedItem);
+}
+
+export function isFetchStatus(str: any): str is FetchStatus {
+  if (typeof str !== 'string') return false;
+  return str === 'fetching' || str === 'success' || str === 'failure' || str === 'yet';
 }
