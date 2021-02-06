@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) =>
       transform: 'translate(-50%, -50%)',
       position: 'absolute',
       maxWidth: '90vw',
+      width: '60%',
       minWidth: 300,
       maxHeight: '90vh',
       overflowY: 'auto',

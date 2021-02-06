@@ -1,5 +1,7 @@
+import * as React from 'react';
 import { FeatureCollection } from 'geojson';
 import { PageFeature } from '../types';
+import { useAppState } from './AppStateContext';
 import { getCoordinate } from './helpers';
 
 export function featuresToGeoJSON(features: PageFeature[]): FeatureCollection {
@@ -26,7 +28,20 @@ export function featuresToGeoJSON(features: PageFeature[]): FeatureCollection {
 }
 
 export function exportFile(geojson: FeatureCollection): string {
-  const blob = new Blob([JSON.stringify(geojson)], { type: 'application/json' });
+  const blob = new Blob([JSON.stringify(geojson, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   return url;
+}
+
+export function useGeoJSON(): string {
+  const { features } = useAppState();
+  return React.useMemo(() => JSON.stringify(featuresToGeoJSON(features), null, 2), [features]);
+}
+
+export function useBlobUrl(json: string): string {
+  return React.useMemo(() => {
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    return url;
+  }, [json]);
 }
