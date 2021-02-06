@@ -6,6 +6,7 @@ import FeaturesList from '../components/FeaturesList';
 import AppStateHandler from '../components/AppStateHandler';
 import MapStateHandler from '../components/MapStateHandler';
 import ThemeStateHandler from '../components/ThemeStateHandler';
+import StateActions from '../components/StateActions';
 import Credit from '../components/Credit';
 
 function AppDrawer(): JSX.Element {
@@ -19,6 +20,7 @@ function AppDrawer(): JSX.Element {
       <MapStateHandler />
       <AppStateHandler />
       <ThemeStateHandler />
+      <StateActions />
       <Credit />
     </div>
   );

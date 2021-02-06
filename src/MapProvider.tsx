@@ -37,8 +37,8 @@ const vectorLayer = new VectorLayer({
 
 const map = new OlMap({
   view: new View({
-    zoom: initialView?.zoom ?? 6,
-    center: initialView?.center ?? fromLonLat([140.4, 36.4]),
+    zoom: initialView?.zoom ?? 13,
+    center: initialView?.center ?? fromLonLat([140.4606, 36.3703]),
     constrainRotation: 4,
   }),
   layers: [baseLayerGroup, vectorLayer],
