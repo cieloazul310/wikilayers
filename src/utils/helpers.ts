@@ -4,6 +4,15 @@ import { fromLonLat } from 'ol/proj';
 import { Coordinate } from 'ol/coordinate';
 import { QueryPage, QueryPageWithCoord, PageFeature } from '../types';
 
+export function isRecord(obj: any): obj is Record<string, unknown> {
+  console.log(Object.prototype.toString.call(obj).slice(8, -1).toLowerCase());
+  return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase() === 'object';
+}
+
+export function isQueryPage(obj: any): obj is QueryPage {
+  return isRecord(obj) && typeof obj.pageid === 'number' && typeof obj.title === 'string' && typeof obj.extract === 'string';
+}
+
 export function hasCoords(page: QueryPage): page is QueryPageWithCoord {
   return Boolean(page.coordinates);
 }
