@@ -20,7 +20,9 @@ function SearchResult(): JSX.Element | null {
   const { page, features, fetchTitle } = useAppState();
   const dispatch = useDispatch();
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
-
+  React.useEffect(() => {
+    setSnackbarOpen(false);
+  }, [page]);
   const isExist = new Set(features.map((feature) => feature.page.pageid)).has(page?.pageid ?? 0);
 
   const onAddButtonClick = () => {
