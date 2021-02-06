@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,7 +15,7 @@ import PinDropIcon from '@material-ui/icons/PinDrop';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { fromLonLat } from 'ol/proj';
 import Snackbar from './Snackbar';
-import Modal from './Modal';
+import Dialog from './Dialog';
 import { useAppState, useDispatch } from '../utils/AppStateContext';
 import { useMap } from '../utils/MapContext';
 import { PageFeature } from '../types';
@@ -27,7 +26,7 @@ function FeaturesList(): JSX.Element {
   const [selectedFeature, setSelectedFeature] = React.useState<null | PageFeature>(null);
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
   const [snackbarMessage, setSnackbarMessage] = React.useState('');
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [DialogOpen, setDialogOpen] = React.useState(false);
   const menuOpen = Boolean(anchorEl);
   const { features, page } = useAppState();
   const dispatch = useDispatch();
@@ -43,8 +42,8 @@ function FeaturesList(): JSX.Element {
     setAnchorEl(null);
     setSelectedFeature(null);
   };
-  const handleModalOpen = (open: boolean) => () => {
-    setModalOpen(open);
+  const handleDialogOpen = (open: boolean) => () => {
+    setDialogOpen(open);
   };
   const onClick = (feature: PageFeature) => () => {
     dispatch({ type: 'SET_PAGE', page: feature.page });
@@ -78,9 +77,11 @@ function FeaturesList(): JSX.Element {
       handleClose();
     }
   };
-  const modalAction = () => {
+  const DialogAction = () => {
     dispatch({ type: 'CLEAR_FEATURES' });
-    setModalOpen(false);
+    setDialogOpen(false);
+    setSnackbarMessage('アイテムを全てを削除しました');
+    setSnackbarOpen(true);
   };
   const handleSnackbarClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
     if (reason === 'clickaway') {
@@ -92,7 +93,7 @@ function FeaturesList(): JSX.Element {
   return (
     <List subheader={<ListSubheader>アイテム</ListSubheader>}>
       {features.length ? (
-        <ListItem button dense onClick={handleModalOpen(true)}>
+        <ListItem button dense onClick={handleDialogOpen(true)}>
           <ListItemText primary="全て消去" />
         </ListItem>
       ) : null}
@@ -130,18 +131,17 @@ function FeaturesList(): JSX.Element {
         </MenuItem>
       </Menu>
       <Snackbar message={snackbarMessage} open={snackbarOpen} onClose={handleSnackbarClose} />
-      <Modal
-        open={modalOpen}
-        modalHandler={handleModalOpen}
-        onClose={handleModalOpen(false)}
+      <Dialog
+        text="現在のアイテムを全て消去しますか？"
+        open={DialogOpen}
+        dialogHandler={handleDialogOpen}
+        onClose={handleDialogOpen(false)}
         actionButton={
-          <Button variant="contained" color="primary" onClick={modalAction}>
-            削除
+          <Button variant="contained" color="primary" onClick={DialogAction}>
+            実行
           </Button>
         }
-      >
-        <Typography>アイテムを全て削除しますか？</Typography>
-      </Modal>
+      />
     </List>
   );
 }
