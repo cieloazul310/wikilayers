@@ -38,6 +38,9 @@ function SearchForm(): JSX.Element {
   const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && title !== '') {
       onSubmit();
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
     }
   };
 
