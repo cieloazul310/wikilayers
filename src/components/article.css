@@ -1,0 +1,25 @@
+.article {
+  max-width: 32em;
+  margin: 0 auto;
+  color: #4c4539;
+  line-height: 1.7;
+}
+
+.article ul, .article ol {
+  padding-left: 1em;
+}
+
+.article dd {
+  margin-left: 1em;
+}
+
+.article a {
+  color: #12acc7;
+  text-decoration: none;
+}
+
+@media (max-width: 400px) {
+  .article {
+    font-size: 85%;
+  }
+}
