@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAAA,MACE,YAAa,CACb,WAAY,CACZ,gBACF,CACA,uCACE,MACE,iCACF,CACF","file":"main.cf6ab139.chunk.css","sourcesContent":["#root {\n  display: flex;\n  flex-grow: 1;\n  min-height: 100vh;\n}\n@supports (-webkit-touch-callout: none) {\n  #root {\n    min-height: -webkit-fill-available;\n  }\n}"]}
