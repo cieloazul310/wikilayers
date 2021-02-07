@@ -10,12 +10,14 @@ import Search from './pages/Search';
 import Article from './pages/Article';
 import Settings from './pages/Settings';
 import About from './pages/About';
+import ScrollToTop from './utils/ScrollToTop';
 
 function App(): JSX.Element {
   return (
     <AppStateProvider>
       <MapProvider>
         <Router basename="/wikilayers">
+          <ScrollToTop />
           <Layout>
             <Switch>
               <Route path="/search" component={Search} />
