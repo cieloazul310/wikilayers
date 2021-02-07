@@ -20,11 +20,10 @@ export function partialStoredThemeState(obj: any): Partial<ThemeState> {
 }
 
 export function useInitialThemeState(): ThemeState {
-  const stored = localStorage.getItem('wikilayers:ThemeState');
-  const storedThemeState = stored ? partialStoredThemeState(JSON.parse(stored)) : null;
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
   return React.useMemo(() => {
+    const stored = localStorage.getItem('wikilayers:ThemeState');
+    const storedThemeState = stored ? partialStoredThemeState(JSON.parse(stored)) : null;
     return storedThemeState
       ? {
           ...initialThemeState,

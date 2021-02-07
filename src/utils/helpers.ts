@@ -5,7 +5,6 @@ import { Coordinate } from 'ol/coordinate';
 import { QueryPage, QueryPageWithCoord, PageFeature } from '../types';
 
 export function isRecord(obj: any): obj is Record<string, unknown> {
-  console.log(Object.prototype.toString.call(obj).slice(8, -1).toLowerCase());
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase() === 'object';
 }
 

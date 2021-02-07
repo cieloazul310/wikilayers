@@ -55,16 +55,17 @@ function partialAppState(obj: any): Partial<AppState> {
 }
 
 export function useInitialAppState(): AppState {
-  const stored = localStorage.getItem('wikilayers:AppState');
-  const storedAppState = stored ? partialAppState(JSON.parse(stored)) : null;
   return React.useMemo(
-    () =>
-      storedAppState
+    () => {
+      const stored = localStorage.getItem('wikilayers:AppState');
+      const storedAppState = stored ? partialAppState(JSON.parse(stored)) : null;
+      return storedAppState
         ? {
             ...initialAppState,
             ...storedAppState,
           }
-        : initialAppState,
+        : initialAppState;
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
