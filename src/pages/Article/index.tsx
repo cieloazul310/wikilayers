@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import PageContainer from '../../components/PageContainer';
@@ -34,33 +35,35 @@ function Article(): JSX.Element {
   useGaTrackPage(pathname);
 
   return (
-    <PageContainer disableGutters={false}>
-      <div className={classes.article}>
-        {page ? (
-          <article>
+    <PageContainer>
+      <Container>
+        <div className={classes.article}>
+          {page ? (
+            <article>
+              <Typography className={classes.title} variant="h5" component="h2" gutterBottom>
+                {page?.title}
+              </Typography>
+              {article ? (
+                // eslint-disable-next-line
+                <div dangerouslySetInnerHTML={{ __html: article.extract }} />
+              ) : (
+                <>
+                  <Typography variant="body2" paragraph>
+                    {page?.extract}
+                  </Typography>
+                  <div className={classes.loaderContainer}>
+                    <Loader />
+                  </div>
+                </>
+              )}
+            </article>
+          ) : (
             <Typography className={classes.title} variant="h5" component="h2" gutterBottom>
-              {page?.title}
+              ページが選択されていません
             </Typography>
-            {article ? (
-              // eslint-disable-next-line
-              <div dangerouslySetInnerHTML={{ __html: article.extract }} />
-            ) : (
-              <>
-                <Typography variant="body2" paragraph>
-                  {page?.extract}
-                </Typography>
-                <div className={classes.loaderContainer}>
-                  <Loader />
-                </div>
-              </>
-            )}
-          </article>
-        ) : (
-          <Typography className={classes.title} variant="h5" component="h2" gutterBottom>
-            ページが選択されていません
-          </Typography>
-        )}
-      </div>
+          )}
+        </div>
+      </Container>
     </PageContainer>
   );
 }
