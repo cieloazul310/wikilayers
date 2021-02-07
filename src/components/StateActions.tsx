@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import RestoreIcon from '@material-ui/icons/Restore';
 import Snackbar from './Snackbar';
-import Modal from './Modal';
+import Dialog from './Dialog';
 import { useGeoJSON, useBlobUrl } from '../utils/exportGeoJSON';
 import { useDispatch } from '../utils/AppStateContext';
 
@@ -50,11 +49,20 @@ function StateActions(): JSX.Element {
     setActionType('download');
     setModalOpen(true);
   };
-  const modal = (
-    <Modal
+  const dialog = (
+    <Dialog
+      variant={actionType === 'reset' ? 'text' : 'content'}
       open={modalOpen}
-      modalHandler={handleModalOpen}
+      fullWidth={actionType === 'download'}
+      maxWidth={actionType === 'download' ? 'sm' : undefined}
+      dialogHandler={handleModalOpen}
       onClose={handleModalOpen(false)}
+      text={actionType === 'reset' ? '設定を初期化しますか？' : undefined}
+      content={
+        actionType === 'download' ? (
+          <TextField multiline fullWidth rowsMax={20} label="GeoJSON" variant="outlined" value={geojson} />
+        ) : undefined
+      }
       actionButton={
         actionType === 'reset' ? (
           <Button variant="contained" color="primary" onClick={modalAction}>
@@ -74,13 +82,7 @@ function StateActions(): JSX.Element {
           </Button>
         )
       }
-    >
-      {actionType === 'reset' ? (
-        <Typography>設定を初期化しますか？</Typography>
-      ) : (
-        <TextField multiline fullWidth rowsMax={20} label="GeoJSON" variant="outlined" defaultValue="GeoJSON" value={geojson} />
-      )}
-    </Modal>
+    />
   );
 
   return (
@@ -98,7 +100,7 @@ function StateActions(): JSX.Element {
         <ListItemText>設定を初期化する</ListItemText>
       </ListItem>
       <Snackbar message={snackbarMessage} open={snackbarOpen} onClose={handleSnackbarClose} />
-      {modal}
+      {dialog}
     </List>
   );
 }

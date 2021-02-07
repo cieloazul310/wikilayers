@@ -1,3 +1,5 @@
+export type FetchStatus = 'fetching' | 'success' | 'failure' | 'yet';
+
 export interface Result<T> {
   continue: {
     llcontinue: string;

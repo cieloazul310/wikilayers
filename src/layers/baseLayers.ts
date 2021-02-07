@@ -29,3 +29,7 @@ export function setVisibleBaseLayer(baseLayer: BaseLayer): void {
     layer.setVisible(baseLayers[index].id === baseLayer);
   });
 }
+
+export function isBaseLayer(str: any): str is BaseLayer {
+  return str === 'cjstd' || str === 'osm' || str === 'specialRelief' || str === 'vector' || str === 'seamless';
+}

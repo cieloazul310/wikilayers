@@ -1,5 +1,6 @@
 import * as React from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { isRecord } from './helpers';
 
 export interface ThemeState {
   darkMode: boolean;
@@ -10,13 +11,20 @@ export const initialThemeState: ThemeState = {
   darkMode: false,
 };
 
-export function useInitialThemeState(): ThemeState {
-  const stored = localStorage.getItem('wikilayers:ThemeState');
-  const storedThemeState: Partial<ThemeState> | null = stored ? JSON.parse(stored) : null;
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+export function partialStoredThemeState(obj: any): Partial<ThemeState> {
+  if (!isRecord(obj)) return {};
+  const { darkMode } = obj;
+  return {
+    darkMode: typeof darkMode === 'boolean' ? darkMode : undefined,
+  };
+}
 
+export function useInitialThemeState(): ThemeState {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   return React.useMemo(() => {
-    return stored
+    const stored = localStorage.getItem('wikilayers:ThemeState');
+    const storedThemeState = stored ? partialStoredThemeState(JSON.parse(stored)) : null;
+    return storedThemeState
       ? {
           ...initialThemeState,
           ...storedThemeState,
