@@ -2,14 +2,17 @@
 
 ![WikiLayers](./src/img/showcase.png "WikiLayers")
 
-**WikiLayers**（ウィキレイヤーズ）は Wikipedia から座標を取得し地図で表示するアプリケーションです。  
-このアプリケーションは [TypeScript], [React], [Material-UI], [OpenLayers] で作られています。
+**WikiLayers**（ウィキレイヤーズ）はWikipediaから座標を取得し地図で表示するアプリケーションです。  
+このアプリケーションはReact, Redux, Material-UIとOpenLayersで作られています。
+
+**WikiLayers** is the Map App which displays Wikipedia Geo Data.  
+This App is build by React, Redux, Material-UI, and OpenLayers.
 
 URL: <https://cieloazul310.github.io/wikilayers/>
 
 ## 遊び方
 
-1. 検索フォームに表示したい記事の**タイトル**を入れて検索
+1. 検索フォームに表示したい記事の**タイトル**、または**URL**を入れて検索（「水戸城」「 <https://ja.wikipedia.org/wiki/偕楽園> 」など）
 2. 記事の座標を取得したら「**地図に追加**」を押す
 3. 「**地図**」を見る
 
@@ -55,10 +58,6 @@ Wikipediaを情報源としている部分においては、[クリエイティ�
 Copyright © 2021 cieloazul310 All right reserved.
 
 [@cieloazul310]: https://twitter.com/cieloazul310
-[TypeScript]: https://www.typescriptlang.org/
-[React]: https://reactjs.org/
-[Material-UI]: https://material-ui.com/
-[OpenLayers]: http://openlayers.org/
 <!-- 
 WIKIMEDIA FOUNDATION 利用規約
 -->
