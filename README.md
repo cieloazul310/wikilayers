@@ -8,22 +8,15 @@
 **WikiLayers** is the Map App which displays Wikipedia Geo Data.  
 This App is build by React, Redux, Material-UI, and OpenLayers.
 
-URL: https://cieloazul310.github.io/wikilayers/
+URL: <https://cieloazul310.github.io/wikilayers/>
 
-### 遊び方
+## 遊び方
 
-1. 検索フォームに表示したい記事の**タイトル**、または**URL**を入れて検索（「水戸城」「 https://ja.wikipedia.org/wiki/偕楽園 」など）
-2. 記事の座標を取得したら「**地図に追加**」を押す 
+1. 検索フォームに表示したい記事の**タイトル**、または**URL**を入れて検索（「水戸城」「 <https://ja.wikipedia.org/wiki/偕楽園> 」など）
+2. 記事の座標を取得したら「**地図に追加**」を押す
 3. 「**地図**」を見る
 
-#### How To Play
-
-1. Search a Title or URL you want to get.
-  - ex. 'Wembley Stadium', 'https://en.wikipedia.org/wiki/Wembley_Stadium'
-2. Click the Add to the Map(**地図に追加**) Button.
-3. View the Map(**地図**)
-
-#### 検索例
+## 地図に追加できる記事
 
 Wikipediaの記事に座標がついているものであれば取得可能です。
 
@@ -34,13 +27,11 @@ Wikipediaの記事に座標がついているものであれば取得可能で�
 - **スタジアム**: ケーズデンキスタジアム水戸、日立柏サッカー場、アザディ・スタジアム など
 - **歴史上の事件**: 本能寺の変、池田屋事件、ワールシュタットの戦い、ウッドストック・フェスティバル など
 
-#### その他機能
+## その他の機能
 
-- URLによる検索では多国語に対応しています。
-- 記事ページで選択した記事の本文を見ることができます。
-- 8種類の**背景地図**が選べます。
+- 「読む」ページでは選択した記事の本文を見ることができます。
+- 5種類の**背景地図**が選べます。
 - GPSを使った**現在地の表示**ができます。
-- スマートフォンでWikiLayersをホーム画面に追加すると、全画面でWikiLayersを起動できます。
 - ローカルストレージに情報が保存されるので、アプリを離れても状態は維持されます。
 - 設定ページで取得したアイテムから**GeoJSONファイルを出力**することができます。
 
@@ -51,34 +42,20 @@ Wikipediaを情報源としている部分においては、[クリエイティ�
 
 地図画面を二次利用する場合は地図画面右下に表示されている地図の帰属を明記してください。
 
-- 地理院地図
-- 写真
-- 色別標高図
-- 傾斜量図
-- 地形スペシャル
-
-また、以上の5つの地図を二次利用する場合は別途[国土地理院コンテンツ利用規約]を参照してください。
-
-WikiLayersの表記については任意とします。
-
-#### 表記例
-
-- 「出典: Wikipedia, 地図: 地理院地図(標準地図) (WikiLayersで表示　URL: https://cieloazul310.github.io/wikilayers/)」
-- 「地理院地図, Wikipediaを元に作成」
-
 ### アップデート
 
+- 2021/02/07 v2.0 リニューアル
 - 2018/02/02 v1.1 英語版など
 - 2018/01/29 v1.0 公開
 
 ### 付記
 
-- **Version**: 1.1 (2018/02/02)
+- **Version**: 2.0 (2021/02/07)
 - **作成者**: [@cieloazul310]
-- **GitHub**: https://github.com/cieloazul310/wikilayers/
-- **水戸地図**: https://cieloazul310.github.io
+- **GitHub**: <https://github.com/cieloazul310/wikilayers/>
+- **水戸地図**: <https://cieloazul310.github.io>
 
-Copyright © 2018 cieloazul310 All right reserved.
+Copyright © 2021 cieloazul310 All right reserved.
 
 [@cieloazul310]: https://twitter.com/cieloazul310
 <!-- 
